@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		041342BF21797D5D00486DF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 041342BE21797D5D00486DF9 /* AppDelegate.m */; };
-		041342C221797D5D00486DF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041342C121797D5D00486DF9 /* ViewController.m */; };
 		041342C521797D5D00486DF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 041342C321797D5D00486DF9 /* Main.storyboard */; };
 		041342C721797D5E00486DF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 041342C621797D5E00486DF9 /* Assets.xcassets */; };
 		041342CA21797D5E00486DF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 041342C821797D5E00486DF9 /* LaunchScreen.storyboard */; };
 		041342CD21797D5E00486DF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 041342CC21797D5E00486DF9 /* main.m */; };
+		04134330217DFA1F00486DF9 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0413432F217DFA1F00486DF9 /* HomeViewController.m */; };
 		5BB8A6D8D6E9CBEC31D15B13 /* libPods-zhihu-daily-ImitationDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 338E584827BEA8CFD0790911 /* libPods-zhihu-daily-ImitationDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -20,13 +20,13 @@
 		041342BA21797D5D00486DF9 /* zhihu-daily-ImitationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "zhihu-daily-ImitationDemo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		041342BD21797D5D00486DF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		041342BE21797D5D00486DF9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		041342C021797D5D00486DF9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		041342C121797D5D00486DF9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		041342C421797D5D00486DF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		041342C621797D5E00486DF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		041342C921797D5E00486DF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		041342CB21797D5E00486DF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		041342CC21797D5E00486DF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0413432E217DFA1F00486DF9 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		0413432F217DFA1F00486DF9 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		338E584827BEA8CFD0790911 /* libPods-zhihu-daily-ImitationDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-zhihu-daily-ImitationDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CE07051F0C04404A85DD1F /* Pods-zhihu-daily-ImitationDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhihu-daily-ImitationDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-zhihu-daily-ImitationDemo/Pods-zhihu-daily-ImitationDemo.release.xcconfig"; sourceTree = "<group>"; };
 		DBAD9BCBA95F613B982CB8A9 /* Pods-zhihu-daily-ImitationDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhihu-daily-ImitationDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zhihu-daily-ImitationDemo/Pods-zhihu-daily-ImitationDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -65,33 +65,26 @@
 		041342BC21797D5D00486DF9 /* zhihu-daily-ImitationDemo */ = {
 			isa = PBXGroup;
 			children = (
-				041342D321797FED00486DF9 /* 代码 */,
-				041342BD21797D5D00486DF9 /* AppDelegate.h */,
-				041342BE21797D5D00486DF9 /* AppDelegate.m */,
-				041342C021797D5D00486DF9 /* ViewController.h */,
-				041342C121797D5D00486DF9 /* ViewController.m */,
-				041342C321797D5D00486DF9 /* Main.storyboard */,
-				041342C621797D5E00486DF9 /* Assets.xcassets */,
-				041342C821797D5E00486DF9 /* LaunchScreen.storyboard */,
 				041342CB21797D5E00486DF9 /* Info.plist */,
-				041342CC21797D5E00486DF9 /* main.m */,
+				04134331217E108E00486DF9 /* Main */,
+				041342D321797FED00486DF9 /* Classes */,
 			);
 			path = "zhihu-daily-ImitationDemo";
 			sourceTree = "<group>";
 		};
-		041342D321797FED00486DF9 /* 代码 */ = {
+		041342D321797FED00486DF9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				041342D421797FED00486DF9 /* Controller */,
-				041342D521797FED00486DF9 /* Model */,
-				041342D621797FED00486DF9 /* View */,
+				04134335217E11C200486DF9 /* HomePage */,
 			);
-			path = "代码";
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		041342D421797FED00486DF9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0413432E217DFA1F00486DF9 /* HomeViewController.h */,
+				0413432F217DFA1F00486DF9 /* HomeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -108,6 +101,29 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		04134331217E108E00486DF9 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				041342BD21797D5D00486DF9 /* AppDelegate.h */,
+				041342BE21797D5D00486DF9 /* AppDelegate.m */,
+				041342C321797D5D00486DF9 /* Main.storyboard */,
+				041342C621797D5E00486DF9 /* Assets.xcassets */,
+				041342C821797D5E00486DF9 /* LaunchScreen.storyboard */,
+				041342CC21797D5E00486DF9 /* main.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		04134335217E11C200486DF9 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				041342D421797FED00486DF9 /* Controller */,
+				041342D521797FED00486DF9 /* Model */,
+				041342D621797FED00486DF9 /* View */,
+			);
+			path = HomePage;
 			sourceTree = "<group>";
 		};
 		44128A71D70593531BB19EE5 /* Pods */ = {
@@ -223,9 +239,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				041342C221797D5D00486DF9 /* ViewController.m in Sources */,
 				041342CD21797D5E00486DF9 /* main.m in Sources */,
 				041342BF21797D5D00486DF9 /* AppDelegate.m in Sources */,
+				04134330217DFA1F00486DF9 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
