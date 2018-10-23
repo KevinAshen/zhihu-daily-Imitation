@@ -1,8 +1,8 @@
 //
-//  HomeViewController.h
+//  ZDIHomePageTableViewGroupView.h
 //  zhihu-daily-ImitationDemo
 //
-//  Created by mac on 2018/10/22.
+//  Created by mac on 2018/10/23.
 //  Copyright © 2018 姜凯文. All rights reserved.
 //
 
@@ -10,9 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeViewController : UIViewController
+@interface ZDIHomePageTableViewGroupView : UIView
 
-@property (nonatomic, copy) NSString *navStr;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 

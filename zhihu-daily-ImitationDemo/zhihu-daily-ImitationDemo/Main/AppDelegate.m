@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "HomeViewController.h"
+#import "ZDIHomePageViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,7 +22,7 @@
     _window = [[UIWindow alloc] init];
     [_window makeKeyAndVisible];
     
-    HomeViewController *homeViewController = [[HomeViewController alloc] init];
+    ZDIHomePageViewController *homeViewController = [[ZDIHomePageViewController alloc] init];
     UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     _window.rootViewController = homeNav;
     
