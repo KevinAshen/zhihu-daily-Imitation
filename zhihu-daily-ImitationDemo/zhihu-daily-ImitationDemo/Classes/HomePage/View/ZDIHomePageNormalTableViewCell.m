@@ -28,19 +28,28 @@
     [self.contentView addSubview:self.titleImageView];
     
     
-    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).offset(10 / kExamplePictureHeight * kDeviceHeight);
-        make.right.equalTo(self.contentView).offset(10 / kExamplePictureWidth * kDeviceWidth);
+    
+    [self.titleImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView.mas_top).offset(18 / kExamplePictureHeight * kDeviceHeight);
+        make.right.equalTo(self.contentView.mas_right).offset(-18 / kExamplePictureWidth * kDeviceWidth);
         make.width.mas_equalTo(90 / kExamplePictureWidth * kDeviceWidth);
         make.height.mas_equalTo(65 / kExamplePictureHeight * kDeviceHeight);
     }];
     
-//    self.titleLabel = [[UILabel alloc] init];
-//    [self.contentView addSubview:self.titleLabel];
-//    
-//    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        <#code#>
-//    }];
+    self.titleLabel = [[UILabel alloc] init];
+    self.titleLabel.numberOfLines = 0;
+    [self.contentView addSubview:self.titleLabel];
+    
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView.mas_top).offset(18 / kExamplePictureHeight * kDeviceHeight);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-18 / kExamplePictureHeight * kDeviceHeight);
+        make.left.equalTo(self.contentView.mas_left).offset(18 / kExamplePictureWidth * kDeviceWidth);
+        make.right.equalTo(self.titleImageView.mas_left).offset(-18 / kExamplePictureWidth * kDeviceWidth);
+        
+    }];
+    
+    //test
+    self.titleLabel.text = @"脱掉倚🐎卖🐎的皇帝的新衣，华晨宝马变成了宝马华晨";
 }
 
 - (void)awakeFromNib {

@@ -26,7 +26,7 @@ static NSString *normalCellIdentifier = @"normalCell";
 - (instancetype) init {
     self = [super init];
     if (self) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) style:UITableViewStylePlain];
         [_tableView registerClass:[ZDIHomePageNormalTableViewCell class] forCellReuseIdentifier:normalCellIdentifier];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
@@ -38,9 +38,7 @@ static NSString *normalCellIdentifier = @"normalCell";
     return self;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    
-}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     //test

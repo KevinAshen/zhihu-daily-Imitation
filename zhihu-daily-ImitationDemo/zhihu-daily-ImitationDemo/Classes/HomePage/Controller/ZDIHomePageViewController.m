@@ -30,6 +30,14 @@
         make.left.equalTo(self.view).offset(0);
     }];
     
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.02f green:0.56f blue:0.84f alpha:1.00f];
+    
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsCompact];
+//    CGRect frame = self.navigationController.navigationBar.frame;
+//    UIView *alphaView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, frame.size.width, frame.size.height+20)];
+//    alphaView.backgroundColor = [UIColor colorWithRed:0.02f green:0.56f blue:0.84f alpha:1.00f];
+//    alphaView.userInteractionEnabled = NO;
+//    [self.navigationController.navigationBar insertSubview: alphaView atIndex:0];
 }
 
 /*
