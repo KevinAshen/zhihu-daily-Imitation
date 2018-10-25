@@ -7,9 +7,10 @@
 //
 
 #import "ZDIHomePageViewController.h"
+#import "ZDIHomePageCarouselView.h"
 #import <Masonry.h>
 
-@interface ZDIHomePageViewController ()
+@interface ZDIHomePageViewController ()<ATCarouselViewDelegate>
 
 @end
 
@@ -19,10 +20,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    ZDIHomePageCarouselView *carousel = [[ZDIHomePageCarouselView alloc] initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, 230)];
+    //    carousel.scrollDorectionPortrait = YES;
+    carousel.images = @[
+                        [UIImage imageNamed:@"0.JPG"],
+                        [UIImage imageNamed:@"1.JPG"],
+                        [UIImage imageNamed:@"2.JPG"],
+                        [UIImage imageNamed:@"3.JPG"],
+                        [UIImage imageNamed:@"4.JPG"]
+                        ];
+    NSLog(@"-@-*--%ld--*-@-", carousel.pageControl.numberOfPages);
+    carousel.currentPageColor = [UIColor orangeColor];
+    carousel.pageColor = [UIColor grayColor];
+    
+    
     self.navigationItem.title = @"今日热闻";
     
     _homePageTableViewGroupView = [[ZDIHomePageTableViewGroupView alloc] init];
     [self.view addSubview:_homePageTableViewGroupView];
+    
+    _homePageTableViewGroupView.tableView.tableHeaderView = carousel;
     
     [_homePageTableViewGroupView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
@@ -38,6 +55,10 @@
 //    alphaView.backgroundColor = [UIColor colorWithRed:0.02f green:0.56f blue:0.84f alpha:1.00f];
 //    alphaView.userInteractionEnabled = NO;
 //    [self.navigationController.navigationBar insertSubview: alphaView atIndex:0];
+}
+
+- (void)carouselView:(ATCarouselView *)carouselView indexOfClickedImageBtn:(NSUInteger )index {
+    NSLog(@"点击了第%ld张图片",index);
 }
 
 /*

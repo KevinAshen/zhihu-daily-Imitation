@@ -17,6 +17,12 @@
 		0413437D217F4C9100486DF9 /* ZDIHomePageTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0413437C217F4C9100486DF9 /* ZDIHomePageTitleTableViewCell.m */; };
 		04134380217F4CA200486DF9 /* ZDIHomePageNormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0413437F217F4CA200486DF9 /* ZDIHomePageNormalTableViewCell.m */; };
 		04134383217F529B00486DF9 /* test1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 04134382217F529B00486DF9 /* test1.JPG */; };
+		0413438621819DC100486DF9 /* ZDIHomePageCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0413438521819DC100486DF9 /* ZDIHomePageCarouselView.m */; };
+		0413438C21819EBB00486DF9 /* 3.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 0413438721819EBA00486DF9 /* 3.JPG */; };
+		0413438D21819EBB00486DF9 /* 1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 0413438821819EBA00486DF9 /* 1.JPG */; };
+		0413438E21819EBB00486DF9 /* 4.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 0413438921819EBA00486DF9 /* 4.JPG */; };
+		0413438F21819EBB00486DF9 /* 0.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 0413438A21819EBA00486DF9 /* 0.JPG */; };
+		0413439021819EBB00486DF9 /* 2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 0413438B21819EBB00486DF9 /* 2.JPG */; };
 		5BB8A6D8D6E9CBEC31D15B13 /* libPods-zhihu-daily-ImitationDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 338E584827BEA8CFD0790911 /* libPods-zhihu-daily-ImitationDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +44,13 @@
 		0413437E217F4CA200486DF9 /* ZDIHomePageNormalTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDIHomePageNormalTableViewCell.h; sourceTree = "<group>"; };
 		0413437F217F4CA200486DF9 /* ZDIHomePageNormalTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDIHomePageNormalTableViewCell.m; sourceTree = "<group>"; };
 		04134382217F529B00486DF9 /* test1.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test1.JPG; sourceTree = "<group>"; };
+		0413438421819DC000486DF9 /* ZDIHomePageCarouselView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDIHomePageCarouselView.h; sourceTree = "<group>"; };
+		0413438521819DC100486DF9 /* ZDIHomePageCarouselView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDIHomePageCarouselView.m; sourceTree = "<group>"; };
+		0413438721819EBA00486DF9 /* 3.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.JPG; sourceTree = "<group>"; };
+		0413438821819EBA00486DF9 /* 1.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.JPG; sourceTree = "<group>"; };
+		0413438921819EBA00486DF9 /* 4.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.JPG; sourceTree = "<group>"; };
+		0413438A21819EBA00486DF9 /* 0.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.JPG; sourceTree = "<group>"; };
+		0413438B21819EBB00486DF9 /* 2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.JPG; sourceTree = "<group>"; };
 		338E584827BEA8CFD0790911 /* libPods-zhihu-daily-ImitationDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-zhihu-daily-ImitationDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CE07051F0C04404A85DD1F /* Pods-zhihu-daily-ImitationDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhihu-daily-ImitationDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-zhihu-daily-ImitationDemo/Pods-zhihu-daily-ImitationDemo.release.xcconfig"; sourceTree = "<group>"; };
 		DBAD9BCBA95F613B982CB8A9 /* Pods-zhihu-daily-ImitationDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhihu-daily-ImitationDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zhihu-daily-ImitationDemo/Pods-zhihu-daily-ImitationDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -117,6 +130,8 @@
 				0413437C217F4C9100486DF9 /* ZDIHomePageTitleTableViewCell.m */,
 				0413437E217F4CA200486DF9 /* ZDIHomePageNormalTableViewCell.h */,
 				0413437F217F4CA200486DF9 /* ZDIHomePageNormalTableViewCell.m */,
+				0413438421819DC000486DF9 /* ZDIHomePageCarouselView.h */,
+				0413438521819DC100486DF9 /* ZDIHomePageCarouselView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -148,6 +163,11 @@
 			isa = PBXGroup;
 			children = (
 				04134382217F529B00486DF9 /* test1.JPG */,
+				0413438A21819EBA00486DF9 /* 0.JPG */,
+				0413438821819EBA00486DF9 /* 1.JPG */,
+				0413438B21819EBB00486DF9 /* 2.JPG */,
+				0413438721819EBA00486DF9 /* 3.JPG */,
+				0413438921819EBA00486DF9 /* 4.JPG */,
 			);
 			path = TestPicture;
 			sourceTree = "<group>";
@@ -227,9 +247,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0413439021819EBB00486DF9 /* 2.JPG in Resources */,
+				0413438F21819EBB00486DF9 /* 0.JPG in Resources */,
+				0413438D21819EBB00486DF9 /* 1.JPG in Resources */,
 				041342CA21797D5E00486DF9 /* LaunchScreen.storyboard in Resources */,
 				041342C721797D5E00486DF9 /* Assets.xcassets in Resources */,
+				0413438E21819EBB00486DF9 /* 4.JPG in Resources */,
 				041342C521797D5D00486DF9 /* Main.storyboard in Resources */,
+				0413438C21819EBB00486DF9 /* 3.JPG in Resources */,
 				04134383217F529B00486DF9 /* test1.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04134380217F4CA200486DF9 /* ZDIHomePageNormalTableViewCell.m in Sources */,
+				0413438621819DC100486DF9 /* ZDIHomePageCarouselView.m in Sources */,
 				041342CD21797D5E00486DF9 /* main.m in Sources */,
 				04134377217F3ED900486DF9 /* ZDIHomePageViewController.m in Sources */,
 				0413437D217F4C9100486DF9 /* ZDIHomePageTitleTableViewCell.m in Sources */,
