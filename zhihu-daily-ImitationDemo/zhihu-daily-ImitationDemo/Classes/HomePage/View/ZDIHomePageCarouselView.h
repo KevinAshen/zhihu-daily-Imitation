@@ -11,13 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ATCarouselView;
-@protocol ATCarouselViewDelegate <NSObject>
+@class ZDIHomePageCarouselView;
+@protocol ZDIHomePageCarouselViewDelegate <NSObject>
 @optional
 /**
  *  点击图片的回调事件
  */
-- (void)carouselView:(ATCarouselView *)carouselView indexOfClickedImageBtn:(NSUInteger)index;
+- (void)carouselView:(ZDIHomePageCarouselView *)homePageCarouselView indexOfClickedImageBtn:(NSUInteger)index;
 @end
 
 
@@ -38,7 +38,7 @@ BOOL scrollDorectionPortrait;
 @property (nonatomic, weak) UIPageControl *pageControl;
 @property (nonatomic, weak) NSTimer *timer;
 
-@property (weak, nonatomic) id<ATCarouselViewDelegate> delegate;
+@property (weak, nonatomic) id<ZDIHomePageCarouselViewDelegate> homePageCarouselViewDelegate;
 @end
 
 NS_ASSUME_NONNULL_END

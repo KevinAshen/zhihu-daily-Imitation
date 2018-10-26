@@ -10,7 +10,7 @@
 #import "ZDIHomePageCarouselView.h"
 #import <Masonry.h>
 
-@interface ZDIHomePageViewController ()<ATCarouselViewDelegate>
+@interface ZDIHomePageViewController ()<ZDIHomePageCarouselViewDelegate>
 
 @end
 
@@ -29,7 +29,7 @@
                         [UIImage imageNamed:@"3.JPG"],
                         [UIImage imageNamed:@"4.JPG"]
                         ];
-    NSLog(@"-@-*--%ld--*-@-", carousel.pageControl.numberOfPages);
+    //NSLog(@"-@-*--%ld--*-@-", carousel.pageControl.numberOfPages);
     carousel.currentPageColor = [UIColor orangeColor];
     carousel.pageColor = [UIColor grayColor];
     
@@ -57,7 +57,7 @@
 //    [self.navigationController.navigationBar insertSubview: alphaView atIndex:0];
 }
 
-- (void)carouselView:(ATCarouselView *)carouselView indexOfClickedImageBtn:(NSUInteger )index {
+- (void)carouselView:(ZDIHomePageCarouselView *)homePageCarouselView indexOfClickedImageBtn:(NSUInteger )index {
     NSLog(@"点击了第%ld张图片",index);
 }
 

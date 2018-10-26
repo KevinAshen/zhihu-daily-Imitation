@@ -130,7 +130,7 @@ static const int imageBtnCount = 3;
         }
         imageBtn.tag = index;
         //用上面处理好的索引给imageBtn设置图片
-        NSLog(@"$$--%ld---", index);
+        //NSLog(@"$$--%ld---", index);
         [imageBtn setBackgroundImage:self.images[index] forState:UIControlStateNormal];
         [imageBtn setBackgroundImage:self.images[index] forState:UIControlStateHighlighted];
         
@@ -220,10 +220,10 @@ static const int imageBtnCount = 3;
 
 - (void)imageBtnClick:(UIButton *)btn {
     //    NSLog(@"%ld",btn.tag);
-    if ([self.delegate respondsToSelector:@selector(carouselView:indexOfClickedImageBtn:)])
+    if ([self.homePageCarouselViewDelegate respondsToSelector:@selector(carouselView:indexOfClickedImageBtn:)])
     {
         //[self.delegate carouselView:self indexOfClickedImageBtn:btn.tag];
-        [self.delegate carouselView:self indexOfClickedImageBtn:btn.tag];
+        [self.homePageCarouselViewDelegate carouselView:self indexOfClickedImageBtn:btn.tag];
     }
     
 }
