@@ -49,7 +49,7 @@
     }];
     
     //test
-    self.titleLabel.text = @"脱掉倚🐎卖🐎的皇帝的新衣，华晨宝马变成了宝马华晨";
+    self.titleLabel.text = @"iOS冲鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭";
 }
 
 - (void)awakeFromNib {

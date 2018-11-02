@@ -13,11 +13,10 @@
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
 #define kExamplePictureWidth 440.0
 #define kExamplePictureHeight 784.0
-
 static NSString *titleCellIdentifier = @"titleCell";
 static NSString *normalCellIdentifier = @"normalCell";
 
-@interface ZDIHomePageTableViewGroupView()<UITableViewDelegate, UITableViewDataSource>
+@interface ZDIHomePageTableViewGroupView()<UITableViewDataSource>
 
 @end
 
@@ -28,7 +27,7 @@ static NSString *normalCellIdentifier = @"normalCell";
     if (self) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) style:UITableViewStylePlain];
         [_tableView registerClass:[ZDIHomePageNormalTableViewCell class] forCellReuseIdentifier:normalCellIdentifier];
-        self.tableView.delegate = self;
+        
         self.tableView.dataSource = self;
         [self addSubview:_tableView];
         
@@ -39,7 +38,6 @@ static NSString *normalCellIdentifier = @"normalCell";
 }
 
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     //test
     return 3;
@@ -47,12 +45,9 @@ static NSString *normalCellIdentifier = @"normalCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //test
-    return 14;
+    return 13;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100 / kExamplePictureHeight * kDeviceHeight;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZDIHomePageNormalTableViewCell *homePageNormalTableViewCell = [tableView dequeueReusableCellWithIdentifier:normalCellIdentifier forIndexPath:indexPath];

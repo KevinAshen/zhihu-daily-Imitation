@@ -8,12 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "ZDIHomePageTableViewGroupView.h"
+#import "ZDIHomePageTableViewSectionHeadView.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZDIHomePageViewController : UIViewController
 
 @property (nonatomic, strong) ZDIHomePageTableViewGroupView *homePageTableViewGroupView;
+
+@property (nonatomic, strong) UIImage *navChangeBackImage;
+
+@property (nonatomic, strong) ZDIHomePageTableViewSectionHeadView *homePageTableViewSectionHeadView;
 
 @end
 
