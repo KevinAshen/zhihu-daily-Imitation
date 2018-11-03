@@ -64,11 +64,17 @@
     self.homePageTableViewGroupView.tableView.delegate = self;
     
     //   菜单按钮的设置
-    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithTitle:@"菜单" style:UIBarButtonItemStylePlain target:self action:@selector(openCloseMenu:)];
+//    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithTitle:@"菜单" style:UIBarButtonItemStylePlain target:self action:@selector(openCloseMenu:)];
+    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu"] style:UIBarButtonItemStylePlain target:self action:@selector(openCloseMenu:)];
     self.navigationItem.leftBarButtonItem = menuItem;
     
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.barStyle = UIBaselineAdjustmentNone;
+    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.shadowImage= [UIImage new];
+    
 }
 
 /**侧边栏的展开和关闭*/
@@ -98,18 +104,26 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return 0;
+    } else if (section == 1) {
+        return 44;
     } else {
-        return 64;
+        return 44;
     }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
+        self.homePageTableViewGroupView.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         return nil;
-    } else {
-        _homePageTableViewSectionHeadView = [[ZDIHomePageTableViewSectionHeadView alloc] initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, 44)];
+    } else if (section == 1) {
+        self.homePageTableViewGroupView.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+        _homePageTableViewSectionHeadView = [[ZDIHomePageTableViewSectionHeadView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
 //        NSString *sectionStr = [NSString stringWithFormat:@"%lu", section];
 //        _homePageTableViewSectionHeadView.dateLabel.text = sectionStr;
+        return _homePageTableViewSectionHeadView;
+    } else {
+        self.homePageTableViewGroupView.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+        _homePageTableViewSectionHeadView = [[ZDIHomePageTableViewSectionHeadView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
         return _homePageTableViewSectionHeadView;
     }
 }
@@ -137,7 +151,8 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.y < 420) {
+    if (scrollView.contentOffset.y < ((100 / kExamplePictureHeight * kDeviceHeight * 13) + 230 / kExamplePictureHeight * kDeviceHeight)) {
+        self.homePageTableViewGroupView.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         self.navigationController.navigationBar.hidden = NO;
         self.navigationItem.title = @"今日热闻";
         
@@ -149,9 +164,7 @@
         
         
     } else {
-        
-       
-
+        self.homePageTableViewGroupView.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
         [self setStatusBarBackgroundColor:[UIColor colorWithRed:0.24f green:0.78f blue:0.99f alpha:1.00f]];
         self.navigationController.navigationBar.hidden = YES;
     }

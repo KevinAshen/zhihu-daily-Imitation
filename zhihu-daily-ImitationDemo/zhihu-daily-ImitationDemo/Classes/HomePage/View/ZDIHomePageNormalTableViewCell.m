@@ -49,7 +49,7 @@
     }];
     
     //test
-    self.titleLabel.text = @"iOS冲鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭鸭";
+    self.titleLabel.text = @"这是最孤寂的时刻。在静静的午夜，宇宙向它的聆听者展示着广漠的荒凉。叶文洁最不愿意看的，就是显示器上缓缓移动的那条曲线";
 }
 
 - (void)awakeFromNib {

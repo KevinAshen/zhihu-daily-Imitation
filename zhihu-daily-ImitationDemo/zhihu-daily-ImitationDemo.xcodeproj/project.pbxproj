@@ -29,6 +29,7 @@
 		04EBAC37218BD3AE00708FDE /* ZDIMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EBAC36218BD3AE00708FDE /* ZDIMenuTableViewCell.m */; };
 		04EBAC3A218BF24A00708FDE /* ZDINavChangeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EBAC39218BF24A00708FDE /* ZDINavChangeImage.m */; };
 		04EBAC3D218C4E8200708FDE /* ZDIHomePageTableViewSectionHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EBAC3C218C4E8200708FDE /* ZDIHomePageTableViewSectionHeadView.m */; };
+		04EBAC3F218DC95900708FDE /* Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 04EBAC3E218DC95900708FDE /* Menu.png */; };
 		5BB8A6D8D6E9CBEC31D15B13 /* libPods-zhihu-daily-ImitationDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 338E584827BEA8CFD0790911 /* libPods-zhihu-daily-ImitationDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		04EBAC39218BF24A00708FDE /* ZDINavChangeImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDINavChangeImage.m; sourceTree = "<group>"; };
 		04EBAC3B218C4E8200708FDE /* ZDIHomePageTableViewSectionHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDIHomePageTableViewSectionHeadView.h; sourceTree = "<group>"; };
 		04EBAC3C218C4E8200708FDE /* ZDIHomePageTableViewSectionHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDIHomePageTableViewSectionHeadView.m; sourceTree = "<group>"; };
+		04EBAC3E218DC95900708FDE /* Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu.png; sourceTree = "<group>"; };
 		338E584827BEA8CFD0790911 /* libPods-zhihu-daily-ImitationDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-zhihu-daily-ImitationDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CE07051F0C04404A85DD1F /* Pods-zhihu-daily-ImitationDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhihu-daily-ImitationDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-zhihu-daily-ImitationDemo/Pods-zhihu-daily-ImitationDemo.release.xcconfig"; sourceTree = "<group>"; };
 		DBAD9BCBA95F613B982CB8A9 /* Pods-zhihu-daily-ImitationDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhihu-daily-ImitationDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zhihu-daily-ImitationDemo/Pods-zhihu-daily-ImitationDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		04134381217F522D00486DF9 /* TestPicture */ = {
 			isa = PBXGroup;
 			children = (
+				04EBAC3E218DC95900708FDE /* Menu.png */,
 				04134382217F529B00486DF9 /* test1.JPG */,
 				0413438A21819EBA00486DF9 /* 0.JPG */,
 				0413438821819EBA00486DF9 /* 1.JPG */,
@@ -325,6 +328,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04EBAC3F218DC95900708FDE /* Menu.png in Resources */,
 				0413439021819EBB00486DF9 /* 2.JPG in Resources */,
 				0413438F21819EBB00486DF9 /* 0.JPG in Resources */,
 				0413438D21819EBB00486DF9 /* 1.JPG in Resources */,
