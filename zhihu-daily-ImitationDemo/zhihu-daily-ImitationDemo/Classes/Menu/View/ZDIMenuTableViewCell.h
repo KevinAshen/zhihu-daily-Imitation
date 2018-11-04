@@ -12,6 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZDIMenuTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) UIImageView *leftImageView;
+
+@property (nonatomic, strong) UILabel *titleLabel;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

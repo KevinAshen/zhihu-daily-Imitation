@@ -18,18 +18,22 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, 44)];
-        baseView.backgroundColor = [UIColor colorWithRed:0.24f green:0.78f blue:0.99f alpha:1.00f];
-        [self addSubview:baseView];
-        
-        self.backgroundColor = [UIColor whiteColor];
-//        self.backgroundColor = [UIColor colorWithRed:0.24f green:0.78f blue:0.99f alpha:1.00f];
-        _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width / 2.0 - 50, 0, frame.size.width / 3.0, frame.size.height)];
-        _dateLabel.textColor = [UIColor whiteColor];
-        _dateLabel.text = @"11月1日 星期四";
-        [baseView addSubview:_dateLabel];
+        [self createUIWithFrame:frame];
     }
     return self;
+}
+
+- (void) createUIWithFrame:(CGRect)frame {
+    UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, 44)];
+    baseView.backgroundColor = [UIColor colorWithRed:0.24f green:0.78f blue:0.99f alpha:1.00f];
+    [self addSubview:baseView];
+    
+    self.backgroundColor = [UIColor whiteColor];
+    //        self.backgroundColor = [UIColor colorWithRed:0.24f green:0.78f blue:0.99f alpha:1.00f];
+    _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width / 2.0 - 50, 0, frame.size.width / 3.0, frame.size.height)];
+    _dateLabel.textColor = [UIColor whiteColor];
+    _dateLabel.text = @"11月1日 星期四";
+    [baseView addSubview:_dateLabel];
 }
 
 /*

@@ -8,6 +8,7 @@
 
 #import "ZDIMenuView.h"
 #import "ZDIMenuTableViewCell.h"
+
 #import <Masonry.h>
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
@@ -32,8 +33,8 @@ static NSString *columnCellIdentifier = @"columnCell";
 
 - (void)CreateUI {
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) style:UITableViewStylePlain];
-    [_tableView registerClass:[ZDIHomePageNormalTableViewCell class] forCellReuseIdentifier:columnCellIdentifier];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 240 / kExamplePictureWidth * kDeviceWidth, kDeviceHeight) style:UITableViewStylePlain];
+    [_tableView registerClass:[ZDIMenuTableViewCell class] forCellReuseIdentifier:columnCellIdentifier];
     
     self.tableView.dataSource = self;
     [self addSubview:_tableView];
@@ -41,15 +42,34 @@ static NSString *columnCellIdentifier = @"columnCell";
     self.backgroundColor = [UIColor whiteColor];
     
     self.tableView.dataSource = self;
-    self.backgroundColor = [UIColor darkGrayColor];
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.14f green:0.16f blue:0.19f alpha:1.00f];
+    self.tableView.separatorStyle = UIAccessibilityTraitNone;
+    self.backgroundColor = [UIColor colorWithRed:0.14f green:0.16f blue:0.19f alpha:1.00f];
     
-    UILabel *testLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 240 / kExamplePictureWidth * kDeviceWidth, kDeviceHeight)];
-    [self addSubview:testLabel];
-    testLabel.backgroundColor = [UIColor yellowColor];
-    testLabel.textColor = [UIColor whiteColor];
-    testLabel.text = @"TEST";
+    _menuTableHeadView = [[ZDIMenuTableHeadView alloc] initWithFrame:CGRectMake(0, 0, 240 / kExamplePictureWidth * kDeviceWidth, 135 / kExamplePictureHeight * kDeviceHeight)];
+    self.tableView.tableHeaderView = _menuTableHeadView;
+    
+    _menuTableFootView = [[ZDIMenuTableFootView alloc] initWithFrame:CGRectMake(0, 734 / kExamplePictureHeight * kDeviceHeight, 240 / kExamplePictureWidth * kDeviceWidth, 50 / kExamplePictureHeight * kDeviceHeight)];
+    [self addSubview:_menuTableFootView];
+    
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    //test
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    //test
+    return 1;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ZDIMenuTableViewCell *menuTableViewCell = [tableView dequeueReusableCellWithIdentifier:columnCellIdentifier forIndexPath:indexPath];
+    menuTableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return menuTableViewCell;
+}
 
 
 /*

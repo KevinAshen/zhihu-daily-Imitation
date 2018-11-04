@@ -7,12 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZDIMenuTableHeadView.h"
+#import "ZDIMenuTableFootView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZDIMenuView : UIView
 
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) ZDIMenuTableHeadView *menuTableHeadView;
+
+@property (nonatomic, strong) ZDIMenuTableFootView *menuTableFootView;
 
 @end
 

@@ -13,7 +13,7 @@
 #define kExamplePictureHeight 784.0
 
 
-@interface ZDIMenuViewController ()
+@interface ZDIMenuViewController ()<UITableViewDelegate>
 
 @end
 
@@ -27,11 +27,20 @@
     
     //test
     _menuView = [[ZDIMenuView alloc] init];
-    _menuView.frame = CGRectMake(-240 / kExamplePictureWidth * kDeviceWidth, 0, self.view.frame.size.width, self.view.frame.size.height);
+    _menuView.frame = CGRectMake(-240 / kExamplePictureWidth * kDeviceWidth, 0, 240 / kExamplePictureWidth * kDeviceWidth, kDeviceHeight);
+    _menuView.tableView.delegate = self;
     
     [self.view addSubview:_menuView];
     
+    _menuView.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 56 / kExamplePictureHeight * kDeviceHeight;
+}
+
+
 
 /*
 #pragma mark - Navigation
