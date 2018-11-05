@@ -31,6 +31,10 @@ static NSString *normalCellIdentifier = @"normalCell";
         self.tableView.dataSource = self;
         [self addSubview:_tableView];
         
+        self.tableView.showsVerticalScrollIndicator = NO;
+        self.tableView.showsHorizontalScrollIndicator = NO;
+        self.tableView.bounces = NO;
+        
         self.backgroundColor = [UIColor whiteColor];
         
     }
