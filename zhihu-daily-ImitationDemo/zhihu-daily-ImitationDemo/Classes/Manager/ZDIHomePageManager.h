@@ -7,10 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ZDIDailyDataModel.h"
+
+//请求当日最新的数据（轮播图）
+typedef void(^ZDILatestDailyDataHandle)(ZDIDailyDataModel *latestDataModel);
+
+// 请求失败统一回调block
+typedef void(^ErrorHandle)(NSError *error);
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZDIHomePageManager : NSObject
+
++ (instancetype)sharedManager;
+
+// 获取当日最新的数据（轮播图）方法
+- (void)fetchLatestDailyDatasucceed:(ZDILatestDailyDataHandle)succeedBlock error:(ErrorHandle)errorBlock;
 
 @end
 

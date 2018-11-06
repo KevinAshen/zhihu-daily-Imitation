@@ -8,6 +8,26 @@
 
 #import "ZDIDailyDataModel.h"
 
+@implementation ZDIStoriesJSONModel
+
++(BOOL)propertyIsOptional:(NSString *)propertyName{
+    return  YES;
+}
+
+@end
+
+@implementation ZDITop_storiesJSONModel
+
++(BOOL)propertyIsOptional:(NSString *)propertyName{
+    return  YES;
+}
+
+@end
+
 @implementation ZDIDailyDataModel
+
++(BOOL)propertyIsOptional:(NSString *)propertyName{
+    return  YES;
+}
 
 @end

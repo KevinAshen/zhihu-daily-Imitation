@@ -7,8 +7,8 @@
 //
 
 #import "ZDIHomePageViewController.h"
-#import "ZDIHomePageCarouselView.h"
 #import "ZDIHomePageTableViewSectionHeadView.h"
+#import "ZDIHomePageManager.h"
 #import <Masonry.h>
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
@@ -27,44 +27,19 @@
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
-    ZDIHomePageCarouselView *carousel = [[ZDIHomePageCarouselView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 230 / kExamplePictureHeight * kDeviceHeight)];
-    carousel.images = @[
-                        [UIImage imageNamed:@"0.JPG"],
-                        [UIImage imageNamed:@"1.JPG"],
-                        [UIImage imageNamed:@"2.JPG"],
-                        [UIImage imageNamed:@"3.JPG"],
-                        [UIImage imageNamed:@"4.JPG"]
-                        ];
-    carousel.currentPageColor = [UIColor orangeColor];
-    carousel.pageColor = [UIColor grayColor];
-    
-    
     self.navigationItem.title = @"今日热闻";
     
     _homePageTableViewGroupView = [[ZDIHomePageTableViewGroupView alloc] init];
     [self.view addSubview:_homePageTableViewGroupView];
-    
-    _homePageTableViewGroupView.tableView.tableHeaderView = carousel;
-    
-    _homePageTableViewGroupView.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     
     [_homePageTableViewGroupView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
         make.top.equalTo(self.view).offset(0);
         make.left.equalTo(self.view).offset(0);
     }];
-    
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-//    CGRect frame = self.navigationController.navigationBar.frame;
-//    UIView *alphaView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, frame.size.width, frame.size.height + 20)];
-//    alphaView.backgroundColor = [UIColor colorWithRed:0.02f green:0.56f blue:0.84f alpha:1.00f];
-//    alphaView.userInteractionEnabled = NO;
-//    [self.navigationController.navigationBar insertSubview: alphaView atIndex:0];
-    
+
     self.homePageTableViewGroupView.tableView.delegate = self;
     
-    //   菜单按钮的设置
-//    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithTitle:@"菜单" style:UIBarButtonItemStylePlain target:self action:@selector(openCloseMenu:)];
     UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu"] style:UIBarButtonItemStylePlain target:self action:@selector(openCloseMenu:)];
     self.navigationItem.leftBarButtonItem = menuItem;
     
@@ -118,8 +93,6 @@
     } else if (section == 1) {
         self.homePageTableViewGroupView.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
         _homePageTableViewSectionHeadView = [[ZDIHomePageTableViewSectionHeadView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
-//        NSString *sectionStr = [NSString stringWithFormat:@"%lu", section];
-//        _homePageTableViewSectionHeadView.dateLabel.text = sectionStr;
         return _homePageTableViewSectionHeadView;
     } else {
         self.homePageTableViewGroupView.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);

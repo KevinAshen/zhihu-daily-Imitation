@@ -8,6 +8,7 @@
 
 #import "ZDIHomePageTableViewGroupView.h"
 #import "ZDIHomePageNormalTableViewCell.h"
+
 #import <Masonry.h>
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
@@ -34,8 +35,21 @@ static NSString *normalCellIdentifier = @"normalCell";
         self.tableView.showsVerticalScrollIndicator = NO;
         self.tableView.showsHorizontalScrollIndicator = NO;
         self.tableView.bounces = NO;
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         
         self.backgroundColor = [UIColor whiteColor];
+        
+        _carousel = [[ZDIHomePageCarouselView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 230 / kExamplePictureHeight * kDeviceHeight)];
+        _carousel.images = @[
+                            [UIImage imageNamed:@"0.JPG"],
+                            [UIImage imageNamed:@"1.JPG"],
+                            [UIImage imageNamed:@"2.JPG"],
+                            [UIImage imageNamed:@"3.JPG"],
+                            [UIImage imageNamed:@"4.JPG"]
+                            ];
+        _carousel.currentPageColor = [UIColor orangeColor];
+        _carousel.pageColor = [UIColor grayColor];
+        _tableView.tableHeaderView = _carousel;
         
     }
     return self;
