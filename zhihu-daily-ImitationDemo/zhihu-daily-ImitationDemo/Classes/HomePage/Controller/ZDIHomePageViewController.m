@@ -21,9 +21,17 @@
 
 @implementation ZDIHomePageViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self updateLatestDaily];
+    NSLog(@"---%@--_homePageTableViewGroupView.latestDailyDataModel.stories.count--", _homePageTableViewGroupView.latestDailyDataModel);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
@@ -50,6 +58,22 @@
     
     self.navigationController.navigationBar.shadowImage= [UIImage new];
     
+
+    
+}
+
+- (void)updateLatestDaily {
+    [[ZDIHomePageManager sharedManager] fetchLatestDailyDataWithSucceed:^(ZDIDailyDataModel *latestDataModel) {
+        self.homePageTableViewGroupView.latestDailyDataModel = [[ZDIDailyDataModel alloc] init];
+        self.homePageTableViewGroupView.latestDailyDataModel = latestDataModel;
+        //NSLog(@"---%@----", self.homePageTableViewGroupView.latestDailyDataModel);
+        NSLog(@"添加成功");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.homePageTableViewGroupView.tableView reloadData];
+        });
+    } error:^(NSError *error) {
+        NSLog(@"添加失败");
+    }];
 }
 
 /**侧边栏的展开和关闭*/

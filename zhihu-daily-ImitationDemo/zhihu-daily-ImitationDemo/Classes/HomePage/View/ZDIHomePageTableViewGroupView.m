@@ -26,6 +26,9 @@ static NSString *normalCellIdentifier = @"normalCell";
 - (instancetype) init {
     self = [super init];
     if (self) {
+        
+        //_latestDailyDataModel = [[ZDIDailyDataModel alloc] init];
+        
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) style:UITableViewStylePlain];
         [_tableView registerClass:[ZDIHomePageNormalTableViewCell class] forCellReuseIdentifier:normalCellIdentifier];
         
@@ -58,18 +61,30 @@ static NSString *normalCellIdentifier = @"normalCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     //test
-    return 3;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //test
-    return 13;
+    return _latestDailyDataModel.stories.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZDIHomePageNormalTableViewCell *homePageNormalTableViewCell = [tableView dequeueReusableCellWithIdentifier:normalCellIdentifier forIndexPath:indexPath];
+    homePageNormalTableViewCell.titleLabel.text = [_latestDailyDataModel.stories[indexPath.row] title];
+    NSArray *testArr = [_latestDailyDataModel.stories[indexPath.row] images];
+    NSString *titleImageStr = testArr[0];
+    homePageNormalTableViewCell.titleImageView.image = [self getImageFromURL:titleImageStr];
     return homePageNormalTableViewCell;
+}
+
+// 根据url获取图片
+- (UIImage *)getImageFromURL:(NSString *)fileURL {
+    UIImage *result;
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
+    result = [UIImage imageWithData:data];
+    return result;
 }
 
 /*
