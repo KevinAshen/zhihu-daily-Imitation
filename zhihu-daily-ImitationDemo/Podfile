@@ -2,5 +2,6 @@ platform :ios, '7.0'
 target 'zhihu-daily-ImitationDemo' do
 pod 'Masonry'
 pod 'JSONModel'
+pod 'SDWebImage'
 end
 

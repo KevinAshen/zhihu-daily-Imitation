@@ -18,8 +18,19 @@
 
 @implementation ZDITop_storiesJSONModel
 
-+(BOOL)propertyIsOptional:(NSString *)propertyName{
-    return  YES;
+//+(BOOL)propertyIsOptional:(NSString *)propertyName{
+//    return  YES;
+//}
+
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{
+                                                                  @"ID":@"id",
+                                                                  @"imageStr":@"image"
+//                                                                  @"type":@"typeStr",
+//                                                                  @"ga_prefix":@"gaPrefixStr",
+//                                                                  @"title":@"titleStr"
+                                                                
+                                                                  }];
 }
 
 @end

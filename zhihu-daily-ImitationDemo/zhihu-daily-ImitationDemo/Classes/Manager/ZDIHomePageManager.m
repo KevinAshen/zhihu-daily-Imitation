@@ -29,6 +29,7 @@ static ZDIHomePageManager *manger = nil;
     NSURLSessionDataTask *latestDailyDataTask = [latestDailyDataSession dataTaskWithRequest:latestDailyDataRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error == nil) {
             NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"%@", resultDic);
             ZDIDailyDataModel *dailyDataModel = [[ZDIDailyDataModel alloc] initWithDictionary:resultDic error:&error];
             succeedBlock(dailyDataModel);
         } else {

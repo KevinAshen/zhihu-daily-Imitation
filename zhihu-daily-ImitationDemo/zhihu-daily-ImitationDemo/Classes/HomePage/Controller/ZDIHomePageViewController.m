@@ -21,18 +21,16 @@
 
 @implementation ZDIHomePageViewController
 
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self updateLatestDaily];
-    NSLog(@"---%@--_homePageTableViewGroupView.latestDailyDataModel.stories.count--", _homePageTableViewGroupView.latestDailyDataModel);
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-
-    
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     self.navigationItem.title = @"今日热闻";
@@ -66,11 +64,14 @@
     [[ZDIHomePageManager sharedManager] fetchLatestDailyDataWithSucceed:^(ZDIDailyDataModel *latestDataModel) {
         self.homePageTableViewGroupView.latestDailyDataModel = [[ZDIDailyDataModel alloc] init];
         self.homePageTableViewGroupView.latestDailyDataModel = latestDataModel;
-        //NSLog(@"---%@----", self.homePageTableViewGroupView.latestDailyDataModel);
+        
         NSLog(@"添加成功");
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.homePageTableViewGroupView.tableView reloadData];
+            NSArray *tempCarouselImageArr = [self getCarouselWithModel:latestDataModel];
+            [self.homePageTableViewGroupView setScrollViewImage:tempCarouselImageArr];
         });
+        
     } error:^(NSError *error) {
         NSLog(@"添加失败");
     }];
@@ -79,7 +80,7 @@
 /**侧边栏的展开和关闭*/
 - (void)openCloseMenu: (UIBarButtonItem *)sender
 {
-    [self.navigationController.parentViewController performSelector:@selector(openCloseMenu)];
+//    [self.navigationController.parentViewController performSelector:@selector(openCloseMenu)];
 }
 
 - (void)carouselView:(ZDIHomePageCarouselView *)homePageCarouselView indexOfClickedImageBtn:(NSUInteger )index {
@@ -165,6 +166,17 @@
         [self setStatusBarBackgroundColor:[UIColor colorWithRed:0.24f green:0.78f blue:0.99f alpha:1.00f]];
         self.navigationController.navigationBar.hidden = YES;
     }
+}
+
+- (NSArray *)getCarouselWithModel:(ZDIDailyDataModel *)dailyDataModel {
+    NSMutableArray *tempCarouselImageMut = [[NSMutableArray alloc] init];
+    for (int i = 0; i < dailyDataModel.top_stories.count; i++) {
+        NSString *tempCarouselStr = [self.homePageTableViewGroupView.latestDailyDataModel.top_stories[i] imageStr];
+        UIImage *tempCarouselImage = [self.homePageTableViewGroupView getImageFromURL:tempCarouselStr];
+        [tempCarouselImageMut addObject:tempCarouselImage];
+    }
+    NSArray *tempCarouselImageArr = [NSArray arrayWithArray:tempCarouselImageMut];
+    return tempCarouselImageArr;
 }
 
 /*

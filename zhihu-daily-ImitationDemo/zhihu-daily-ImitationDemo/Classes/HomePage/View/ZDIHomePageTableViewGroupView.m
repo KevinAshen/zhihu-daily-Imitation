@@ -9,6 +9,7 @@
 #import "ZDIHomePageTableViewGroupView.h"
 #import "ZDIHomePageNormalTableViewCell.h"
 
+
 #import <Masonry.h>
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
@@ -27,8 +28,6 @@ static NSString *normalCellIdentifier = @"normalCell";
     self = [super init];
     if (self) {
         
-        //_latestDailyDataModel = [[ZDIDailyDataModel alloc] init];
-        
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) style:UITableViewStylePlain];
         [_tableView registerClass:[ZDIHomePageNormalTableViewCell class] forCellReuseIdentifier:normalCellIdentifier];
         
@@ -43,13 +42,22 @@ static NSString *normalCellIdentifier = @"normalCell";
         self.backgroundColor = [UIColor whiteColor];
         
         _carousel = [[ZDIHomePageCarouselView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 230 / kExamplePictureHeight * kDeviceHeight)];
-        _carousel.images = @[
-                            [UIImage imageNamed:@"0.JPG"],
-                            [UIImage imageNamed:@"1.JPG"],
-                            [UIImage imageNamed:@"2.JPG"],
-                            [UIImage imageNamed:@"3.JPG"],
-                            [UIImage imageNamed:@"4.JPG"]
-                            ];
+//        NSLog(@"%lu------_latestDailyDataModel.top_stories.count-----test", _latestDailyDataModel.top_stories.count);
+//        NSLog(@"%@------_latestDailyDataModel-----test", _latestDailyDataModel);
+//        for (int i = 0; i < _latestDailyDataModel.top_stories.count; i++) {
+//            NSString *tempCarouselStr = [_latestDailyDataModel.top_stories[2] imageStr];
+//            NSLog(@"%@------tempCarouselStr-----test", tempCarouselStr);
+//            UIImage *tempCarouselImage = [self getImageFromURL:tempCarouselStr];
+//            [_tempCarouselImagesMut addObject:tempCarouselImage];
+//        }
+//        _carousel.images = _tempCarouselImagesMut;
+//        _carousel.images = @[
+//                            [UIImage imageNamed:@"0.JPG"],
+//                            [UIImage imageNamed:@"1.JPG"],
+//                            [UIImage imageNamed:@"2.JPG"],
+//                            [UIImage imageNamed:@"3.JPG"],
+//                            [UIImage imageNamed:@"4.JPG"]
+//                            ];
         _carousel.currentPageColor = [UIColor orangeColor];
         _carousel.pageColor = [UIColor grayColor];
         _tableView.tableHeaderView = _carousel;
@@ -73,8 +81,8 @@ static NSString *normalCellIdentifier = @"normalCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZDIHomePageNormalTableViewCell *homePageNormalTableViewCell = [tableView dequeueReusableCellWithIdentifier:normalCellIdentifier forIndexPath:indexPath];
     homePageNormalTableViewCell.titleLabel.text = [_latestDailyDataModel.stories[indexPath.row] title];
-    NSArray *testArr = [_latestDailyDataModel.stories[indexPath.row] images];
-    NSString *titleImageStr = testArr[0];
+    NSArray *titleImageArr = [_latestDailyDataModel.stories[indexPath.row] images];
+    NSString *titleImageStr = titleImageArr[0];
     homePageNormalTableViewCell.titleImageView.image = [self getImageFromURL:titleImageStr];
     return homePageNormalTableViewCell;
 }
@@ -85,6 +93,10 @@ static NSString *normalCellIdentifier = @"normalCell";
     NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
     result = [UIImage imageWithData:data];
     return result;
+}
+
+- (void)setScrollViewImage:(NSArray *)images {
+    _carousel.images = images;
 }
 
 /*
