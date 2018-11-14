@@ -33,7 +33,7 @@ static const int imageBtnCount = 3;
         
         //在scrollView中添加三个图片按钮，因为后面需要响应点击事件，所以我直接用按钮不用imageView了，感觉更方便一些
         for (int i = 0;i < imageBtnCount; i++) {
-            UIButton *imageBtn = [[UIButton alloc] init];
+            ZDIHomePageCarouselButton *imageBtn = [[ZDIHomePageCarouselButton alloc] init];
             [scrollView addSubview:imageBtn];
         }
         //添加pageControl
@@ -60,7 +60,7 @@ static const int imageBtnCount = 3;
     }
     //设置三张图片的位置，并为三个按钮添加点击事件
     for (int i = 0; i < imageBtnCount; i++) {
-        UIButton *imageBtn = self.scrollView.subviews[i];
+        ZDIHomePageCarouselButton *imageBtn = self.scrollView.subviews[i];
         [imageBtn addTarget:self action:@selector(imageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         if (self.isScrollDorectionPortrait) { //竖向
             imageBtn.frame = CGRectMake(0, i * height, width, height);
@@ -94,8 +94,9 @@ static const int imageBtnCount = 3;
     self.pageControl.pageIndicatorTintColor = pageColor;
 }
 //根据传入的图片数组设置图片
-- (void)setImages:(NSArray *)images {
+- (void)setImages:(NSArray *)images andTitles:(NSArray *)titles {
     _images = images;
+    _topImageTitle = titles;
     //pageControl的页数就是图片的个数
     self.pageControl.numberOfPages = images.count;
     //默认一开始显示的是第0页
@@ -111,7 +112,7 @@ static const int imageBtnCount = 3;
     //设置三个imageBtn的显示图片
     for (int i = 0; i < self.scrollView.subviews.count; i++) {
         //取出三个imageBtn
-        UIButton *imageBtn = self.scrollView.subviews[i];
+        ZDIHomePageCarouselButton *imageBtn = self.scrollView.subviews[i];
         //这个是为了给图片做索引用的
         NSInteger index = self.pageControl.currentPage;
         //NSLog(@"1--%ld---", index);
@@ -128,10 +129,13 @@ static const int imageBtnCount = 3;
         } else if (index == self.pageControl.numberOfPages) { //当上面的index超过最大page索引的时候，也就是滑到最右再继续滑的时候，让他显示第一张图片
             index = 0;
         }
+        imageBtn.titleLabel.font = [UIFont systemFontOfSize:20];
+        imageBtn.titleLabel.numberOfLines = 0;
         imageBtn.tag = index;
         //用上面处理好的索引给imageBtn设置图片
         //NSLog(@"$$--%ld---", index);
         [imageBtn setBackgroundImage:self.images[index] forState:UIControlStateNormal];
+        [imageBtn setTitle:_topImageTitle[index] forState:UIControlStateNormal];
         [imageBtn setBackgroundImage:self.images[index] forState:UIControlStateHighlighted];
         
     }
@@ -160,7 +164,7 @@ static const int imageBtnCount = 3;
     CGFloat minDistance = MAXFLOAT;
     //遍历三个imageView,看那个图片偏移最小，也就是最靠中间
     for (int i = 0; i < self.scrollView.subviews.count; i++) {
-        UIButton *imageBtn = self.scrollView.subviews[i];
+        ZDIHomePageCarouselButton *imageBtn = self.scrollView.subviews[i];
         CGFloat distance = 0;
         if (self.isScrollDorectionPortrait) {
             distance = ABS(imageBtn.frame.origin.y - scrollView.contentOffset.y);
@@ -218,7 +222,7 @@ static const int imageBtnCount = 3;
 }
 
 
-- (void)imageBtnClick:(UIButton *)btn {
+- (void)imageBtnClick:(ZDIHomePageCarouselButton *)btn {
     //    NSLog(@"%ld",btn.tag);
     if ([self.homePageCarouselViewDelegate respondsToSelector:@selector(carouselView:indexOfClickedImageBtn:)])
     {

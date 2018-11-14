@@ -29,9 +29,8 @@ static ZDIHomePageManager *manger = nil;
     NSURLSessionDataTask *latestDailyDataTask = [latestDailyDataSession dataTaskWithRequest:latestDailyDataRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error == nil) {
             NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            NSLog(@"%@", resultDic);
-            ZDIDailyDataModel *dailyDataModel = [[ZDIDailyDataModel alloc] initWithDictionary:resultDic error:&error];
-            succeedBlock(dailyDataModel);
+            ZDIDailyDataModel *LatestDailyDataModel = [[ZDIDailyDataModel alloc] initWithDictionary:resultDic error:&error];
+            succeedBlock(LatestDailyDataModel);
         } else {
             errorBlock(error);
         }
@@ -39,6 +38,23 @@ static ZDIHomePageManager *manger = nil;
     [latestDailyDataTask resume];
     
     
+}
+
+- (void)fetchLatestDailyDataWithDate:(NSString *)date succeed:(ZDILatestDailyDataHandle)succeedBlock error:(ErrorHandle)errorBlock {
+    NSString *latestDailyDataURLStr = [NSString stringWithFormat:@"https://news-at.zhihu.com/api/4/news/before/%@", date];
+    NSURL *latestDailyDataURL = [NSURL URLWithString:latestDailyDataURLStr];
+    NSURLRequest *latestDailyDataRequest = [NSURLRequest requestWithURL:latestDailyDataURL];
+    NSURLSession *latestDailyDataSession = [NSURLSession sharedSession];
+    NSURLSessionDataTask *latestDailyDataTask = [latestDailyDataSession dataTaskWithRequest:latestDailyDataRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error == nil) {
+            NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            ZDIDailyDataModel *someDailyDataModel = [[ZDIDailyDataModel alloc] initWithDictionary:resultDic error:&error];
+            succeedBlock(someDailyDataModel);
+        } else {
+            errorBlock(error);
+        }
+    }];
+    [latestDailyDataTask resume];
 }
 
 

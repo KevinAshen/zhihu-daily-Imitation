@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ZDIHomePageCarouselButton.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 //传入图片数组
 @property (nonatomic, copy) NSArray *images;
 
+//传入标题数组
+@property (nonatomic, copy) NSArray *topImageTitle;
+
 //pageControl颜色设置
 @property (nonatomic, strong) UIColor *currentPageColor;
 @property (nonatomic, strong) UIColor *pageColor;
@@ -39,6 +42,9 @@ BOOL scrollDorectionPortrait;
 @property (nonatomic, weak) NSTimer *timer;
 
 @property (weak, nonatomic) id<ZDIHomePageCarouselViewDelegate> homePageCarouselViewDelegate;
+
+- (void)setImages:(NSArray *)images andTitles:(NSArray *)titles;
+
 @end
 
 NS_ASSUME_NONNULL_END

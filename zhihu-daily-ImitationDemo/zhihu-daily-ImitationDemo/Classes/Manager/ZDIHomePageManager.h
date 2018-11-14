@@ -21,8 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sharedManager;
 
-// 获取当日最新的数据（轮播图）方法
+//获取当日最新的数据（轮播图）方法
 - (void)fetchLatestDailyDataWithSucceed:(ZDILatestDailyDataHandle)succeedBlock error:(ErrorHandle)errorBlock;
+
+//根据日期获取某日的数据方法
+- (void)fetchLatestDailyDataWithDate:(NSString *)date succeed:(ZDILatestDailyDataHandle)succeedBlock error:(ErrorHandle)errorBlock;
 
 @end
 

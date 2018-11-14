@@ -24,6 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) ZDIHomePageCarouselView *carousel;
 
+@property (nonatomic, assign) int days;
+
+@property(nonatomic, assign) BOOL isLoading;
 
 @end
 

@@ -22,11 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) ZDIDailyDataModel *latestDailyDataModel;
 
-@property (nonatomic, copy) NSMutableArray *tempCarouselImagesMut;
+@property (nonatomic, strong) NSMutableArray *tempCarouselImagesMut;
+
+@property (nonatomic, strong) NSMutableArray *everyDailyDateModelMut;
 
 - (UIImage *)getImageFromURL:(NSString *)fileURL;
 
-- (void)setScrollViewImage:(NSArray *)images;
+- (void)setScrollViewImage:(NSArray *)images andTitles:(NSArray *)titles;
 
 @end
 

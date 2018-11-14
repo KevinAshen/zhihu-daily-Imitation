@@ -1,15 +1,15 @@
 //
-//  ZDIHomePageNormalTableViewCell.m
+//  ZDIHomePageLatestTableViewCell.m
 //  zhihu-daily-ImitationDemo
 //
-//  Created by mac on 2018/10/23.
+//  Created by mac on 2018/11/13.
 //  Copyright © 2018 姜凯文. All rights reserved.
 //
 
-#import "ZDIHomePageNormalTableViewCell.h"
+#import "ZDIHomePageLatestTableViewCell.h"
 #import <Masonry.h>
 
-@implementation ZDIHomePageNormalTableViewCell
+@implementation ZDIHomePageLatestTableViewCell
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
 #define kExamplePictureWidth 440.0

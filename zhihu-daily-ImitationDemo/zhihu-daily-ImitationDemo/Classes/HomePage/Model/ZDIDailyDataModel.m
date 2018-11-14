@@ -18,9 +18,9 @@
 
 @implementation ZDITop_storiesJSONModel
 
-//+(BOOL)propertyIsOptional:(NSString *)propertyName{
-//    return  YES;
-//}
++(BOOL)propertyIsOptional:(NSString *)propertyName{
+    return  YES;
+}
 
 + (JSONKeyMapper *)keyMapper {
     return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{

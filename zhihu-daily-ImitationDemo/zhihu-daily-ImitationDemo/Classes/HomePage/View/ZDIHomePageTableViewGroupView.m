@@ -8,15 +8,16 @@
 
 #import "ZDIHomePageTableViewGroupView.h"
 #import "ZDIHomePageNormalTableViewCell.h"
-
+#import "ZDIHomePageLatestTableViewCell.h"
+#import <UIImageView+WebCache.h>
 
 #import <Masonry.h>
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
 #define kExamplePictureWidth 440.0
 #define kExamplePictureHeight 784.0
-static NSString *titleCellIdentifier = @"titleCell";
-static NSString *normalCellIdentifier = @"normalCell";
+static NSString *latestCellIdentifier = @"latestDailyCell";
+static NSString *someCellIdentifier = @"someDailyCell";
 
 @interface ZDIHomePageTableViewGroupView()<UITableViewDataSource>
 
@@ -28,8 +29,12 @@ static NSString *normalCellIdentifier = @"normalCell";
     self = [super init];
     if (self) {
         
+        _everyDailyDateModelMut = [[NSMutableArray alloc] init];
+        
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) style:UITableViewStylePlain];
-        [_tableView registerClass:[ZDIHomePageNormalTableViewCell class] forCellReuseIdentifier:normalCellIdentifier];
+//        _tableView = [[UITableView alloc] initWithFrame:self.frame style:UITableViewStylePlain];
+        [_tableView registerClass:[ZDIHomePageLatestTableViewCell class] forCellReuseIdentifier:latestCellIdentifier];
+        [_tableView registerClass:[ZDIHomePageNormalTableViewCell class] forCellReuseIdentifier:someCellIdentifier];
         
         self.tableView.dataSource = self;
         [self addSubview:_tableView];
@@ -42,22 +47,6 @@ static NSString *normalCellIdentifier = @"normalCell";
         self.backgroundColor = [UIColor whiteColor];
         
         _carousel = [[ZDIHomePageCarouselView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 230 / kExamplePictureHeight * kDeviceHeight)];
-//        NSLog(@"%lu------_latestDailyDataModel.top_stories.count-----test", _latestDailyDataModel.top_stories.count);
-//        NSLog(@"%@------_latestDailyDataModel-----test", _latestDailyDataModel);
-//        for (int i = 0; i < _latestDailyDataModel.top_stories.count; i++) {
-//            NSString *tempCarouselStr = [_latestDailyDataModel.top_stories[2] imageStr];
-//            NSLog(@"%@------tempCarouselStr-----test", tempCarouselStr);
-//            UIImage *tempCarouselImage = [self getImageFromURL:tempCarouselStr];
-//            [_tempCarouselImagesMut addObject:tempCarouselImage];
-//        }
-//        _carousel.images = _tempCarouselImagesMut;
-//        _carousel.images = @[
-//                            [UIImage imageNamed:@"0.JPG"],
-//                            [UIImage imageNamed:@"1.JPG"],
-//                            [UIImage imageNamed:@"2.JPG"],
-//                            [UIImage imageNamed:@"3.JPG"],
-//                            [UIImage imageNamed:@"4.JPG"]
-//                            ];
         _carousel.currentPageColor = [UIColor orangeColor];
         _carousel.pageColor = [UIColor grayColor];
         _tableView.tableHeaderView = _carousel;
@@ -68,23 +57,37 @@ static NSString *normalCellIdentifier = @"normalCell";
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    //test
-    return 1;
+    return _everyDailyDateModelMut.count + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //test
-    return _latestDailyDataModel.stories.count;
+    if (section == 0) {
+        return _latestDailyDataModel.stories.count;
+    } else {
+        return [_everyDailyDateModelMut[section - 1] stories].count;
+    }
+    
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ZDIHomePageNormalTableViewCell *homePageNormalTableViewCell = [tableView dequeueReusableCellWithIdentifier:normalCellIdentifier forIndexPath:indexPath];
-    homePageNormalTableViewCell.titleLabel.text = [_latestDailyDataModel.stories[indexPath.row] title];
-    NSArray *titleImageArr = [_latestDailyDataModel.stories[indexPath.row] images];
-    NSString *titleImageStr = titleImageArr[0];
-    homePageNormalTableViewCell.titleImageView.image = [self getImageFromURL:titleImageStr];
-    return homePageNormalTableViewCell;
+    if (indexPath.section == 0) {
+        ZDIHomePageLatestTableViewCell *homePageLatestTableViewCell = [tableView dequeueReusableCellWithIdentifier:latestCellIdentifier forIndexPath:indexPath];
+        homePageLatestTableViewCell.titleLabel.text = [_latestDailyDataModel.stories[indexPath.row] title];
+        NSArray *titleImageArr = [_latestDailyDataModel.stories[indexPath.row] images];
+        NSString *titleImageStr = titleImageArr[0];
+        [homePageLatestTableViewCell.titleImageView sd_setImageWithURL:[NSURL URLWithString:titleImageStr] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        return homePageLatestTableViewCell;
+    } else {
+        ZDIDailyDataModel *someDailyDataModel = _everyDailyDateModelMut[indexPath.section - 1];
+        ZDIHomePageNormalTableViewCell *homePageNormalTableViewCell = [tableView dequeueReusableCellWithIdentifier:someCellIdentifier forIndexPath:indexPath];
+        homePageNormalTableViewCell.titleLabel.text = [someDailyDataModel.stories[indexPath.row] title];
+        NSArray *titleImageArr = [someDailyDataModel.stories[indexPath.row] images];
+        NSString *titleImageStr = titleImageArr[0];
+        [homePageNormalTableViewCell.titleImageView sd_setImageWithURL:[NSURL URLWithString:titleImageStr] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        return homePageNormalTableViewCell;
+    }
+
 }
 
 // 根据url获取图片
@@ -95,9 +98,12 @@ static NSString *normalCellIdentifier = @"normalCell";
     return result;
 }
 
-- (void)setScrollViewImage:(NSArray *)images {
-    _carousel.images = images;
+- (void)setScrollViewImage:(NSArray *)images andTitles:(NSArray *)titles {
+    [_carousel setImages:images andTitles:titles];
 }
+
+
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

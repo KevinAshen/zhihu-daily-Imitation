@@ -25,12 +25,16 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self updateLatestDaily];
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.days = 1;
+    
+    
+    
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     self.navigationItem.title = @"今日热闻";
@@ -64,14 +68,27 @@
     [[ZDIHomePageManager sharedManager] fetchLatestDailyDataWithSucceed:^(ZDIDailyDataModel *latestDataModel) {
         self.homePageTableViewGroupView.latestDailyDataModel = [[ZDIDailyDataModel alloc] init];
         self.homePageTableViewGroupView.latestDailyDataModel = latestDataModel;
-        
-        NSLog(@"添加成功");
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.homePageTableViewGroupView.tableView reloadData];
-            NSArray *tempCarouselImageArr = [self getCarouselWithModel:latestDataModel];
-            [self.homePageTableViewGroupView setScrollViewImage:tempCarouselImageArr];
+            NSArray *tempCarouselImageArr = [self getCarouselImagesWithModel:latestDataModel];
+            NSArray *tempCarouselTitleArr = [self getCarouselImageTitleWithModel:latestDataModel];
+            [self.homePageTableViewGroupView setScrollViewImage:tempCarouselImageArr andTitles:tempCarouselTitleArr];
         });
         
+    } error:^(NSError *error) {
+        NSLog(@"添加失败");
+    }];
+}
+
+- (void)updateSomeDailyWithDate:(NSString *)date {
+    self.isLoading = YES;
+    [[ZDIHomePageManager sharedManager] fetchLatestDailyDataWithDate:date succeed:^(ZDIDailyDataModel *someDailyDateModel) {
+        [self.homePageTableViewGroupView.everyDailyDateModelMut addObject:someDailyDateModel];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.homePageTableViewGroupView.tableView reloadData];
+            self.isLoading = NO;
+            self.days++;
+        });
     } error:^(NSError *error) {
         NSLog(@"添加失败");
     }];
@@ -149,7 +166,13 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.y < ((100 / kExamplePictureHeight * kDeviceHeight * 13) + 230 / kExamplePictureHeight * kDeviceHeight)) {
+    CGPoint offset = scrollView.contentOffset;
+    double change = 100 / kExamplePictureHeight * kDeviceHeight * _homePageTableViewGroupView.latestDailyDataModel.stories.count + 230 / kExamplePictureHeight * kDeviceHeight;
+    NSLog(@"--%f-scrollView.contentOffset.y--", scrollView.contentOffset.y);
+    NSLog(@"--%f-change--", change);
+    NSLog(@"--%d--", self.navigationController.navigationBar.translucent);
+    //导航栏变化
+    if (scrollView.contentOffset.y < change) {
         self.homePageTableViewGroupView.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         self.navigationController.navigationBar.hidden = NO;
         self.navigationItem.title = @"今日热闻";
@@ -166,9 +189,23 @@
         [self setStatusBarBackgroundColor:[UIColor colorWithRed:0.24f green:0.78f blue:0.99f alpha:1.00f]];
         self.navigationController.navigationBar.hidden = YES;
     }
+    //下滑更新更多
+    CGRect bounds = scrollView.bounds;
+    CGSize contentSize = scrollView.contentSize;
+    float y = offset.y + bounds.size.height;
+    float h = contentSize.height;
+    float reload_distance = -30;
+    if (y > h + reload_distance) {
+        if (self.isLoading || self.days == 0) {
+            //NSLog(@"$$");
+            return;
+        } else {
+            [self updateSomeDailyWithDate:[ZDIHomePageViewController getSomeDayFromTodayWithNextDay:self.days]];
+        }
+    }
 }
 
-- (NSArray *)getCarouselWithModel:(ZDIDailyDataModel *)dailyDataModel {
+- (NSArray *)getCarouselImagesWithModel:(ZDIDailyDataModel *)dailyDataModel {
     NSMutableArray *tempCarouselImageMut = [[NSMutableArray alloc] init];
     for (int i = 0; i < dailyDataModel.top_stories.count; i++) {
         NSString *tempCarouselStr = [self.homePageTableViewGroupView.latestDailyDataModel.top_stories[i] imageStr];
@@ -178,6 +215,37 @@
     NSArray *tempCarouselImageArr = [NSArray arrayWithArray:tempCarouselImageMut];
     return tempCarouselImageArr;
 }
+
+- (NSArray *)getCarouselImageTitleWithModel:(ZDIDailyDataModel *)dailyDataModel {
+    NSMutableArray *tempCarouselImageMut = [[NSMutableArray alloc] init];
+    for (int i = 0; i < dailyDataModel.top_stories.count; i++) {
+        NSString *tempCarouselStr = [self.homePageTableViewGroupView.latestDailyDataModel.top_stories[i] title];
+        [tempCarouselImageMut addObject:tempCarouselStr];
+    }
+    NSArray *tempCarouselTitleArr = [NSArray arrayWithArray:tempCarouselImageMut];
+    return tempCarouselTitleArr;
+}
+
+
++ (NSString *)getSomeDayFromTodayWithNextDay:(int)nextDay {
+    NSDate *currentDate = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:currentDate];
+    [components setDay:([components day] - nextDay)];
+    NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
+    NSDateFormatter *dateday = [[NSDateFormatter alloc] init];
+    [dateday setDateFormat:@"yyyyMMdd"];
+    return [dateday stringFromDate:beginningOfWeek];
+}
+
+
+    
+    
+
+
+
+
+
 
 /*
 #pragma mark - Navigation
