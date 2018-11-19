@@ -7,6 +7,7 @@
 //
 
 #import "ZDIHomePageCarouselView.h"
+#import "ZDIWebPageViewController.h"
 
 static const int imageBtnCount = 3;
 
@@ -93,10 +94,11 @@ static const int imageBtnCount = 3;
     _pageColor = pageColor;
     self.pageControl.pageIndicatorTintColor = pageColor;
 }
-//根据传入的图片数组设置图片
-- (void)setImages:(NSArray *)images andTitles:(NSArray *)titles {
+//根据传入的图片数组, title数组， ID数组设置
+- (void)setImages:(NSArray *)images andTitles:(NSArray *)titles andID:(NSArray *)ID{
     _images = images;
     _topImageTitle = titles;
+    _topIDStr = ID;
     //pageControl的页数就是图片的个数
     self.pageControl.numberOfPages = images.count;
     //默认一开始显示的是第0页
@@ -133,7 +135,6 @@ static const int imageBtnCount = 3;
         imageBtn.titleLabel.numberOfLines = 0;
         imageBtn.tag = index;
         //用上面处理好的索引给imageBtn设置图片
-        //NSLog(@"$$--%ld---", index);
         [imageBtn setBackgroundImage:self.images[index] forState:UIControlStateNormal];
         [imageBtn setTitle:_topImageTitle[index] forState:UIControlStateNormal];
         [imageBtn setBackgroundImage:self.images[index] forState:UIControlStateHighlighted];
@@ -223,10 +224,8 @@ static const int imageBtnCount = 3;
 
 
 - (void)imageBtnClick:(ZDIHomePageCarouselButton *)btn {
-    //    NSLog(@"%ld",btn.tag);
     if ([self.homePageCarouselViewDelegate respondsToSelector:@selector(carouselView:indexOfClickedImageBtn:)])
     {
-        //[self.delegate carouselView:self indexOfClickedImageBtn:btn.tag];
         [self.homePageCarouselViewDelegate carouselView:self indexOfClickedImageBtn:btn.tag];
     }
     

@@ -9,6 +9,7 @@
 #import "ZDIHomePageViewController.h"
 #import "ZDIHomePageTableViewSectionHeadView.h"
 #import "ZDIHomePageManager.h"
+#import "ZDIWebPageViewController.h"
 #import <Masonry.h>
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
@@ -31,9 +32,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.days = 1;
+    self.days = 0;
     
+    _headViewDayStrMut = [[NSMutableArray alloc] init];
     
+    _everyDailyDateModelMut = [[NSMutableArray alloc] init];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
@@ -68,11 +71,14 @@
     [[ZDIHomePageManager sharedManager] fetchLatestDailyDataWithSucceed:^(ZDIDailyDataModel *latestDataModel) {
         self.homePageTableViewGroupView.latestDailyDataModel = [[ZDIDailyDataModel alloc] init];
         self.homePageTableViewGroupView.latestDailyDataModel = latestDataModel;
+        self.latestDailyDataModel = [[ZDIDailyDataModel alloc] init];
+        self.latestDailyDataModel = latestDataModel;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.homePageTableViewGroupView.tableView reloadData];
             NSArray *tempCarouselImageArr = [self getCarouselImagesWithModel:latestDataModel];
             NSArray *tempCarouselTitleArr = [self getCarouselImageTitleWithModel:latestDataModel];
-            [self.homePageTableViewGroupView setScrollViewImage:tempCarouselImageArr andTitles:tempCarouselTitleArr];
+            NSArray *tempCarouselIDArr = [self getCarouselIDStrWithModel:latestDataModel];
+            [self.homePageTableViewGroupView setScrollViewImage:tempCarouselImageArr andTitles:tempCarouselTitleArr andID:tempCarouselIDArr];
         });
         
     } error:^(NSError *error) {
@@ -84,6 +90,7 @@
     self.isLoading = YES;
     [[ZDIHomePageManager sharedManager] fetchLatestDailyDataWithDate:date succeed:^(ZDIDailyDataModel *someDailyDateModel) {
         [self.homePageTableViewGroupView.everyDailyDateModelMut addObject:someDailyDateModel];
+        [self.everyDailyDateModelMut addObject:someDailyDateModel];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.homePageTableViewGroupView.tableView reloadData];
             self.isLoading = NO;
@@ -97,7 +104,7 @@
 /**侧边栏的展开和关闭*/
 - (void)openCloseMenu: (UIBarButtonItem *)sender
 {
-//    [self.navigationController.parentViewController performSelector:@selector(openCloseMenu)];
+    [self.navigationController.parentViewController performSelector:@selector(openCloseMenu)];
 }
 
 - (void)carouselView:(ZDIHomePageCarouselView *)homePageCarouselView indexOfClickedImageBtn:(NSUInteger )index {
@@ -134,11 +141,11 @@
         return nil;
     } else if (section == 1) {
         self.homePageTableViewGroupView.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-        _homePageTableViewSectionHeadView = [[ZDIHomePageTableViewSectionHeadView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
+        _homePageTableViewSectionHeadView = [[ZDIHomePageTableViewSectionHeadView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44) andDateStr:_headViewDayStrMut[section - 1]];
         return _homePageTableViewSectionHeadView;
     } else {
         self.homePageTableViewGroupView.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-        _homePageTableViewSectionHeadView = [[ZDIHomePageTableViewSectionHeadView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
+        _homePageTableViewSectionHeadView = [[ZDIHomePageTableViewSectionHeadView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44) andDateStr:_headViewDayStrMut[section - 1]];
         return _homePageTableViewSectionHeadView;
     }
 }
@@ -168,9 +175,6 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint offset = scrollView.contentOffset;
     double change = 100 / kExamplePictureHeight * kDeviceHeight * _homePageTableViewGroupView.latestDailyDataModel.stories.count + 230 / kExamplePictureHeight * kDeviceHeight;
-    NSLog(@"--%f-scrollView.contentOffset.y--", scrollView.contentOffset.y);
-    NSLog(@"--%f-change--", change);
-    NSLog(@"--%d--", self.navigationController.navigationBar.translucent);
     //导航栏变化
     if (scrollView.contentOffset.y < change) {
         self.homePageTableViewGroupView.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -195,12 +199,15 @@
     float y = offset.y + bounds.size.height;
     float h = contentSize.height;
     float reload_distance = -30;
+    NSLog(@"---%f--y-", y);
+    NSLog(@"---%f--h-", h);
     if (y > h + reload_distance) {
-        if (self.isLoading || self.days == 0) {
-            //NSLog(@"$$");
+        if (self.isLoading) {
             return;
         } else {
             [self updateSomeDailyWithDate:[ZDIHomePageViewController getSomeDayFromTodayWithNextDay:self.days]];
+            NSString *tempStr = [ZDIHomePageViewController getWeekDayFromTodayWithNextDay:self.days + 1];
+            [self.headViewDayStrMut addObject:tempStr];
         }
     }
 }
@@ -226,6 +233,15 @@
     return tempCarouselTitleArr;
 }
 
+- (NSArray *)getCarouselIDStrWithModel:(ZDIDailyDataModel *)dailyDataModel {
+    NSMutableArray *tempCarouselIDMut = [[NSMutableArray alloc] init];
+    for (int i = 0; i < dailyDataModel.top_stories.count; i++) {
+        NSString *tempCarouselIDStr = [self.homePageTableViewGroupView.latestDailyDataModel.top_stories[i] ID];
+        [tempCarouselIDMut addObject:tempCarouselIDStr];
+    }
+    NSArray *tempCarouselIDArr = [NSArray arrayWithArray:tempCarouselIDMut];
+    return tempCarouselIDArr;
+}
 
 + (NSString *)getSomeDayFromTodayWithNextDay:(int)nextDay {
     NSDate *currentDate = [NSDate date];
@@ -238,7 +254,41 @@
     return [dateday stringFromDate:beginningOfWeek];
 }
 
++ (NSString *)getWeekDayFromTodayWithNextDay:(int)nextDay {
+    NSDate *currentDate = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:currentDate];
+    [components setDay:([components day] - nextDay)];
+    NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
+    NSDateFormatter *dateday = [[NSDateFormatter alloc] init];
+    [dateday setDateFormat:@"MM月dd日 "];
+    
+    NSString *resultStr = [[dateday stringFromDate:beginningOfWeek] stringByAppendingString:[ZDIHomePageViewController getWeekDayFordate:beginningOfWeek]];
+    
+    return resultStr;
+}
 
++ (NSString *)getWeekDayFordate:(NSDate *)date {
+    NSArray *weekday = [NSArray arrayWithObjects: [NSNull null], @"星期日", @"星期一", @"星期二", @"星期三", @"星期四", @"星期五", @"星期六", nil];
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [calendar components:NSCalendarUnitWeekday fromDate:date];
+    
+    NSString *weekStr = [weekday objectAtIndex:components.weekday];
+    return weekStr;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ZDIWebPageViewController *webPageViewController = [[ZDIWebPageViewController alloc] init];
+    if (indexPath.section == 0) {
+        webPageViewController.IDStr = [_latestDailyDataModel.stories[indexPath.row] id];
+    } else {
+        ZDIDailyDataModel *tempDailyDataModel = _everyDailyDateModelMut[indexPath.section - 1];
+        webPageViewController.IDStr = [tempDailyDataModel.stories[indexPath.row] id];
+    }
+    
+    [self presentViewController:webPageViewController animated:YES completion:nil];
+}
     
     
 

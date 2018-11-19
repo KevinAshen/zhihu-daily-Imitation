@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *dateLabel;
 
+- (instancetype) initWithFrame:(CGRect)frame andDateStr:(NSString *)dateStr;
+
 @end
 
 NS_ASSUME_NONNULL_END

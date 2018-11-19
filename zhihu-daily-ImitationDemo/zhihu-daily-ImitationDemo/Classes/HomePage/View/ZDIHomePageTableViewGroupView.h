@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIImage *)getImageFromURL:(NSString *)fileURL;
 
-- (void)setScrollViewImage:(NSArray *)images andTitles:(NSArray *)titles;
+- (void)setScrollViewImage:(NSArray *)images andTitles:(NSArray *)titles andID:(NSArray *)ID;
 
 @end
 

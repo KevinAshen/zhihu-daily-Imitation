@@ -26,10 +26,7 @@
     return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{
                                                                   @"ID":@"id",
                                                                   @"imageStr":@"image"
-//                                                                  @"type":@"typeStr",
-//                                                                  @"ga_prefix":@"gaPrefixStr",
-//                                                                  @"title":@"titleStr"
-                                                                
+
                                                                   }];
 }
 
@@ -40,5 +37,7 @@
 +(BOOL)propertyIsOptional:(NSString *)propertyName{
     return  YES;
 }
+
+
 
 @end

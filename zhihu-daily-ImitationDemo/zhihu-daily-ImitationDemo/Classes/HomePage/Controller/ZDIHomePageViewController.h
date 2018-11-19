@@ -26,7 +26,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) int days;
 
-@property(nonatomic, assign) BOOL isLoading;
+@property (nonatomic, assign) BOOL isLoading;
+
+@property (nonatomic, strong) NSMutableArray *headViewDayStrMut;
+
+@property (nonatomic, strong) ZDIDailyDataModel *latestDailyDataModel;
+
+@property (nonatomic, strong) NSMutableArray *tempCarouselImagesMut;
+
+@property (nonatomic, strong) NSMutableArray *everyDailyDateModelMut;
+
 
 @end
 

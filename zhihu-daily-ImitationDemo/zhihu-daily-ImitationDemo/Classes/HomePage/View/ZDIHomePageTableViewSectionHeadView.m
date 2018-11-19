@@ -14,16 +14,16 @@
 
 @implementation ZDIHomePageTableViewSectionHeadView
 
-- (instancetype) initWithFrame:(CGRect)frame {
+- (instancetype) initWithFrame:(CGRect)frame andDateStr:(NSString *)dateStr{
     self = [super initWithFrame:frame];
     if (self) {
         
-        [self createUIWithFrame:frame];
+        [self createUIWithFrame:frame andDateStr:dateStr];
     }
     return self;
 }
 
-- (void) createUIWithFrame:(CGRect)frame {
+- (void) createUIWithFrame:(CGRect)frame andDateStr:(NSString *)dateStr {
     UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, 44)];
     baseView.backgroundColor = [UIColor colorWithRed:0.24f green:0.78f blue:0.99f alpha:1.00f];
     [self addSubview:baseView];
@@ -32,7 +32,7 @@
     //        self.backgroundColor = [UIColor colorWithRed:0.24f green:0.78f blue:0.99f alpha:1.00f];
     _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width / 2.0 - 50, 0, frame.size.width / 3.0, frame.size.height)];
     _dateLabel.textColor = [UIColor whiteColor];
-    _dateLabel.text = @"11月1日 星期四";
+    _dateLabel.text = dateStr;
     [baseView addSubview:_dateLabel];
 }
 

@@ -29,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 //传入标题数组
 @property (nonatomic, copy) NSArray *topImageTitle;
 
+//传入网页ID数组
+@property (nonatomic, copy) NSArray *topIDStr;
+
 //pageControl颜色设置
 @property (nonatomic, strong) UIColor *currentPageColor;
 @property (nonatomic, strong) UIColor *pageColor;
@@ -43,7 +46,7 @@ BOOL scrollDorectionPortrait;
 
 @property (weak, nonatomic) id<ZDIHomePageCarouselViewDelegate> homePageCarouselViewDelegate;
 
-- (void)setImages:(NSArray *)images andTitles:(NSArray *)titles;
+- (void)setImages:(NSArray *)images andTitles:(NSArray *)titles andID:(NSArray *)ID;
 
 @end
 

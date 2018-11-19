@@ -32,7 +32,6 @@ static NSString *someCellIdentifier = @"someDailyCell";
         _everyDailyDateModelMut = [[NSMutableArray alloc] init];
         
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) style:UITableViewStylePlain];
-//        _tableView = [[UITableView alloc] initWithFrame:self.frame style:UITableViewStylePlain];
         [_tableView registerClass:[ZDIHomePageLatestTableViewCell class] forCellReuseIdentifier:latestCellIdentifier];
         [_tableView registerClass:[ZDIHomePageNormalTableViewCell class] forCellReuseIdentifier:someCellIdentifier];
         
@@ -66,10 +65,7 @@ static NSString *someCellIdentifier = @"someDailyCell";
     } else {
         return [_everyDailyDateModelMut[section - 1] stories].count;
     }
-    
 }
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         ZDIHomePageLatestTableViewCell *homePageLatestTableViewCell = [tableView dequeueReusableCellWithIdentifier:latestCellIdentifier forIndexPath:indexPath];
@@ -98,9 +94,11 @@ static NSString *someCellIdentifier = @"someDailyCell";
     return result;
 }
 
-- (void)setScrollViewImage:(NSArray *)images andTitles:(NSArray *)titles {
-    [_carousel setImages:images andTitles:titles];
+- (void)setScrollViewImage:(NSArray *)images andTitles:(NSArray *)titles andID:(NSArray *)ID{
+    [_carousel setImages:images andTitles:titles andID:ID];
 }
+
+
 
 
 
