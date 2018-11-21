@@ -17,7 +17,6 @@
 - (instancetype) initWithFrame:(CGRect)frame andDateStr:(NSString *)dateStr{
     self = [super initWithFrame:frame];
     if (self) {
-        
         [self createUIWithFrame:frame andDateStr:dateStr];
     }
     return self;

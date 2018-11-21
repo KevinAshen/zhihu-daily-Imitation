@@ -199,8 +199,6 @@
     float y = offset.y + bounds.size.height;
     float h = contentSize.height;
     float reload_distance = -30;
-    NSLog(@"---%f--y-", y);
-    NSLog(@"---%f--h-", h);
     if (y > h + reload_distance) {
         if (self.isLoading) {
             return;
@@ -287,7 +285,8 @@
         webPageViewController.IDStr = [tempDailyDataModel.stories[indexPath.row] id];
     }
     
-    [self presentViewController:webPageViewController animated:YES completion:nil];
+//    [self presentViewController:webPageViewController animated:YES completion:nil];
+    [self.navigationController pushViewController:webPageViewController animated:YES];
 }
     
     

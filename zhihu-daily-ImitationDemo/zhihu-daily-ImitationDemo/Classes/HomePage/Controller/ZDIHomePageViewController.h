@@ -10,6 +10,7 @@
 #import "ZDIHomePageTableViewGroupView.h"
 #import "ZDIHomePageTableViewSectionHeadView.h"
 #import "ZDIHomePageCarouselView.h"
+#import "YUFoldingTableView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
