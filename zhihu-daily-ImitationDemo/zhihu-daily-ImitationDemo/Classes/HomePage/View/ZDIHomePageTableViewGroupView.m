@@ -10,7 +10,6 @@
 #import "ZDIHomePageNormalTableViewCell.h"
 #import "ZDIHomePageLatestTableViewCell.h"
 #import <UIImageView+WebCache.h>
-
 #import <Masonry.h>
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height

@@ -97,7 +97,7 @@
 
 + (CGFloat)cellComment:(NSString *)comment size:(CGSize)contextSize {
     CGFloat commentHeigth = [UILabel getHeightByWidth:contextSize.width - 80 title:comment font:[UIFont systemFontOfSize:15.0]];
-    return commentHeigth + 80;
+    return commentHeigth + 110;
 }
 
 - (void)awakeFromNib {

@@ -7,7 +7,6 @@
 //
 
 #import "ZDICommitPageView.h"
-#import "YUCustomHeaderView.h"
 #import "ZDICommitPageTableViewCell.h"
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
@@ -15,7 +14,7 @@
 #define kExamplePictureHeight 784.0
 static NSString *commitCellIdentifier = @"commitCell";
 
-@interface UIView () <YUFoldingTableViewDelegate>
+@interface ZDICommitPageView ()<UITableViewDataSource>
 
 @end
 
@@ -35,6 +34,7 @@ static NSString *commitCellIdentifier = @"commitCell";
 }
 
 - (void) createData {
+    _tapFlag = 1;
     if (_longCommits == 0) {
         _flag = 0;
     } else {
@@ -46,112 +46,68 @@ static NSString *commitCellIdentifier = @"commitCell";
     
     _longCommitPageModel = [[ZDICommitPageModel alloc] init];
     _shortCommitPageModel = [[ZDICommitPageModel alloc] init];
-    
-    [self calculateHeight];
 }
 
 -(void)createUI {
-    if (_longCommits == 0) {
-        _commitPagePlaceholderView = [[ZDICommitPagePlaceholderView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight - 400 / kExamplePictureHeight * kDeviceHeight)];
-        [self addSubview:_commitPagePlaceholderView];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight - 64) style:UITableViewStyleGrouped];
+    [self addSubview:_tableView];
     
-        _foldingTableView = [[YUFoldingTableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight - 64)];
-        [self addSubview:_foldingTableView];
-        _foldingTableView.foldingDelegate = self;
-        // 可以设置cell默认展开，不设置的话，默认折叠
-        //_foldingTableView.foldingState = YUFoldingSectionStateShow;
+    [_tableView registerClass:[ZDICommitPageTableViewCell class] forCellReuseIdentifier:commitCellIdentifier];
+    
+    if (_longCommits == 0) {
+        _commitPagePlaceholderView = [[ZDICommitPagePlaceholderView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight - 114 / kExamplePictureHeight * kDeviceHeight)];
+        _tableView.tableHeaderView = _commitPagePlaceholderView;
+    }
+    
+    self.tableView.dataSource = self;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section + _flag == 1) {
+        ZDICommitPageTableViewCell *commitPageTableViewCell = [tableView dequeueReusableCellWithIdentifier:commitCellIdentifier forIndexPath:indexPath];
         
-        _foldingTableView.tableHeaderView = _commitPagePlaceholderView;
+        ZDIReplyToModel *replyToModel = [_shortCommitPageModel.comments[indexPath.row] replyTo];
+        if (replyToModel) {
+            commitPageTableViewCell.contentLabel.text = [NSString stringWithFormat:@"%@\n//%@:%@", [_longCommitPageModel.comments[indexPath.row] contentCommitStr],[replyToModel author],[replyToModel contentReplyToStr]];
+        } else {
+           commitPageTableViewCell.contentLabel.text = [_longCommitPageModel.comments[indexPath.row] contentCommitStr];
+        }
+        
+        commitPageTableViewCell.authorLabel.text = [_longCommitPageModel.comments[indexPath.row] author];
+        commitPageTableViewCell.timeLabel.text = [_longCommitPageModel.comments[indexPath.row] time];
+        return commitPageTableViewCell;
+    }
+    ZDICommitPageTableViewCell *commitPageTableViewCell = [tableView dequeueReusableCellWithIdentifier:commitCellIdentifier forIndexPath:indexPath];
+    
+    ZDIReplyToModel *replyToModel = [_shortCommitPageModel.comments[indexPath.row] replyTo];
+    if (replyToModel) {
+        commitPageTableViewCell.contentLabel.text = [NSString stringWithFormat:@"%@\n//%@:%@", [_shortCommitPageModel.comments[indexPath.row] contentCommitStr],[replyToModel author],[replyToModel contentReplyToStr]];
     } else {
-        _foldingTableView = [[YUFoldingTableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight - 64)];
-        [self addSubview:_foldingTableView];
-        _foldingTableView.foldingDelegate = self;
-        // 可以设置cell默认展开，不设置的话，默认折叠
-        _foldingTableView.foldingState = YUFoldingSectionStateShow;
-        
+        commitPageTableViewCell.contentLabel.text = [_shortCommitPageModel.comments[indexPath.row] contentCommitStr];
     }
-    [_foldingTableView registerClass:[ZDICommitPageTableViewCell class] forCellReuseIdentifier:commitCellIdentifier];
-
-}
-
-- (void)calculateHeight {
-    //NSInteger longCommitCount = _longCommitPageModel.comments.count;
-    NSInteger shortCommitCount = _shortCommitPageModel.comments.count;
-    for (NSInteger i = 0; i < shortCommitCount; i++) {
-        CGFloat height = [ZDICommitPageTableViewCell cellComment:[_shortCommitPageModel.comments[i] contentCommitStr] size:CGSizeMake(self.frame.size.width, 0)];
-        NSNumber *commentHeight = [NSNumber numberWithFloat:height];
-        NSLog(@"--test%f-QST-", height);
-        [_cellShortCommitHeightArray addObject:commentHeight];
-    }
-}
-
-
-#pragma mark - YUFoldingTableViewDelegate / required（必须实现的代理）
-- (NSInteger )numberOfSectionForYUFoldingTableView:(YUFoldingTableView *)yuTableView
-{
-    return 1 + _flag;
-}
-- (NSInteger )yuFoldingTableView:(YUFoldingTableView *)yuTableView numberOfRowsInSection:(NSInteger )section
-{
-    return _cellShortCommitHeightArray.count;
-}
-- (CGFloat )yuFoldingTableView:(YUFoldingTableView *)yuTableView heightForHeaderInSection:(NSInteger )section
-{
-    return 50;
-}
-- (CGFloat )yuFoldingTableView:(YUFoldingTableView *)yuTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [_cellShortCommitHeightArray[indexPath.row] floatValue];
-}
-- (UITableViewCell *)yuFoldingTableView:(YUFoldingTableView *)yuTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    ZDICommitPageTableViewCell *commitPageTableViewCell = [yuTableView dequeueReusableCellWithIdentifier:commitCellIdentifier forIndexPath:indexPath];
-    commitPageTableViewCell.contentLabel.text = [_shortCommitPageModel.comments[indexPath.row] contentCommitStr];
+    
     commitPageTableViewCell.authorLabel.text = [_shortCommitPageModel.comments[indexPath.row] author];
     commitPageTableViewCell.timeLabel.text = [_shortCommitPageModel.comments[indexPath.row] time];
     return commitPageTableViewCell;
 }
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1 + _flag;
+}
 
-#pragma mark - YUFoldingTableViewDelegate / optional （可选择实现的）
-// 自定义sectionHeaderView
-- (UIView *)yuFoldingTableView:(UITableView *)yuTableView viewForHeaderInSection:(NSInteger)section
-{
-    static NSString *headerIdentifier = @"headerIdentifier";
-    YUCustomHeaderView *headerFooterView = [yuTableView dequeueReusableHeaderFooterViewWithIdentifier:headerIdentifier];
-    if (headerFooterView == nil) {
-        headerFooterView = [[YUCustomHeaderView alloc] initWithReuseIdentifier:headerIdentifier];
-    }
-    headerFooterView.contentView.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:0.2];
-    if (_flag == 1) {
-        if (section == 0) {
-            headerFooterView.title = [NSString stringWithFormat:@" %d条长评", _longCommits];
-        } else {
-            headerFooterView.title = [NSString stringWithFormat:@" %d条短评", _shortCommits];
-        }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section + _flag == 1) {
+        return _longCommitPageModel.comments.count;
     } else {
-        headerFooterView.title = [NSString stringWithFormat:@" %d条短评", _shortCommits];
+        if (_tapFlag == 1) {
+            return _shortCommitPageModel.comments.count;
+        } else {
+            return 0;
+        }
     }
-//    headerFooterView.descriptionText = [NSString stringWithFormat:@"自定义的sectionHeaderView - %ld", section];
-    return headerFooterView;
-}
-- (NSString *)yuFoldingTableView:(YUFoldingTableView *)yuTableView titleForHeaderInSection:(NSInteger)section
-{
-    return [NSString stringWithFormat:@"Title %ld",section];
-}
-// 返回箭头的位置
-- (YUFoldingSectionHeaderArrowPosition)perferedArrowPositionForYUFoldingTableView:(YUFoldingTableView *)yuTableView
-{
-    return YUFoldingSectionHeaderArrowPositionLeft;
 }
 
-- (void )yuFoldingTableView:(YUFoldingTableView *)yuTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [yuTableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-- (NSString *)yuFoldingTableView:(YUFoldingTableView *)yuTableView descriptionForHeaderInSection:(NSInteger )section
-{
-    return @"detailText";
-}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

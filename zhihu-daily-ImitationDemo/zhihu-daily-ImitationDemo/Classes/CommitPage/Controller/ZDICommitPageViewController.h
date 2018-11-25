@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ZDICommitPageView.h"
 #import "ZDICommitPageModel.h"
+#import "ZDICommitPageSectionView.h"
+#import "ZDICommitPageTableViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy)NSString *IDStr;
 
 @property (nonatomic, strong)ZDICommitPageView *commitPageView;
+
+@property (nonatomic, strong)ZDICommitPageSectionView *commitPageSectionView;
 
 @property (nonatomic, strong) UIImage *navChangeBackImage;
 
@@ -27,6 +31,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign)int allCommits;
 
 @property (nonatomic, strong)ZDICommitPageModel *shortCommitPageModel;
+
+@property (nonatomic, strong)ZDICommitPageModel *longCommitPageModel;
+
+//缓存cell高度
+@property (nonatomic, strong) NSMutableArray *cellLongCommitHeightArray;
+
+@property (nonatomic, strong) NSMutableArray *cellShortCommitHeightArray;
+
+@property (nonatomic, strong) UITapGestureRecognizer *tap;
+
+@property (nonatomic, assign)int flag;
+
+@property (nonatomic, assign)int tapFlag;
 
 @end
 

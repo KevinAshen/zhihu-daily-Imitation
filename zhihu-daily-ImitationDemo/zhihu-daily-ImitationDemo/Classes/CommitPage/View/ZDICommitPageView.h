@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ZDICommitPageModel.h"
-#import "YUFoldingTableView.h"
 #import "ZDICommitPagePlaceholderView.h"
+#import "ZDICommitPageSectionView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,8 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)ZDICommitPageModel *longCommitPageModel;
 
 @property (nonatomic, strong)ZDICommitPageModel *shortCommitPageModel;
-
-@property (nonatomic, strong)YUFoldingTableView *foldingTableView;
 
 @property (nonatomic, strong)ZDICommitPagePlaceholderView *commitPagePlaceholderView;
 
@@ -37,9 +35,13 @@ NS_ASSUME_NONNULL_BEGIN
 //判断是否需要占位View的标志
 @property (nonatomic, assign)int flag;
 
-- (instancetype)initWithFrame:(CGRect)frame andLongCommits:(int)longCommits andShortCommits:(int)shortCommits;
+@property (nonatomic, assign)int tapFlag;
 
-- (void)calculateHeight;
+@property (nonatomic, strong)UITableView *tableView;
+
+@property (nonatomic, strong)ZDICommitPageSectionView *commitPageSectionView;
+
+- (instancetype)initWithFrame:(CGRect)frame andLongCommits:(int)longCommits andShortCommits:(int)shortCommits;
 
 @end
 
