@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZDIReplyToModel : JSONModel
 
-@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *contentReplyToStr;
 @property (nonatomic, assign) int status;
 @property (nonatomic, copy) NSString *ID;
 @property (nonatomic, copy) NSString *author;
@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ZDICommentsModel : JSONModel
 
 @property (nonatomic, copy) NSString *author;
-@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *contentCommitStr;
 @property (nonatomic, copy) NSString *avatar;
 @property (nonatomic, copy) NSString *time;
 @property (nonatomic, copy) NSString *ID;

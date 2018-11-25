@@ -32,6 +32,13 @@
 		0485A85A21A5929E00B62907 /* YUFoldingSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A85521A5929E00B62907 /* YUFoldingSectionHeader.m */; };
 		0485A85B21A5929E00B62907 /* YUFolding_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0485A85721A5929E00B62907 /* YUFolding_arrow.png */; };
 		0485A85E21A599BE00B62907 /* YUCustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A85D21A599BE00B62907 /* YUCustomHeaderView.m */; };
+		0485A86121A64C0200B62907 /* ZDIWebPageExtraInformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A86021A64C0200B62907 /* ZDIWebPageExtraInformationModel.m */; };
+		0485A86421A64DCA00B62907 /* ZDIWebPageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A86321A64DCA00B62907 /* ZDIWebPageManager.m */; };
+		0485A86721A6ACD600B62907 /* ZDICommitPagePlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A86621A6ACD600B62907 /* ZDICommitPagePlaceholderView.m */; };
+		0485A86921A6B0C400B62907 /* placeholderSofa.png in Resources */ = {isa = PBXBuildFile; fileRef = 0485A86821A6B0C400B62907 /* placeholderSofa.png */; };
+		0485A86C21A7F24E00B62907 /* ZDICommitPageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A86B21A7F24E00B62907 /* ZDICommitPageTableViewCell.m */; };
+		0485A86F21A7F2D200B62907 /* UILabel+LabelHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A86E21A7F2D200B62907 /* UILabel+LabelHeight.m */; };
+		0485A87121A933AE00B62907 /* commitUpvote.png in Resources */ = {isa = PBXBuildFile; fileRef = 0485A87021A933AE00B62907 /* commitUpvote.png */; };
 		04EBAC25218B2A4D00708FDE /* ZDIMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EBAC24218B2A4D00708FDE /* ZDIMenuViewController.m */; };
 		04EBAC2B218B41E900708FDE /* ZDIMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EBAC2A218B41E900708FDE /* ZDIMenuView.m */; };
 		04EBAC2F218BD16400708FDE /* ZDIContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EBAC2E218BD16400708FDE /* ZDIContainerViewController.m */; };
@@ -102,6 +109,18 @@
 		0485A85821A5929E00B62907 /* YUFoldingSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUFoldingSectionHeader.h; sourceTree = "<group>"; };
 		0485A85C21A599BE00B62907 /* YUCustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUCustomHeaderView.h; sourceTree = "<group>"; };
 		0485A85D21A599BE00B62907 /* YUCustomHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUCustomHeaderView.m; sourceTree = "<group>"; };
+		0485A85F21A64C0200B62907 /* ZDIWebPageExtraInformationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDIWebPageExtraInformationModel.h; sourceTree = "<group>"; };
+		0485A86021A64C0200B62907 /* ZDIWebPageExtraInformationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDIWebPageExtraInformationModel.m; sourceTree = "<group>"; };
+		0485A86221A64DCA00B62907 /* ZDIWebPageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDIWebPageManager.h; sourceTree = "<group>"; };
+		0485A86321A64DCA00B62907 /* ZDIWebPageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDIWebPageManager.m; sourceTree = "<group>"; };
+		0485A86521A6ACD600B62907 /* ZDICommitPagePlaceholderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDICommitPagePlaceholderView.h; sourceTree = "<group>"; };
+		0485A86621A6ACD600B62907 /* ZDICommitPagePlaceholderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDICommitPagePlaceholderView.m; sourceTree = "<group>"; };
+		0485A86821A6B0C400B62907 /* placeholderSofa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderSofa.png; sourceTree = "<group>"; };
+		0485A86A21A7F24E00B62907 /* ZDICommitPageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDICommitPageTableViewCell.h; sourceTree = "<group>"; };
+		0485A86B21A7F24E00B62907 /* ZDICommitPageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDICommitPageTableViewCell.m; sourceTree = "<group>"; };
+		0485A86D21A7F2D200B62907 /* UILabel+LabelHeight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+LabelHeight.h"; sourceTree = "<group>"; };
+		0485A86E21A7F2D200B62907 /* UILabel+LabelHeight.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LabelHeight.m"; sourceTree = "<group>"; };
+		0485A87021A933AE00B62907 /* commitUpvote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commitUpvote.png; sourceTree = "<group>"; };
 		04EBAC23218B2A4D00708FDE /* ZDIMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDIMenuViewController.h; sourceTree = "<group>"; };
 		04EBAC24218B2A4D00708FDE /* ZDIMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDIMenuViewController.m; sourceTree = "<group>"; };
 		04EBAC29218B41E900708FDE /* ZDIMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDIMenuView.h; sourceTree = "<group>"; };
@@ -262,6 +281,8 @@
 		04134381217F522D00486DF9 /* TestPicture */ = {
 			isa = PBXGroup;
 			children = (
+				0485A87021A933AE00B62907 /* commitUpvote.png */,
+				0485A86821A6B0C400B62907 /* placeholderSofa.png */,
 				04EBAC3E218DC95900708FDE /* Menu.png */,
 				04134382217F529B00486DF9 /* test1.JPG */,
 				0413438A21819EBA00486DF9 /* 0.JPG */,
@@ -309,6 +330,10 @@
 			children = (
 				0485A84921A5780400B62907 /* ZDICommitPageView.h */,
 				0485A84A21A5780400B62907 /* ZDICommitPageView.m */,
+				0485A86521A6ACD600B62907 /* ZDICommitPagePlaceholderView.h */,
+				0485A86621A6ACD600B62907 /* ZDICommitPagePlaceholderView.m */,
+				0485A86A21A7F24E00B62907 /* ZDICommitPageTableViewCell.h */,
+				0485A86B21A7F24E00B62907 /* ZDICommitPageTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -325,6 +350,8 @@
 		0485A85221A5928B00B62907 /* ThirdSupport */ = {
 			isa = PBXGroup;
 			children = (
+				0485A86D21A7F2D200B62907 /* UILabel+LabelHeight.h */,
+				0485A86E21A7F2D200B62907 /* UILabel+LabelHeight.m */,
 				0485A85321A5929E00B62907 /* YUFoldingTableView */,
 			);
 			path = ThirdSupport;
@@ -333,13 +360,13 @@
 		0485A85321A5929E00B62907 /* YUFoldingTableView */ = {
 			isa = PBXGroup;
 			children = (
-				0485A85421A5929E00B62907 /* YUFoldingTableView.m */,
-				0485A85521A5929E00B62907 /* YUFoldingSectionHeader.m */,
 				0485A85621A5929E00B62907 /* YUFoldingTableView.h */,
-				0485A85721A5929E00B62907 /* YUFolding_arrow.png */,
+				0485A85421A5929E00B62907 /* YUFoldingTableView.m */,
 				0485A85821A5929E00B62907 /* YUFoldingSectionHeader.h */,
+				0485A85521A5929E00B62907 /* YUFoldingSectionHeader.m */,
 				0485A85C21A599BE00B62907 /* YUCustomHeaderView.h */,
 				0485A85D21A599BE00B62907 /* YUCustomHeaderView.m */,
+				0485A85721A5929E00B62907 /* YUFolding_arrow.png */,
 			);
 			path = YUFoldingTableView;
 			sourceTree = "<group>";
@@ -409,6 +436,8 @@
 				04EBAC5C21908A8000708FDE /* ZDIHomePageManager.m */,
 				0485A84C21A57AA900B62907 /* ZDICommitPageManager.h */,
 				0485A84D21A57AA900B62907 /* ZDICommitPageManager.m */,
+				0485A86221A64DCA00B62907 /* ZDIWebPageManager.h */,
+				0485A86321A64DCA00B62907 /* ZDIWebPageManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -446,6 +475,8 @@
 		04EBFF8321A17D9C003F470B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0485A85F21A64C0200B62907 /* ZDIWebPageExtraInformationModel.h */,
+				0485A86021A64C0200B62907 /* ZDIWebPageExtraInformationModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -531,6 +562,7 @@
 				04EBFFA021A2DA17003F470B /* commit.png in Resources */,
 				0413439021819EBB00486DF9 /* 2.JPG in Resources */,
 				0413438F21819EBB00486DF9 /* 0.JPG in Resources */,
+				0485A86921A6B0C400B62907 /* placeholderSofa.png in Resources */,
 				0413438D21819EBB00486DF9 /* 1.JPG in Resources */,
 				04EBAC56218F2E4800708FDE /* night-pattern.png in Resources */,
 				041342CA21797D5E00486DF9 /* LaunchScreen.storyboard in Resources */,
@@ -547,6 +579,7 @@
 				0413438C21819EBB00486DF9 /* 3.JPG in Resources */,
 				04EBFF9D21A2DA17003F470B /* next.png in Resources */,
 				04134383217F529B00486DF9 /* test1.JPG in Resources */,
+				0485A87121A933AE00B62907 /* commitUpvote.png in Resources */,
 				04EBFFA221A2DA1C003F470B /* return.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -588,26 +621,31 @@
 				04EBAC2F218BD16400708FDE /* ZDIContainerViewController.m in Sources */,
 				0485A85E21A599BE00B62907 /* YUCustomHeaderView.m in Sources */,
 				04EBAC602191C30C00708FDE /* ZDIDailyDataModel.m in Sources */,
+				0485A86421A64DCA00B62907 /* ZDIWebPageManager.m in Sources */,
 				04EBAC25218B2A4D00708FDE /* ZDIMenuViewController.m in Sources */,
 				0485A85121A57AE400B62907 /* ZDICommitPageModel.m in Sources */,
 				0485A85A21A5929E00B62907 /* YUFoldingSectionHeader.m in Sources */,
 				04EBAC2B218B41E900708FDE /* ZDIMenuView.m in Sources */,
 				0413438621819DC100486DF9 /* ZDIHomePageCarouselView.m in Sources */,
 				0485A84821A577F100B62907 /* ZDICommitPageViewController.m in Sources */,
+				0485A86721A6ACD600B62907 /* ZDICommitPagePlaceholderView.m in Sources */,
 				04EBFF8921A17F31003F470B /* ZDIWebPageView.m in Sources */,
 				04EBAC5D21908A8000708FDE /* ZDIHomePageManager.m in Sources */,
 				04EBAC49218EEEF000708FDE /* ZDIMenuTableHeadView.m in Sources */,
 				041342CD21797D5E00486DF9 /* main.m in Sources */,
 				0485A84E21A57AA900B62907 /* ZDICommitPageManager.m in Sources */,
+				0485A86F21A7F2D200B62907 /* UILabel+LabelHeight.m in Sources */,
 				04EBAC4C218EEF0000708FDE /* ZDIMenuTableFootView.m in Sources */,
 				0485A85921A5929E00B62907 /* YUFoldingTableView.m in Sources */,
 				04134377217F3ED900486DF9 /* ZDIHomePageViewController.m in Sources */,
+				0485A86121A64C0200B62907 /* ZDIWebPageExtraInformationModel.m in Sources */,
 				04EBFF8621A17E83003F470B /* ZDIWebPageViewController.m in Sources */,
 				0413437A217F3F8E00486DF9 /* ZDIHomePageTableViewGroupView.m in Sources */,
 				041342BF21797D5D00486DF9 /* AppDelegate.m in Sources */,
 				04EBAC3D218C4E8200708FDE /* ZDIHomePageTableViewSectionHeadView.m in Sources */,
 				0410C8042198955300D4BE6B /* ZDIHomePageCarouselButton.m in Sources */,
 				0410C807219B0F5700D4BE6B /* ZDIHomePageLatestTableViewCell.m in Sources */,
+				0485A86C21A7F24E00B62907 /* ZDICommitPageTableViewCell.m in Sources */,
 				0485A84B21A5780400B62907 /* ZDICommitPageView.m in Sources */,
 				04EBFFA421A2DAD9003F470B /* ZDIWebPageBottomView.m in Sources */,
 			);

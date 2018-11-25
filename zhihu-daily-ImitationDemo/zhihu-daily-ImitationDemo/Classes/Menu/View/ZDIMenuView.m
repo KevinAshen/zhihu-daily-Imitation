@@ -26,12 +26,12 @@ static NSString *columnCellIdentifier = @"columnCell";
 {
     self = [super init];
     if (self) {
-        [self CreateUI];
+        [self createUI];
     }
     return self;
 }
 
-- (void)CreateUI {
+- (void)createUI {
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 240 / kExamplePictureWidth * kDeviceWidth, kDeviceHeight) style:UITableViewStylePlain];
     [_tableView registerClass:[ZDIMenuTableViewCell class] forCellReuseIdentifier:columnCellIdentifier];

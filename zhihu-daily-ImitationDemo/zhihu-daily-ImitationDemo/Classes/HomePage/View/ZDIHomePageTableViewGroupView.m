@@ -28,7 +28,6 @@ static NSString *someCellIdentifier = @"someDailyCell";
 - (instancetype) init {
     self = [super init];
     if (self) {
-        
         _everyDailyDateModelMut = [[NSMutableArray alloc] init];
         
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) style:UITableViewStylePlain];

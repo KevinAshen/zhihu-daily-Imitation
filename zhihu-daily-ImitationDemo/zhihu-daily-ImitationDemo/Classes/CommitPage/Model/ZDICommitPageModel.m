@@ -16,7 +16,8 @@
 
 + (JSONKeyMapper *)keyMapper {
     return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{
-                                                                  @"ID":@"id"
+                                                                  @"ID":@"id",
+                                                                  @"contentReplyToStr":@"content"
                                                     
                                                                   
                                                                   
@@ -34,7 +35,8 @@
 + (JSONKeyMapper *)keyMapper {
     return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{
                                                                   @"ID":@"id",
-                                                                  @"replyTo":@"reply_to"
+                                                                  @"replyTo":@"reply_to",
+                                                                  @"contentCommitStr":@"content"
                                                                   
                                                                   }];
 }

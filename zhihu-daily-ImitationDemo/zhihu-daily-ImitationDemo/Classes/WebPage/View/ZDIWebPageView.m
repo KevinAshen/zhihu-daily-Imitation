@@ -14,12 +14,12 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self CreateUIWithFrame:frame AndIDStr:IDStr];
+        [self createUIWithFrame:frame AndIDStr:IDStr];
     }
     return self;
 }
 
-- (void)CreateUIWithFrame:(CGRect)frame AndIDStr:(NSString *)IDStr{
+- (void)createUIWithFrame:(CGRect)frame AndIDStr:(NSString *)IDStr{
     _webView = [[WKWebView alloc] initWithFrame:frame];
     [self addSubview:_webView];
     

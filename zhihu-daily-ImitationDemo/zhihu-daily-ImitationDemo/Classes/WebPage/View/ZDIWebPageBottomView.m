@@ -19,12 +19,12 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self CreateUI];
+        [self createUI];
     }
     return self;
 }
 
-- (void)CreateUI {
+- (void)createUI {
     _shadowlabel = [[UILabel alloc] init];
     [self addSubview:_shadowlabel];
     [self.shadowlabel mas_makeConstraints:^(MASConstraintMaker *make) {

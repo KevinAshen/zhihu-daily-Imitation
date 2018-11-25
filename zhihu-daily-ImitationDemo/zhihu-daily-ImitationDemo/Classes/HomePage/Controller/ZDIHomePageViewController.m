@@ -26,6 +26,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self updateLatestDaily];
+    [self updateSomeDailyWithDate:[ZDIHomePageViewController getSomeDayFromTodayWithNextDay:self.days]];
+    NSString *tempStr = [ZDIHomePageViewController getWeekDayFromTodayWithNextDay:self.days + 1];
+    [self.headViewDayStrMut addObject:tempStr];
+    self.navigationController.navigationBar.hidden = YES;
 }
 
 - (void)viewDidLoad {

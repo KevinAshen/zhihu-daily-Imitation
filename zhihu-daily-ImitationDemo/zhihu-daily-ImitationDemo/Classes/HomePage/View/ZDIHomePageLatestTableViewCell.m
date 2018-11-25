@@ -8,22 +8,22 @@
 
 #import "ZDIHomePageLatestTableViewCell.h"
 #import <Masonry.h>
-
-@implementation ZDIHomePageLatestTableViewCell
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
 #define kExamplePictureWidth 440.0
 #define kExamplePictureHeight 784.0
+@implementation ZDIHomePageLatestTableViewCell
+
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self CreateUI];
+        [self createUI];
     }
     return self;
 }
 
-- (void) CreateUI {
+- (void) createUI {
     self.titleImageView = [[UIImageView alloc] init];
     [self.contentView addSubview:self.titleImageView];
     

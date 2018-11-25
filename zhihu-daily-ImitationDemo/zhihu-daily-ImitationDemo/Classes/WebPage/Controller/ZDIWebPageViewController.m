@@ -8,6 +8,8 @@
 
 #import "ZDIWebPageViewController.h"
 #import "ZDICommitPageViewController.h"
+#import "ZDICommitPageManager.h"
+#import "ZDIWebPageManager.h"
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
 #define kExamplePictureWidth 440.0
@@ -18,6 +20,11 @@
 @end
 
 @implementation ZDIWebPageViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self updateExtraInformationWithID:_IDStr];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,9 +47,42 @@
 }
 
 - (void)touchCommit {
-    ZDICommitPageViewController *commitPageViewController = [[ZDICommitPageViewController alloc] init];
-    commitPageViewController.IDStr = _IDStr;
-    [self.navigationController pushViewController:commitPageViewController animated:YES];
+    [self updateShortCommit];
+//    ZDICommitPageViewController *commitPageViewController = [[ZDICommitPageViewController alloc] init];
+//    commitPageViewController.IDStr = _IDStr;
+//    [self.navigationController pushViewController:commitPageViewController animated:YES];
+//
+//    commitPageViewController.longCommits = _webPageExtraInformationModel.longComments;
+//    commitPageViewController.shortCommits = _webPageExtraInformationModel.shortComments;
+//    commitPageViewController.allCommits = _webPageExtraInformationModel.comments;
+}
+
+- (void)updateExtraInformationWithID:(NSString *)ID {
+    [[ZDIWebPageManager sharedManager] fetchExtraInformationWithID:ID succeed:^(ZDIWebPageExtraInformationModel *extraInformationModel) {
+        self.webPageExtraInformationModel = extraInformationModel;
+        NSLog(@"--test---%@--", extraInformationModel);
+    } error:^(NSError *error) {
+        NSLog(@"添加失败");
+    }];
+}
+
+- (void)updateShortCommit {
+    [[ZDICommitPageManager sharedManager] fetchShortCommitWithID:_IDStr succeed:^(ZDICommitPageModel *commitPageModel) {
+        //NSLog(@"--test-%@--zzzzzzzzzzz--", commitPageViewController);
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            ZDICommitPageViewController *commitPageViewController = [[ZDICommitPageViewController alloc] init];
+            commitPageViewController.commitPageView.shortCommitPageModel = [[ZDICommitPageModel alloc] init];
+            commitPageViewController.shortCommitPageModel = commitPageModel;
+            commitPageViewController.IDStr = self.IDStr;
+            [self.navigationController pushViewController:commitPageViewController animated:YES];
+            
+            commitPageViewController.longCommits = self.webPageExtraInformationModel.longComments;
+            commitPageViewController.shortCommits = self.webPageExtraInformationModel.shortComments;
+            commitPageViewController.allCommits = self.webPageExtraInformationModel.comments;
+        });
+    } error:^(NSError *error) {
+        NSLog(@"添加失败");
+    }];
 }
 /*
 #pragma mark - Navigation

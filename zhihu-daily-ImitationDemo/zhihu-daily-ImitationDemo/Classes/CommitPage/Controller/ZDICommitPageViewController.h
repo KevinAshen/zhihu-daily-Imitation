@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDICommitPageModel.h"
 #import "ZDICommitPageView.h"
+#import "ZDICommitPageModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +17,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy)NSString *IDStr;
 
 @property (nonatomic, strong)ZDICommitPageView *commitPageView;
+
+@property (nonatomic, strong) UIImage *navChangeBackImage;
+
+@property (nonatomic, assign)int longCommits;
+
+@property (nonatomic, assign)int shortCommits;
+
+@property (nonatomic, assign)int allCommits;
+
+@property (nonatomic, strong)ZDICommitPageModel *shortCommitPageModel;
 
 @end
 

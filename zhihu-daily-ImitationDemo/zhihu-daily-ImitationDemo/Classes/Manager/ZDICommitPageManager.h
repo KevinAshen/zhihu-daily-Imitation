@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ZDICommitPageModel.h"
 
-//请求当日最新的数据（轮播图）
+//请求获取评论
 typedef void(^ZDICommitPageHandle)(ZDICommitPageModel *commitPageModel);
 
 // 请求失败统一回调block

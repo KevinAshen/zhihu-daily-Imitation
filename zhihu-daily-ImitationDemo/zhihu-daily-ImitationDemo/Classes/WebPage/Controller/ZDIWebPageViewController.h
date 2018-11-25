@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ZDIWebPageView.h"
 #import "ZDIWebPageBottomView.h"
+#import "ZDIWebPageExtraInformationModel.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)ZDIWebPageView *webPageView;
 
 @property (nonatomic, strong)ZDIWebPageBottomView *webPageBottomView;
+
+@property (nonatomic, strong)ZDIWebPageExtraInformationModel *webPageExtraInformationModel;
 
 @property (nonatomic, copy)NSString *IDStr;
 
