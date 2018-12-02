@@ -8,11 +8,14 @@
 
 #import "ZDICommitPageTableViewCell.h"
 #import "UILabel+LabelHeight.h"
+#import "ZDICommitPageView.h"
 #import <Masonry.h>
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
-#define kExamplePictureWidth 440.0
-#define kExamplePictureHeight 784.0
+#define kLittleInterval 10
+#define kBigInterval 16
+#define kMainTextHeight 20
+#define kDateTextHeight 12
 
 @implementation ZDICommitPageTableViewCell
 
@@ -25,79 +28,97 @@
 }
 
 - (void) createUI {
-    _avatarButton = [[UIButton alloc] init];
-    [self.contentView addSubview:_avatarButton];
     
-    [self.avatarButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).offset(20 / kExamplePictureHeight * kDeviceHeight);
-        make.left.equalTo(self.contentView.mas_left).offset(20 / kExamplePictureWidth * kDeviceWidth);
-        make.width.mas_equalTo(30 / kExamplePictureWidth * kDeviceWidth);
-        make.height.mas_equalTo(30 / kExamplePictureHeight * kDeviceHeight);
+    
+    _avatarImageView = [[UIImageView alloc] init];
+    [self.contentView addSubview:_avatarImageView];
+    
+    [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView.mas_top).offset(kBigInterval);
+        make.left.equalTo(self.contentView.mas_left).offset(kBigInterval);
+        make.width.mas_equalTo(30);
+        make.height.mas_equalTo(30);
     }];
     
-    _avatarButton.layer.masksToBounds = YES;
-    _avatarButton.layer.cornerRadius = _avatarButton.frame.size.height / 2.0;
+    _avatarImageView.layer.masksToBounds = YES;
+    _avatarImageView.layer.cornerRadius = 15;
     
     _authorLabel = [[UILabel alloc] init];
     [self.contentView addSubview:_authorLabel];
     
     [self.authorLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).offset(22 / kExamplePictureHeight * kDeviceHeight);
-        make.left.equalTo(self.avatarButton.mas_right).offset(12 / kExamplePictureWidth * kDeviceWidth);
-        make.width.lessThanOrEqualTo(@(300 / kExamplePictureWidth * kDeviceWidth));
-        make.height.mas_equalTo(14 / kExamplePictureHeight * kDeviceHeight);
+        make.top.equalTo(self.contentView.mas_top).offset(kBigInterval);
+        make.left.equalTo(self.avatarImageView.mas_right).offset(kLittleInterval);
+        make.width.lessThanOrEqualTo(@(300));
+        make.height.mas_equalTo(kMainTextHeight);
     }];
     
     self.authorLabel.textColor = [UIColor blackColor];
-    
-    _contentLabel = [[UILabel alloc] init];
-    [self.contentView addSubview:_contentLabel];
-    
-    [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.authorLabel.mas_bottom).offset(10 / kExamplePictureHeight * kDeviceHeight);
-        make.left.equalTo(self.contentView.mas_left).offset(60 / kExamplePictureWidth * kDeviceWidth);
-        make.width.mas_equalTo(362 / kExamplePictureWidth * kDeviceWidth);
-    }];
-    _contentLabel.numberOfLines  = 0;
-    
-    _timeLabel = [[UILabel alloc] init];
-    [self.contentView addSubview:_timeLabel];
-    
-    [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentLabel.mas_bottom).offset(16 / kExamplePictureHeight * kDeviceHeight);
-        make.left.equalTo(self.contentView.mas_left).offset(60 / kExamplePictureWidth * kDeviceWidth);
-        make.width.mas_equalTo(70 / kExamplePictureWidth * kDeviceWidth);
-        make.height.mas_equalTo(10 / kExamplePictureWidth * kDeviceWidth);
-    }];
-    
-    _timeLabel.textColor = [UIColor colorWithRed:0.69f green:0.69f blue:0.69f alpha:1.00f];
-    
-    _upvoteImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"commitUpvote"]];
-    [self.contentView addSubview:_upvoteImageView];
-    
-    [_upvoteImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).offset(22 / kExamplePictureHeight * kDeviceHeight);
-        make.left.equalTo(self.contentView.mas_left).offset(400 / kExamplePictureWidth * kDeviceWidth);
-        make.width.mas_equalTo(12 / kExamplePictureWidth * kDeviceWidth);
-        make.height.mas_equalTo(12 / kExamplePictureHeight * kDeviceHeight);
-    }];
     
     _upvoteLabel = [[UILabel alloc] init];
     [self.contentView addSubview:_upvoteLabel];
     
     [_upvoteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).offset(22 / kExamplePictureHeight * kDeviceHeight);
-        make.left.equalTo(self.upvoteImageView.mas_right).offset(6 / kExamplePictureWidth * kDeviceWidth);
-        make.width.lessThanOrEqualTo(@(26 / kExamplePictureWidth * kDeviceWidth));
-        make.height.mas_equalTo(10 / kExamplePictureWidth * kDeviceWidth);
+        make.top.equalTo(self.contentView.mas_top).offset(kBigInterval);
+        make.right.equalTo(self.contentView.mas_right).offset(-kBigInterval);
+        make.width.lessThanOrEqualTo(@(26));
+        make.height.mas_equalTo(10);
     }];
     
     _upvoteLabel.textColor = [UIColor colorWithRed:0.69f green:0.69f blue:0.69f alpha:1.00f];
+    
+    _upvoteImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"commitUpvote"]];
+    [self.contentView addSubview:_upvoteImageView];
+    
+    [_upvoteImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView.mas_top).offset(kBigInterval);
+        make.right.equalTo(self.upvoteLabel.mas_left).offset(-kLittleInterval);
+        make.width.mas_equalTo(12);
+        make.height.mas_equalTo(12);
+    }];
+    
+    _contentLabel = [[UILabel alloc] init];
+    [self.contentView addSubview:_contentLabel];
+    
+    [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.authorLabel.mas_bottom).offset(kLittleInterval);
+        make.left.equalTo(self.avatarImageView.mas_right).offset(kLittleInterval);
+        make.width.mas_equalTo(kDeviceWidth - (kBigInterval * 2 + 30 + kLittleInterval));
+    }];
+    
+    _contentLabel.numberOfLines  = 0;
+    _contentLabel.font = [UIFont systemFontOfSize:17.0];
+    
+    _replyLabel = [[UILabel alloc] init];
+    [self.contentView addSubview:_replyLabel];
+    
+    [_replyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentLabel.mas_bottom).offset(0);
+        make.left.equalTo(self.avatarImageView.mas_right).offset(kLittleInterval);
+        make.width.mas_equalTo(kDeviceWidth - (kBigInterval * 2 + 30 + kLittleInterval));
+    }];
+    
+    _replyLabel.numberOfLines  = 0;
+    _replyLabel.font = [UIFont systemFontOfSize:17.0];
+    
+    _timeLabel = [[UILabel alloc] init];
+    [self.contentView addSubview:_timeLabel];
+    
+    [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-kBigInterval);
+        make.left.equalTo(self.avatarImageView.mas_right).offset(kLittleInterval);
+        make.width.mas_equalTo(200);
+        make.height.mas_equalTo(kDateTextHeight);
+    }];
+    
+    _timeLabel.textColor = [UIColor colorWithRed:0.69f green:0.69f blue:0.69f alpha:1.00f];
+    _timeLabel.font = [UIFont systemFontOfSize:12];
+    
 }
 
-+ (CGFloat)cellComment:(NSString *)comment size:(CGSize)contextSize {
-    CGFloat commentHeigth = [UILabel getHeightByWidth:contextSize.width - 80 title:comment font:[UIFont systemFontOfSize:15.0]];
-    return commentHeigth + 110;
++ (CGFloat)getCellHeight:(NSString *)content {
+    CGRect rect = [content boundingRectWithSize:CGSizeMake(kDeviceWidth - (kBigInterval * 2 + 30 + kLittleInterval), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil];
+    return ceilf(rect.size.height) + 3 * kBigInterval + kMainTextHeight + kDateTextHeight + kLittleInterval;
 }
 
 - (void)awakeFromNib {

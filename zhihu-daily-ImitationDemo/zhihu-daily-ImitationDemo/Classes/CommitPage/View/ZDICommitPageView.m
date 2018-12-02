@@ -8,6 +8,7 @@
 
 #import "ZDICommitPageView.h"
 #import "ZDICommitPageTableViewCell.h"
+#import <UIImageView+WebCache.h>
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
 #define kExamplePictureWidth 440.0
@@ -52,6 +53,8 @@ static NSString *commitCellIdentifier = @"commitCell";
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight - 64) style:UITableViewStyleGrouped];
     [self addSubview:_tableView];
     
+    self.tableView.dataSource = self;
+    
     [_tableView registerClass:[ZDICommitPageTableViewCell class] forCellReuseIdentifier:commitCellIdentifier];
     
     if (_longCommits == 0) {
@@ -59,7 +62,7 @@ static NSString *commitCellIdentifier = @"commitCell";
         _tableView.tableHeaderView = _commitPagePlaceholderView;
     }
     
-    self.tableView.dataSource = self;
+    
 }
 
 
@@ -67,12 +70,20 @@ static NSString *commitCellIdentifier = @"commitCell";
     if (indexPath.section + _flag == 1) {
         ZDICommitPageTableViewCell *commitPageTableViewCell = [tableView dequeueReusableCellWithIdentifier:commitCellIdentifier forIndexPath:indexPath];
         
-        ZDIReplyToModel *replyToModel = [_shortCommitPageModel.comments[indexPath.row] replyTo];
+        ZDIReplyToModel *replyToModel = [_longCommitPageModel.comments[indexPath.row] replyTo];
         if (replyToModel) {
-            commitPageTableViewCell.contentLabel.text = [NSString stringWithFormat:@"%@\n//%@:%@", [_longCommitPageModel.comments[indexPath.row] contentCommitStr],[replyToModel author],[replyToModel contentReplyToStr]];
+            NSString *replyString = [NSString stringWithFormat:@"\n//%@:%@", [replyToModel author],[replyToModel contentReplyToStr]];
+            commitPageTableViewCell.replyLabel.text = replyString;
         } else {
-           commitPageTableViewCell.contentLabel.text = [_longCommitPageModel.comments[indexPath.row] contentCommitStr];
+           commitPageTableViewCell.replyLabel.text = @" ";
         }
+        NSString *avatarString = [_longCommitPageModel.comments[indexPath.row] avatar];
+        NSMutableString *str = [[NSMutableString alloc]initWithString:avatarString];
+        [str insertString:@"s" atIndex:4];
+        
+        commitPageTableViewCell.contentLabel.text = [_longCommitPageModel.comments[indexPath.row] contentCommitStr];
+        
+        [commitPageTableViewCell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:str]];
         
         commitPageTableViewCell.authorLabel.text = [_longCommitPageModel.comments[indexPath.row] author];
         commitPageTableViewCell.timeLabel.text = [_longCommitPageModel.comments[indexPath.row] time];
@@ -82,10 +93,18 @@ static NSString *commitCellIdentifier = @"commitCell";
     
     ZDIReplyToModel *replyToModel = [_shortCommitPageModel.comments[indexPath.row] replyTo];
     if (replyToModel) {
-        commitPageTableViewCell.contentLabel.text = [NSString stringWithFormat:@"%@\n//%@:%@", [_shortCommitPageModel.comments[indexPath.row] contentCommitStr],[replyToModel author],[replyToModel contentReplyToStr]];
+         NSString *replyString = [NSString stringWithFormat:@"\n//%@:%@", [replyToModel author],[replyToModel contentReplyToStr]];
+        commitPageTableViewCell.replyLabel.text = replyString;
     } else {
-        commitPageTableViewCell.contentLabel.text = [_shortCommitPageModel.comments[indexPath.row] contentCommitStr];
+        commitPageTableViewCell.replyLabel.text = @" ";
     }
+    NSString *avatarString = [_shortCommitPageModel.comments[indexPath.row] avatar];
+    NSMutableString *str = [[NSMutableString alloc]initWithString:avatarString];
+    [str insertString:@"s" atIndex:4];
+    
+    commitPageTableViewCell.contentLabel.text = [_shortCommitPageModel.comments[indexPath.row] contentCommitStr];
+    
+    [commitPageTableViewCell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:str]];
     
     commitPageTableViewCell.authorLabel.text = [_shortCommitPageModel.comments[indexPath.row] author];
     commitPageTableViewCell.timeLabel.text = [_shortCommitPageModel.comments[indexPath.row] time];

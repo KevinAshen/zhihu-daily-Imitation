@@ -84,8 +84,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section + _flag == 1) {
         return [_cellLongCommitHeightArray[indexPath.row] floatValue];
+    } else {
+        return [_cellShortCommitHeightArray[indexPath.row] floatValue];
     }
-    return [_cellShortCommitHeightArray[indexPath.row] floatValue];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -104,7 +105,6 @@
 }
 
 - (void)tapAction {
-    NSLog(@"--%d-test--tap", _tapFlag);
     if (_tapFlag == 1) {
         _tapFlag = 0;
         self.commitPageView.tapFlag = 1;
@@ -122,12 +122,12 @@
     for (NSInteger i = 0; i < shortCommitCount; i++) {
         ZDIReplyToModel *replyToModel = [_shortCommitPageModel.comments[i] replyTo];
         if (replyToModel) {
-            NSString *tempStr = [NSString stringWithFormat:@"%@\n//%@:%@", [_shortCommitPageModel.comments[i] contentCommitStr],[replyToModel author],[replyToModel contentReplyToStr]];
-            CGFloat height = [ZDICommitPageTableViewCell cellComment:tempStr size:CGSizeMake(self.view.frame.size.width, 0)];
+            NSString *tempStr = [NSString stringWithFormat:@"%@\n\n//%@:%@", [_shortCommitPageModel.comments[i] contentCommitStr],[replyToModel author],[replyToModel contentReplyToStr]];
+            CGFloat height = [ZDICommitPageTableViewCell getCellHeight:tempStr];
             NSNumber *totalNumber = [NSNumber numberWithFloat:height];
             [_cellShortCommitHeightArray addObject:totalNumber];
         } else {
-            CGFloat height = [ZDICommitPageTableViewCell cellComment:[_shortCommitPageModel.comments[i] contentCommitStr] size:CGSizeMake(self.view.frame.size.width, 0)];
+            CGFloat height = [ZDICommitPageTableViewCell getCellHeight:[_shortCommitPageModel.comments[i] contentCommitStr]];
             NSNumber *commentHeight = [NSNumber numberWithFloat:height];
             [_cellShortCommitHeightArray addObject:commentHeight];
         }
@@ -140,13 +140,13 @@
     for (NSInteger i = 0; i < longCommitCount; i++) {
         ZDIReplyToModel *replyToModel = [_longCommitPageModel.comments[i] replyTo];
         if (replyToModel) {
-            NSString *tempStr = [NSString stringWithFormat:@"%@\n//%@:%@", [_longCommitPageModel.comments[i] contentCommitStr],[replyToModel author],[replyToModel contentReplyToStr]];
-            CGFloat height = [ZDICommitPageTableViewCell cellComment:tempStr size:CGSizeMake(self.view.frame.size.width, 0)];
+            NSString *tempStr = [NSString stringWithFormat:@"%@\n\n//%@:%@", [_longCommitPageModel.comments[i] contentCommitStr],[replyToModel author],[replyToModel contentReplyToStr]];
+            NSLog(@"%@---test%ld--reply-", tempStr, i);
+            CGFloat height = [ZDICommitPageTableViewCell getCellHeight:tempStr];
             NSNumber *totalNumber = [NSNumber numberWithFloat:height];
-            NSLog(@"--%@--test--height--%ld--", totalNumber, i);
             [_cellLongCommitHeightArray addObject:totalNumber];
         } else {
-            CGFloat height = [ZDICommitPageTableViewCell cellComment:[_longCommitPageModel.comments[i] contentCommitStr] size:CGSizeMake(self.view.frame.size.width, 0)];
+            CGFloat height = [ZDICommitPageTableViewCell getCellHeight:[_longCommitPageModel.comments[i] contentCommitStr]];
             NSNumber *commentHeight = [NSNumber numberWithFloat:height];
             [_cellLongCommitHeightArray addObject:commentHeight];
         }

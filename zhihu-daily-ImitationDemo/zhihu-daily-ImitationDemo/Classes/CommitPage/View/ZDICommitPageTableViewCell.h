@@ -12,15 +12,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZDICommitPageTableViewCell : UITableViewCell
 
-+(CGFloat)cellComment:(NSString *)comment size:(CGSize)contextSize;
+
++ (CGFloat)getCellHeight:(NSString *)content;
 
 @property (nonatomic, strong) UILabel *authorLabel;
 
 @property (nonatomic, strong) UILabel *contentLabel;
 
+@property (nonatomic, strong) UILabel *replyLabel;
+
 @property (nonatomic, strong) UILabel *timeLabel;
 
-@property (nonatomic, strong) UIButton *avatarButton;
+@property (nonatomic, strong) UIImageView *avatarImageView;
 
 @property (nonatomic, strong) UIImageView *upvoteImageView;
 
