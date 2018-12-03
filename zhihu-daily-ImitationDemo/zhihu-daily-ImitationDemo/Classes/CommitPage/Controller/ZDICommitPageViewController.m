@@ -14,7 +14,7 @@
 #define kExamplePictureWidth 440.0
 #define kExamplePictureHeight 784.0
 
-@interface ZDICommitPageViewController () <UITableViewDelegate>
+@interface ZDICommitPageViewController () <UITableViewDelegate, ZDICommitPageViewDelegate>
 
 @end
 
@@ -38,8 +38,16 @@
         _flag = 1;
     }
     
+    _hiddenStandard = [ZDICommitPageTableViewCell getHiddenCellHeight:@"\nqstsd"];
+    
     self.cellLongCommitHeightArray = [NSMutableArray array];
     self.cellShortCommitHeightArray = [NSMutableArray array];
+    
+    self.cellHiddenLongCommitHeightArray = [NSMutableArray array];
+    self.cellHiddenShortCommitHeightArray = [NSMutableArray array];
+    
+    self.cellFinalLongCommitHeightArray = [NSMutableArray array];
+    self.cellFinalShortCommitHeightArray = [NSMutableArray array];
     
     self.navigationController.navigationBar.hidden = NO;
     NSString *navTitleStr = [NSString stringWithFormat:@"%d条点评", _allCommits];
@@ -51,6 +59,7 @@
     self.commitPageView = [[ZDICommitPageView alloc] initWithFrame:CGRectMake(0, 0, kExamplePictureWidth, kExamplePictureWidth)andLongCommits:_longCommits andShortCommits:_shortCommits];
     [self.view addSubview:_commitPageView];
     
+    self.commitPageView.commitPageViewDelegate = self;
     self.commitPageView.tableView.delegate = self;
     
 }
@@ -83,9 +92,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section + _flag == 1) {
-        return [_cellLongCommitHeightArray[indexPath.row] floatValue];
+        return [_cellFinalLongCommitHeightArray[indexPath.row] floatValue];
     } else {
-        return [_cellShortCommitHeightArray[indexPath.row] floatValue];
+        return [_cellFinalShortCommitHeightArray[indexPath.row] floatValue];
     }
 }
 
@@ -126,13 +135,36 @@
             CGFloat height = [ZDICommitPageTableViewCell getCellHeight:tempStr];
             NSNumber *totalNumber = [NSNumber numberWithFloat:height];
             [_cellShortCommitHeightArray addObject:totalNumber];
+            
+            NSString *hiddenTempStr = [NSString stringWithFormat:@"//%@:%@", [replyToModel author],[replyToModel contentReplyToStr]];
+            CGFloat hiddenHeight = [ZDICommitPageTableViewCell getHiddenCellHeight:hiddenTempStr];
+            CGFloat shouldHiddenHeight = hiddenHeight - _hiddenStandard;
+            if (hiddenHeight > _hiddenStandard) {
+                NSNumber *hiddenNumber = [NSNumber numberWithFloat:shouldHiddenHeight];
+                [_cellHiddenShortCommitHeightArray addObject:hiddenNumber];
+                
+                CGFloat finalHeight = height - shouldHiddenHeight;
+                NSNumber *finalNumber = [NSNumber numberWithFloat:finalHeight];
+                [_cellFinalShortCommitHeightArray addObject:finalNumber];
+            } else {
+                NSNumber *hiddenNumber = [NSNumber numberWithFloat:0];
+                [_cellHiddenShortCommitHeightArray addObject:hiddenNumber];
+                
+                [_cellFinalShortCommitHeightArray addObject:totalNumber];
+            }
         } else {
             CGFloat height = [ZDICommitPageTableViewCell getCellHeight:[_shortCommitPageModel.comments[i] contentCommitStr]];
             NSNumber *commentHeight = [NSNumber numberWithFloat:height];
             [_cellShortCommitHeightArray addObject:commentHeight];
+            
+            [_cellFinalShortCommitHeightArray addObject:commentHeight];
+            
+            NSNumber *hiddenNumber = [NSNumber numberWithFloat:0];
+            [_cellHiddenShortCommitHeightArray addObject:hiddenNumber];
         }
        
     }
+    
 }
 
 - (void)calculateLongCommitsHeight {
@@ -141,17 +173,49 @@
         ZDIReplyToModel *replyToModel = [_longCommitPageModel.comments[i] replyTo];
         if (replyToModel) {
             NSString *tempStr = [NSString stringWithFormat:@"%@\n\n//%@:%@", [_longCommitPageModel.comments[i] contentCommitStr],[replyToModel author],[replyToModel contentReplyToStr]];
-            NSLog(@"%@---test%ld--reply-", tempStr, i);
+
             CGFloat height = [ZDICommitPageTableViewCell getCellHeight:tempStr];
             NSNumber *totalNumber = [NSNumber numberWithFloat:height];
             [_cellLongCommitHeightArray addObject:totalNumber];
+            
+            NSString *hiddenTempStr = [NSString stringWithFormat:@"//%@:%@", [replyToModel author],[replyToModel contentReplyToStr]];
+            CGFloat hiddenHeight = [ZDICommitPageTableViewCell getHiddenCellHeight:hiddenTempStr];
+            CGFloat shouldHiddenHeight = hiddenHeight - _hiddenStandard;
+            if (hiddenHeight > _hiddenStandard) {
+                NSNumber *hiddenNumber = [NSNumber numberWithFloat:shouldHiddenHeight];
+                [_cellHiddenLongCommitHeightArray addObject:hiddenNumber];
+                
+                CGFloat finalHeight = height - shouldHiddenHeight;
+                NSNumber *finalNumber = [NSNumber numberWithFloat:finalHeight];
+                [_cellFinalLongCommitHeightArray addObject:finalNumber];
+            } else {
+                NSNumber *hiddenNumber = [NSNumber numberWithFloat:0];
+                [_cellHiddenLongCommitHeightArray addObject:hiddenNumber];
+                
+                [_cellFinalLongCommitHeightArray addObject:totalNumber];
+            }
         } else {
             CGFloat height = [ZDICommitPageTableViewCell getCellHeight:[_longCommitPageModel.comments[i] contentCommitStr]];
             NSNumber *commentHeight = [NSNumber numberWithFloat:height];
             [_cellLongCommitHeightArray addObject:commentHeight];
+            
+            [_cellFinalLongCommitHeightArray addObject:commentHeight];
+            
+            NSNumber *hiddenNumber = [NSNumber numberWithFloat:0];
+            [_cellHiddenLongCommitHeightArray addObject:hiddenNumber];
         }
         
     }
+}
+
+- (void)unfoldLongWithButtonInCell:(UIButton *)button {
+    ZDICommitPageTableViewCell *longCommitCell = (ZDICommitPageTableViewCell *)[[button superview] superview];
+    NSIndexPath *indexPath = [_commitPageView.tableView indexPathForCell:longCommitCell];
+    
+}
+
+- (void)unfoldShortWithButtonInCell:(UIButton *)button{
+    
 }
 
 
@@ -188,5 +252,7 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
 
 @end

@@ -86,7 +86,7 @@
         make.width.mas_equalTo(kDeviceWidth - (kBigInterval * 2 + 30 + kLittleInterval));
     }];
     
-    _contentLabel.numberOfLines  = 0;
+    _contentLabel.numberOfLines = 0;
     _contentLabel.font = [UIFont systemFontOfSize:17.0];
     
     _replyLabel = [[UILabel alloc] init];
@@ -98,7 +98,7 @@
         make.width.mas_equalTo(kDeviceWidth - (kBigInterval * 2 + 30 + kLittleInterval));
     }];
     
-    _replyLabel.numberOfLines  = 0;
+    _replyLabel.numberOfLines  = 3;
     _replyLabel.font = [UIFont systemFontOfSize:17.0];
     
     _timeLabel = [[UILabel alloc] init];
@@ -114,11 +114,29 @@
     _timeLabel.textColor = [UIColor colorWithRed:0.69f green:0.69f blue:0.69f alpha:1.00f];
     _timeLabel.font = [UIFont systemFontOfSize:12];
     
+    _unfoldButton = [[UIButton alloc] init];
+    [self.contentView addSubview:_unfoldButton];
+    
+    [_unfoldButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-kLittleInterval);
+        make.right.equalTo(self.contentView.mas_right).offset(-kBigInterval);
+        make.width.mas_equalTo(40);
+        make.height.mas_equalTo(kMainTextHeight + kLittleInterval);
+    }];
+    
+    [_unfoldButton setBackgroundColor:[UIColor colorWithRed:0.85f green:0.89f blue:0.95f alpha:1.00f]];
+    [_unfoldButton setTitle:@"展开" forState:UIControlStateNormal];
+    [_unfoldButton setTintColor:[UIColor colorWithRed:0.45f green:0.45f blue:0.45f alpha:1.00f]];
 }
 
 + (CGFloat)getCellHeight:(NSString *)content {
     CGRect rect = [content boundingRectWithSize:CGSizeMake(kDeviceWidth - (kBigInterval * 2 + 30 + kLittleInterval), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil];
     return ceilf(rect.size.height) + 3 * kBigInterval + kMainTextHeight + kDateTextHeight + kLittleInterval;
+}
+
++ (CGFloat)getHiddenCellHeight:(NSString *)content {
+    CGRect rect = [content boundingRectWithSize:CGSizeMake(kDeviceWidth - (kBigInterval * 2 + 30 + kLittleInterval), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil];
+    return ceilf(rect.size.height);
 }
 
 - (void)awakeFromNib {

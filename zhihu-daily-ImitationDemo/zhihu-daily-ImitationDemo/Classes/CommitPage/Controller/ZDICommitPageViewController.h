@@ -39,11 +39,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *cellShortCommitHeightArray;
 
+//缓存应该隐藏的cell高度
+@property (nonatomic, strong) NSMutableArray *cellHiddenLongCommitHeightArray;
+
+@property (nonatomic, strong) NSMutableArray *cellHiddenShortCommitHeightArray;
+
+//缓存实际cell高度
+@property (nonatomic, strong) NSMutableArray *cellFinalLongCommitHeightArray;
+
+@property (nonatomic, strong) NSMutableArray *cellFinalShortCommitHeightArray;
+
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 
 @property (nonatomic, assign)int flag;
 
 @property (nonatomic, assign)int tapFlag;
+
+@property (nonatomic, assign)CGFloat hiddenStandard;
 
 @end
 

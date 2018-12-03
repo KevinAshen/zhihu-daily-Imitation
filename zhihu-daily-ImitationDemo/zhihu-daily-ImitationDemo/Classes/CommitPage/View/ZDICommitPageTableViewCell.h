@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (CGFloat)getCellHeight:(NSString *)content;
 
++ (CGFloat)getHiddenCellHeight:(NSString *)content;
+
 @property (nonatomic, strong) UILabel *authorLabel;
 
 @property (nonatomic, strong) UILabel *contentLabel;
@@ -28,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImageView *upvoteImageView;
 
 @property (nonatomic, strong) UILabel *upvoteLabel;
+
+@property (nonatomic, strong) UIButton *unfoldButton;
 
 @end
 

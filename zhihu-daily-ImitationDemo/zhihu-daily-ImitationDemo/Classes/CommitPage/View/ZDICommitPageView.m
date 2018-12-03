@@ -87,6 +87,9 @@ static NSString *commitCellIdentifier = @"commitCell";
         
         commitPageTableViewCell.authorLabel.text = [_longCommitPageModel.comments[indexPath.row] author];
         commitPageTableViewCell.timeLabel.text = [_longCommitPageModel.comments[indexPath.row] time];
+        
+        [commitPageTableViewCell.unfoldButton addTarget:self action:@selector(clickLongUnfoldButton:) forControlEvents:UIControlEventTouchUpInside];
+        
         return commitPageTableViewCell;
     }
     ZDICommitPageTableViewCell *commitPageTableViewCell = [tableView dequeueReusableCellWithIdentifier:commitCellIdentifier forIndexPath:indexPath];
@@ -108,6 +111,9 @@ static NSString *commitCellIdentifier = @"commitCell";
     
     commitPageTableViewCell.authorLabel.text = [_shortCommitPageModel.comments[indexPath.row] author];
     commitPageTableViewCell.timeLabel.text = [_shortCommitPageModel.comments[indexPath.row] time];
+    
+    [commitPageTableViewCell.unfoldButton addTarget:self action:@selector(clickShortUnfoldButton:) forControlEvents:UIControlEventTouchUpInside];
+    
     return commitPageTableViewCell;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -126,6 +132,15 @@ static NSString *commitCellIdentifier = @"commitCell";
     }
 }
 
+//有长评的unfoldButton的点击事件
+- (void)clickLongUnfoldButton:(UIButton *)button{
+    
+}
+    
+//无长评的unfoldButton的点击事件
+- (void)clickShortUnfoldButton:(UIButton *)button{
+    
+}
 
 
 /*

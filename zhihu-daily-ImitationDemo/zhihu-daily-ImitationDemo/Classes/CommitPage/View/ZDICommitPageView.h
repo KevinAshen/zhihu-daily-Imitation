@@ -13,6 +13,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ZDICommitPageViewDelegate <NSObject>
+
+//长评unfold的点击事件，进行收起展开
+- (void)unfoldLongWithButtonInCell:(UIButton *)button;
+
+//短评unfold的点击事件，进行收起展开
+- (void)unfoldShortWithButtonInCell:(UIButton *)button;
+
+@end
+
 @interface ZDICommitPageView : UIView
 
 @property (nonatomic, strong)ZDICommitPageModel *longCommitPageModel;
@@ -40,6 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)UITableView *tableView;
 
 @property (nonatomic, strong)ZDICommitPageSectionView *commitPageSectionView;
+
+//设置代理
+@property (nonatomic, weak) id<ZDICommitPageViewDelegate> commitPageViewDelegate;
 
 - (instancetype)initWithFrame:(CGRect)frame andLongCommits:(int)longCommits andShortCommits:(int)shortCommits;
 
