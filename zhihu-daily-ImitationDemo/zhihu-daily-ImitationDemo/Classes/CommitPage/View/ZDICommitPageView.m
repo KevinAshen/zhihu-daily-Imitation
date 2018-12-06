@@ -13,7 +13,8 @@
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
 #define kExamplePictureWidth 440.0
 #define kExamplePictureHeight 784.0
-static NSString *commitCellIdentifier = @"commitCell";
+static NSString *shortCommitCellIdentifier = @"shortCommitCell";
+static NSString *longCommitCellIdentifier = @"longCommitCell";
 
 @interface ZDICommitPageView ()<UITableViewDataSource>
 
@@ -45,6 +46,10 @@ static NSString *commitCellIdentifier = @"commitCell";
     self.cellLongCommitHeightArray = [NSMutableArray array];
     self.cellShortCommitHeightArray = [NSMutableArray array];
     
+    _longCommitsCellFoldStateArray = [NSMutableArray arrayWithObjects:@NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, nil];
+    
+    _shortCommitsCellFoldStateArray = [NSMutableArray arrayWithObjects:@NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, nil];
+    
     _longCommitPageModel = [[ZDICommitPageModel alloc] init];
     _shortCommitPageModel = [[ZDICommitPageModel alloc] init];
 }
@@ -55,7 +60,8 @@ static NSString *commitCellIdentifier = @"commitCell";
     
     self.tableView.dataSource = self;
     
-    [_tableView registerClass:[ZDICommitPageTableViewCell class] forCellReuseIdentifier:commitCellIdentifier];
+    [_tableView registerClass:[ZDICommitPageTableViewCell class] forCellReuseIdentifier:longCommitCellIdentifier];
+    [_tableView registerClass:[ZDICommitPageTableViewCell class] forCellReuseIdentifier:shortCommitCellIdentifier];
     
     if (_longCommits == 0) {
         _commitPagePlaceholderView = [[ZDICommitPagePlaceholderView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight - 114 / kExamplePictureHeight * kDeviceHeight)];
@@ -68,53 +74,77 @@ static NSString *commitCellIdentifier = @"commitCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section + _flag == 1) {
-        ZDICommitPageTableViewCell *commitPageTableViewCell = [tableView dequeueReusableCellWithIdentifier:commitCellIdentifier forIndexPath:indexPath];
+        ZDICommitPageTableViewCell *longCommitPageTableViewCell = [tableView dequeueReusableCellWithIdentifier:longCommitCellIdentifier forIndexPath:indexPath];
         
         ZDIReplyToModel *replyToModel = [_longCommitPageModel.comments[indexPath.row] replyTo];
         if (replyToModel) {
             NSString *replyString = [NSString stringWithFormat:@"\n//%@:%@", [replyToModel author],[replyToModel contentReplyToStr]];
-            commitPageTableViewCell.replyLabel.text = replyString;
+            longCommitPageTableViewCell.replyLabel.text = replyString;
+            
+            longCommitPageTableViewCell.unfoldButton.hidden = [self judgeButtonHiddenWithString:replyString andLineHeight:longCommitPageTableViewCell.replyLabel.font.lineHeight];
         } else {
-           commitPageTableViewCell.replyLabel.text = @" ";
+            longCommitPageTableViewCell.replyLabel.text = @" ";
+            longCommitPageTableViewCell.unfoldButton.hidden = YES;
         }
         NSString *avatarString = [_longCommitPageModel.comments[indexPath.row] avatar];
         NSMutableString *str = [[NSMutableString alloc]initWithString:avatarString];
         [str insertString:@"s" atIndex:4];
         
-        commitPageTableViewCell.contentLabel.text = [_longCommitPageModel.comments[indexPath.row] contentCommitStr];
+        longCommitPageTableViewCell.contentLabel.text = [_longCommitPageModel.comments[indexPath.row] contentCommitStr];
         
-        [commitPageTableViewCell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:str]];
+        [longCommitPageTableViewCell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:str]];
+        longCommitPageTableViewCell.upvoteLabel.text = [_longCommitPageModel.comments[indexPath.row] likes];
         
-        commitPageTableViewCell.authorLabel.text = [_longCommitPageModel.comments[indexPath.row] author];
-        commitPageTableViewCell.timeLabel.text = [_longCommitPageModel.comments[indexPath.row] time];
+        longCommitPageTableViewCell.authorLabel.text = [_longCommitPageModel.comments[indexPath.row] author];
+        longCommitPageTableViewCell.timeLabel.text = [self getDateStringWithTimeStr:[_longCommitPageModel.comments[indexPath.row] time]];
         
-        [commitPageTableViewCell.unfoldButton addTarget:self action:@selector(clickLongUnfoldButton:) forControlEvents:UIControlEventTouchUpInside];
+        if ([_longCommitsCellFoldStateArray[indexPath.row] isEqual:@NO]) {
+            longCommitPageTableViewCell.replyLabel.numberOfLines = 3;
+        } else {
+            longCommitPageTableViewCell.replyLabel.numberOfLines = 0;
+        }
         
-        return commitPageTableViewCell;
-    }
-    ZDICommitPageTableViewCell *commitPageTableViewCell = [tableView dequeueReusableCellWithIdentifier:commitCellIdentifier forIndexPath:indexPath];
-    
-    ZDIReplyToModel *replyToModel = [_shortCommitPageModel.comments[indexPath.row] replyTo];
-    if (replyToModel) {
-         NSString *replyString = [NSString stringWithFormat:@"\n//%@:%@", [replyToModel author],[replyToModel contentReplyToStr]];
-        commitPageTableViewCell.replyLabel.text = replyString;
+        [longCommitPageTableViewCell.unfoldButton addTarget:self action:@selector(clickLongUnfoldButton:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return longCommitPageTableViewCell;
     } else {
-        commitPageTableViewCell.replyLabel.text = @" ";
+        ZDICommitPageTableViewCell *shortCommitPageTableViewCell = [tableView dequeueReusableCellWithIdentifier:shortCommitCellIdentifier forIndexPath:indexPath];
+        
+        ZDIReplyToModel *replyToModel = [_shortCommitPageModel.comments[indexPath.row] replyTo];
+        if (replyToModel) {
+            NSString *replyString = [NSString stringWithFormat:@"\n//%@:%@", [replyToModel author],[replyToModel contentReplyToStr]];
+            shortCommitPageTableViewCell.replyLabel.text = replyString;
+            
+            shortCommitPageTableViewCell.unfoldButton.hidden = [self judgeButtonHiddenWithString:replyString andLineHeight:shortCommitPageTableViewCell.replyLabel.font.lineHeight];
+        } else {
+            shortCommitPageTableViewCell.replyLabel.text = @" ";
+            shortCommitPageTableViewCell.unfoldButton.hidden = YES;
+        }
+        NSString *avatarString = [_shortCommitPageModel.comments[indexPath.row] avatar];
+        NSMutableString *str = [[NSMutableString alloc]initWithString:avatarString];
+        [str insertString:@"s" atIndex:4];
+        
+        shortCommitPageTableViewCell.upvoteLabel.text = [_shortCommitPageModel.comments[indexPath.row] likes];
+        
+        shortCommitPageTableViewCell.contentLabel.text = [_shortCommitPageModel.comments[indexPath.row] contentCommitStr];
+        
+        [shortCommitPageTableViewCell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:str]];
+        
+        shortCommitPageTableViewCell.authorLabel.text = [_shortCommitPageModel.comments[indexPath.row] author];
+        shortCommitPageTableViewCell.timeLabel.text = [self getDateStringWithTimeStr:[_shortCommitPageModel.comments[indexPath.row] time]];
+        
+        if ([_shortCommitsCellFoldStateArray[indexPath.row] isEqual:@NO]) {
+            shortCommitPageTableViewCell.replyLabel.numberOfLines = 3;
+            [shortCommitPageTableViewCell.unfoldButton setTitle:@"展开" forState:UIControlStateNormal];
+        } else {
+            shortCommitPageTableViewCell.replyLabel.numberOfLines = 0;
+            [shortCommitPageTableViewCell.unfoldButton setTitle:@"收起" forState:UIControlStateNormal];
+        }
+        
+        [shortCommitPageTableViewCell.unfoldButton addTarget:self action:@selector(clickShortUnfoldButton:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return shortCommitPageTableViewCell;
     }
-    NSString *avatarString = [_shortCommitPageModel.comments[indexPath.row] avatar];
-    NSMutableString *str = [[NSMutableString alloc]initWithString:avatarString];
-    [str insertString:@"s" atIndex:4];
-    
-    commitPageTableViewCell.contentLabel.text = [_shortCommitPageModel.comments[indexPath.row] contentCommitStr];
-    
-    [commitPageTableViewCell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:str]];
-    
-    commitPageTableViewCell.authorLabel.text = [_shortCommitPageModel.comments[indexPath.row] author];
-    commitPageTableViewCell.timeLabel.text = [_shortCommitPageModel.comments[indexPath.row] time];
-    
-    [commitPageTableViewCell.unfoldButton addTarget:self action:@selector(clickShortUnfoldButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return commitPageTableViewCell;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1 + _flag;
@@ -132,14 +162,38 @@ static NSString *commitCellIdentifier = @"commitCell";
     }
 }
 
-//有长评的unfoldButton的点击事件
+//长评的unfoldButton的点击事件
 - (void)clickLongUnfoldButton:(UIButton *)button{
-    
+    if ([self.commitPageViewDelegate respondsToSelector:@selector(unfoldLongWithButtonInCell:)]) {
+        [_commitPageViewDelegate unfoldLongWithButtonInCell:button];
+    }
 }
     
-//无长评的unfoldButton的点击事件
+//短评的unfoldButton的点击事件
 - (void)clickShortUnfoldButton:(UIButton *)button{
-    
+    if ([self.commitPageViewDelegate respondsToSelector:@selector(unfoldShortWithButtonInCell:)]) {
+        [_commitPageViewDelegate unfoldShortWithButtonInCell:button];
+    }
+}
+
+- (BOOL)judgeButtonHiddenWithString:(NSString *)replyString andLineHeight:(CGFloat) lineHeight {
+    double line = [ZDICommitPageTableViewCell getHiddenCellHeight:replyString] / lineHeight - 0.1;
+    if (line >= 3) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+// 时间戳转时间,时间戳为13位是精确到毫秒的，10位精确到秒
+- (NSString *)getDateStringWithTimeStr:(NSString *)str{
+    NSTimeInterval time=[str doubleValue]/1000;//传入的时间戳str如果是精确到毫秒的记得要/1000
+    NSDate *detailDate=[NSDate dateWithTimeIntervalSince1970:time];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; //实例化一个NSDateFormatter对象
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"MM-dd HH:mm"];
+    NSString *currentDateStr = [dateFormatter stringFromDate: detailDate];
+    return currentDateStr;
 }
 
 

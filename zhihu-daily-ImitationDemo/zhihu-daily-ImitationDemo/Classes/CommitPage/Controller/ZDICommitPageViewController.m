@@ -49,6 +49,10 @@
     self.cellFinalLongCommitHeightArray = [NSMutableArray array];
     self.cellFinalShortCommitHeightArray = [NSMutableArray array];
     
+    _longCommitsCellFoldStateArray = [NSMutableArray arrayWithObjects:@NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, nil];
+    
+    _shortCommitsCellFoldStateArray = [NSMutableArray arrayWithObjects:@NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, nil];
+    
     self.navigationController.navigationBar.hidden = NO;
     NSString *navTitleStr = [NSString stringWithFormat:@"%d条点评", _allCommits];
     self.navigationItem.title = navTitleStr;
@@ -211,11 +215,34 @@
 - (void)unfoldLongWithButtonInCell:(UIButton *)button {
     ZDICommitPageTableViewCell *longCommitCell = (ZDICommitPageTableViewCell *)[[button superview] superview];
     NSIndexPath *indexPath = [_commitPageView.tableView indexPathForCell:longCommitCell];
-    
+    if ([_longCommitsCellFoldStateArray[indexPath.row] isEqual:@NO]) {
+        _longCommitsCellFoldStateArray[indexPath.row] = @YES;
+
+        NSNumber *finalLongNumber = [ZDICommitPageViewController addWithNSNumber:_cellHiddenLongCommitHeightArray[indexPath.row] and:_cellFinalLongCommitHeightArray[indexPath.row]];
+        _cellFinalLongCommitHeightArray[indexPath.row] = finalLongNumber;
+    } else {
+        _longCommitsCellFoldStateArray[indexPath.row] = @NO;
+        NSNumber *finalLongNumber = [ZDICommitPageViewController minusWithNSNumber:_cellFinalLongCommitHeightArray[indexPath.row] and:_cellHiddenLongCommitHeightArray[indexPath.row]];
+        _cellFinalLongCommitHeightArray[indexPath.row] = finalLongNumber;
+    }
+    self.commitPageView.longCommitsCellFoldStateArray = _longCommitsCellFoldStateArray;
+    [self.commitPageView.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)unfoldShortWithButtonInCell:(UIButton *)button{
-    
+    ZDICommitPageTableViewCell *shortCommitCell = (ZDICommitPageTableViewCell *)[[button superview] superview];
+    NSIndexPath *indexPath = [_commitPageView.tableView indexPathForCell:shortCommitCell];
+    if ([_shortCommitsCellFoldStateArray[indexPath.row] isEqual:@NO]) {
+        _shortCommitsCellFoldStateArray[indexPath.row] = @YES;
+        NSNumber *finalLongNumber = [ZDICommitPageViewController addWithNSNumber:_cellHiddenShortCommitHeightArray[indexPath.row] and:_cellFinalShortCommitHeightArray[indexPath.row]];
+        _cellFinalShortCommitHeightArray[indexPath.row] = finalLongNumber;
+    } else {
+        _shortCommitsCellFoldStateArray[indexPath.row] = @NO;
+        NSNumber *finalLongNumber = [ZDICommitPageViewController minusWithNSNumber:_cellFinalShortCommitHeightArray[indexPath.row] and:_cellHiddenShortCommitHeightArray[indexPath.row]];
+        _cellFinalShortCommitHeightArray[indexPath.row] = finalLongNumber;
+    }
+    self.commitPageView.shortCommitsCellFoldStateArray = _shortCommitsCellFoldStateArray;
+    [self.commitPageView.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 
@@ -241,7 +268,15 @@
     return newImage;
 }
 
++(NSNumber*)addWithNSNumber:(NSNumber *)one and:(NSNumber *)anotherNumber
+{
+    return [NSNumber numberWithFloat:[one floatValue] + [anotherNumber floatValue]];
+}
 
++(NSNumber*)minusWithNSNumber:(NSNumber *)one and:(NSNumber *)anotherNumber
+{
+    return [NSNumber numberWithFloat:[one floatValue] - [anotherNumber floatValue]];
+}
 
 /*
 #pragma mark - Navigation

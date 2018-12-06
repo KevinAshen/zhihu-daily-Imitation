@@ -62,7 +62,7 @@
         make.top.equalTo(self.contentView.mas_top).offset(kBigInterval);
         make.right.equalTo(self.contentView.mas_right).offset(-kBigInterval);
         make.width.lessThanOrEqualTo(@(26));
-        make.height.mas_equalTo(10);
+        make.height.mas_equalTo(kMainTextHeight);
     }];
     
     _upvoteLabel.textColor = [UIColor colorWithRed:0.69f green:0.69f blue:0.69f alpha:1.00f];
@@ -73,8 +73,8 @@
     [_upvoteImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(kBigInterval);
         make.right.equalTo(self.upvoteLabel.mas_left).offset(-kLittleInterval);
-        make.width.mas_equalTo(12);
-        make.height.mas_equalTo(12);
+        make.width.mas_equalTo(kMainTextHeight);
+        make.height.mas_equalTo(kMainTextHeight);
     }];
     
     _contentLabel = [[UILabel alloc] init];

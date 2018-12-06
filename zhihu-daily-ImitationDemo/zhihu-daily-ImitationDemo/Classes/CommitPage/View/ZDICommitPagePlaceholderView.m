@@ -13,6 +13,7 @@
 #define kExamplePictureWidth 440.0
 #define kExamplePictureHeight 784.0
 
+
 @implementation ZDICommitPagePlaceholderView
 
 - (instancetype)initWithFrame:(CGRect)frame

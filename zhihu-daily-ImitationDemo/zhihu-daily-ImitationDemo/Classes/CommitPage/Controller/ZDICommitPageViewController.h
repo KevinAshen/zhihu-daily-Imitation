@@ -12,6 +12,7 @@
 #import "ZDICommitPageSectionView.h"
 #import "ZDICommitPageTableViewCell.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZDICommitPageViewController : UIViewController
@@ -31,23 +32,24 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign)int allCommits;
 
 @property (nonatomic, strong)ZDICommitPageModel *shortCommitPageModel;
-
 @property (nonatomic, strong)ZDICommitPageModel *longCommitPageModel;
 
 //缓存cell高度
 @property (nonatomic, strong) NSMutableArray *cellLongCommitHeightArray;
-
 @property (nonatomic, strong) NSMutableArray *cellShortCommitHeightArray;
 
 //缓存应该隐藏的cell高度
 @property (nonatomic, strong) NSMutableArray *cellHiddenLongCommitHeightArray;
-
 @property (nonatomic, strong) NSMutableArray *cellHiddenShortCommitHeightArray;
 
 //缓存实际cell高度
 @property (nonatomic, strong) NSMutableArray *cellFinalLongCommitHeightArray;
-
 @property (nonatomic, strong) NSMutableArray *cellFinalShortCommitHeightArray;
+
+//存放判断是否cell是否展开状态的数组
+@property (nonatomic, strong) NSMutableArray *longCommitsCellFoldStateArray;
+@property (nonatomic, strong) NSMutableArray *shortCommitsCellFoldStateArray;
+
 
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 
