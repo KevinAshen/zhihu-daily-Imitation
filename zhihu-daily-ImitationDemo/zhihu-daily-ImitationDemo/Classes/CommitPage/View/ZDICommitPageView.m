@@ -46,9 +46,9 @@ static NSString *longCommitCellIdentifier = @"longCommitCell";
     self.cellLongCommitHeightArray = [NSMutableArray array];
     self.cellShortCommitHeightArray = [NSMutableArray array];
     
-    _longCommitsCellFoldStateArray = [NSMutableArray arrayWithObjects:@NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, nil];
-    
+    _longCommitsCellFoldStateArray = [NSMutableArray arrayWithObjects:@NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, nil];
     _shortCommitsCellFoldStateArray = [NSMutableArray arrayWithObjects:@NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, nil];
+    
     
     _longCommitPageModel = [[ZDICommitPageModel alloc] init];
     _shortCommitPageModel = [[ZDICommitPageModel alloc] init];
@@ -60,6 +60,10 @@ static NSString *longCommitCellIdentifier = @"longCommitCell";
     
     self.tableView.dataSource = self;
     
+    _tableView.estimatedRowHeight = 0;
+    _tableView.estimatedSectionFooterHeight = 0;
+    _tableView.estimatedSectionHeaderHeight = 0;
+    
     [_tableView registerClass:[ZDICommitPageTableViewCell class] forCellReuseIdentifier:longCommitCellIdentifier];
     [_tableView registerClass:[ZDICommitPageTableViewCell class] forCellReuseIdentifier:shortCommitCellIdentifier];
     
@@ -67,8 +71,6 @@ static NSString *longCommitCellIdentifier = @"longCommitCell";
         _commitPagePlaceholderView = [[ZDICommitPagePlaceholderView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight - 114 / kExamplePictureHeight * kDeviceHeight)];
         _tableView.tableHeaderView = _commitPagePlaceholderView;
     }
-    
-    
 }
 
 
@@ -100,8 +102,10 @@ static NSString *longCommitCellIdentifier = @"longCommitCell";
         
         if ([_longCommitsCellFoldStateArray[indexPath.row] isEqual:@NO]) {
             longCommitPageTableViewCell.replyLabel.numberOfLines = 3;
+            [longCommitPageTableViewCell.unfoldButton setTitle:@"展开" forState:UIControlStateNormal];
         } else {
             longCommitPageTableViewCell.replyLabel.numberOfLines = 0;
+            [longCommitPageTableViewCell.unfoldButton setTitle:@"收起" forState:UIControlStateNormal];
         }
         
         [longCommitPageTableViewCell.unfoldButton addTarget:self action:@selector(clickLongUnfoldButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -146,6 +150,7 @@ static NSString *longCommitCellIdentifier = @"longCommitCell";
         return shortCommitPageTableViewCell;
     }
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1 + _flag;
 }
@@ -155,9 +160,9 @@ static NSString *longCommitCellIdentifier = @"longCommitCell";
         return _longCommitPageModel.comments.count;
     } else {
         if (_tapFlag == 1) {
-            return _shortCommitPageModel.comments.count;
-        } else {
             return 0;
+        } else {
+            return _shortCommitPageModel.comments.count;
         }
     }
 }

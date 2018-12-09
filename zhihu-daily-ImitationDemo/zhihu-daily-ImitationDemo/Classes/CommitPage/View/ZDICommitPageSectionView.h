@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *commitNumberLabel;
 
+@property (nonatomic, strong) UIImageView *arrowImageView;
+
 @end
 
 NS_ASSUME_NONNULL_END

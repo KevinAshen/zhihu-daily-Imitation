@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong)ZDIWebPageExtraInformationModel *webPageExtraInformationModel;
 
+@property (nonatomic, assign)BOOL skipFlag;
+
 @property (nonatomic, copy)NSString *IDStr;
 
 @end

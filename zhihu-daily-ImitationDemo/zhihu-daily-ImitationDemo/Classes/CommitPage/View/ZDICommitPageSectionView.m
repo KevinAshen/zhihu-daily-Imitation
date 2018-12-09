@@ -10,8 +10,10 @@
 #import <Masonry.h>
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
-#define kExamplePictureWidth 440.0
-#define kExamplePictureHeight 784.0
+#define kLittleInterval 10
+#define kBigInterval 16
+#define kMainTextHeight 20
+#define kDateTextHeight 12
 
 @implementation ZDICommitPageSectionView
 
@@ -25,14 +27,26 @@
 }
 
 - (void) createUI {
+    self.backgroundColor = [UIColor whiteColor];
+    
     _commitNumberLabel = [[UILabel alloc] init];
     [self addSubview:_commitNumberLabel];
     
     [_commitNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(20 / kExamplePictureWidth * kDeviceWidth);
-        make.top.equalTo(self.mas_top).offset(20 / kExamplePictureHeight * kDeviceHeight);
-        make.height.mas_equalTo(10 / kExamplePictureHeight * kDeviceHeight);
-        make.width.lessThanOrEqualTo(@(100 / kExamplePictureWidth * kDeviceWidth));
+        make.left.equalTo(self.mas_left).offset(kBigInterval);
+        make.top.equalTo(self.mas_top).offset(kBigInterval);
+        make.height.mas_equalTo(kMainTextHeight);
+        make.width.lessThanOrEqualTo(@(100));
+    }];
+    
+    _arrowImageView = [[UIImageView alloc] init];
+    [self addSubview:_arrowImageView];
+    
+    [_arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.mas_right).offset(-kLittleInterval);
+        make.top.equalTo(self.mas_top).offset(kBigInterval);
+        make.height.mas_equalTo(kMainTextHeight);
+        make.width.mas_equalTo(kMainTextHeight);
     }];
 }
 

@@ -202,8 +202,8 @@
     CGSize contentSize = scrollView.contentSize;
     float y = offset.y + bounds.size.height;
     float h = contentSize.height;
-    float reload_distance = -30;
-    if (y > h + reload_distance) {
+    float reloadDistance = -30;
+    if (y > h + reloadDistance) {
         if (self.isLoading) {
             return;
         } else {
@@ -289,7 +289,6 @@
         webPageViewController.IDStr = [tempDailyDataModel.stories[indexPath.row] id];
     }
     
-//    [self presentViewController:webPageViewController animated:YES completion:nil];
     [self.navigationController pushViewController:webPageViewController animated:YES];
 }
     

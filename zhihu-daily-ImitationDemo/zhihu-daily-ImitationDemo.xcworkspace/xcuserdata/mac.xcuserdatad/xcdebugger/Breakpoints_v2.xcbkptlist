@@ -19,13 +19,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "zhihu-daily-ImitationDemo/Classes/CommitPage/Controller/ZDICommitPageViewController.m"
-            timestampString = "565799090.980696"
+            filePath = "zhihu-daily-ImitationDemo/Classes/WebPage/Controller/ZDIWebPageViewController.m"
+            timestampString = "566051765.008474"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "-tableView:heightForRowAtIndexPath:"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "-scrollViewDidScroll:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,13 +35,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "zhihu-daily-ImitationDemo/Classes/CommitPage/Controller/ZDICommitPageViewController.m"
-            timestampString = "565799090.980841"
+            filePath = "zhihu-daily-ImitationDemo/Classes/WebPage/Controller/ZDIWebPageViewController.m"
+            timestampString = "566051765.00928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "-tableView:heightForHeaderInSection:"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "-viewWillAppear:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,29 +51,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "zhihu-daily-ImitationDemo/Classes/CommitPage/Controller/ZDICommitPageViewController.m"
-            timestampString = "565799090.980957"
+            filePath = "zhihu-daily-ImitationDemo/Classes/WebPage/Controller/ZDIWebPageViewController.m"
+            timestampString = "566051765.009334"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "-tableView:viewForHeaderInSection:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "zhihu-daily-ImitationDemo/Classes/CommitPage/View/ZDICommitPageView.m"
-            timestampString = "565799090.9810849"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "-tableView:numberOfRowsInSection:"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

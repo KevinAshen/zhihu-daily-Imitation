@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0401546421BA66E900FE372C /* doubleDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 0401546321BA66E900FE372C /* doubleDown.png */; };
+		0401546621BAA91100FE372C /* doubleUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 0401546521BAA91100FE372C /* doubleUp.png */; };
 		0410C8042198955300D4BE6B /* ZDIHomePageCarouselButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410C8032198955300D4BE6B /* ZDIHomePageCarouselButton.m */; };
 		0410C807219B0F5700D4BE6B /* ZDIHomePageLatestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410C806219B0F5700D4BE6B /* ZDIHomePageLatestTableViewCell.m */; };
 		041342BF21797D5D00486DF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 041342BE21797D5D00486DF9 /* AppDelegate.m */; };
@@ -65,6 +67,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0401546321BA66E900FE372C /* doubleDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doubleDown.png; sourceTree = "<group>"; };
+		0401546521BAA91100FE372C /* doubleUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doubleUp.png; sourceTree = "<group>"; };
 		0410C8022198955300D4BE6B /* ZDIHomePageCarouselButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDIHomePageCarouselButton.h; sourceTree = "<group>"; };
 		0410C8032198955300D4BE6B /* ZDIHomePageCarouselButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDIHomePageCarouselButton.m; sourceTree = "<group>"; };
 		0410C805219B0F5700D4BE6B /* ZDIHomePageLatestTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDIHomePageLatestTableViewCell.h; sourceTree = "<group>"; };
@@ -274,6 +278,8 @@
 			isa = PBXGroup;
 			children = (
 				0485A87021A933AE00B62907 /* commitUpvote.png */,
+				0401546321BA66E900FE372C /* doubleDown.png */,
+				0401546521BAA91100FE372C /* doubleUp.png */,
 				0485A86821A6B0C400B62907 /* placeholderSofa.png */,
 				04EBAC3E218DC95900708FDE /* Menu.png */,
 				04134382217F529B00486DF9 /* test1.JPG */,
@@ -552,12 +558,14 @@
 				04EBAC44218EE0AD00708FDE /* sun-knight.jpeg in Resources */,
 				04EBFFA621A2E33C003F470B /* upVote.png in Resources */,
 				0413438E21819EBB00486DF9 /* 4.JPG in Resources */,
+				0401546621BAA91100FE372C /* doubleUp.png in Resources */,
 				04EBAC50218F160A00708FDE /* message.png in Resources */,
 				041342C521797D5D00486DF9 /* Main.storyboard in Resources */,
 				0413438C21819EBB00486DF9 /* 3.JPG in Resources */,
 				04EBFF9D21A2DA17003F470B /* next.png in Resources */,
 				04134383217F529B00486DF9 /* test1.JPG in Resources */,
 				0485A87121A933AE00B62907 /* commitUpvote.png in Resources */,
+				0401546421BA66E900FE372C /* doubleDown.png in Resources */,
 				04EBFFA221A2DA1C003F470B /* return.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

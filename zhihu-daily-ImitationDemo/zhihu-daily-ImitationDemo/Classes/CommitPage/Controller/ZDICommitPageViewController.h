@@ -50,7 +50,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *longCommitsCellFoldStateArray;
 @property (nonatomic, strong) NSMutableArray *shortCommitsCellFoldStateArray;
 
-
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 
 @property (nonatomic, assign)int flag;
@@ -58,6 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign)int tapFlag;
 
 @property (nonatomic, assign)CGFloat hiddenStandard;
+
+@property (nonatomic, assign)CGFloat skipHeight;
 
 @end
 

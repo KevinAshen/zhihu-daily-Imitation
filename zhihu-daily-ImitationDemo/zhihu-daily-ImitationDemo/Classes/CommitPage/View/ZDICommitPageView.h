@@ -55,6 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *longCommitsCellFoldStateArray;
 @property (nonatomic, strong) NSMutableArray *shortCommitsCellFoldStateArray;
 
+
 //设置代理
 @property (nonatomic, weak) id<ZDICommitPageViewDelegate> commitPageViewDelegate;
 

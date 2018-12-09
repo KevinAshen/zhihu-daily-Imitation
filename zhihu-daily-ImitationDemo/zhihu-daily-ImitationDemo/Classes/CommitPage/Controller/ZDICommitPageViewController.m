@@ -49,9 +49,10 @@
     self.cellFinalLongCommitHeightArray = [NSMutableArray array];
     self.cellFinalShortCommitHeightArray = [NSMutableArray array];
     
-    _longCommitsCellFoldStateArray = [NSMutableArray arrayWithObjects:@NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, nil];
     
+    _longCommitsCellFoldStateArray = [NSMutableArray arrayWithObjects:@NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, nil];
     _shortCommitsCellFoldStateArray = [NSMutableArray arrayWithObjects:@NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO, nil];
+    
     
     self.navigationController.navigationBar.hidden = NO;
     NSString *navTitleStr = [NSString stringWithFormat:@"%d条点评", _allCommits];
@@ -60,12 +61,11 @@
     _navChangeBackImage = [ZDICommitPageViewController createImageWithColor:[UIColor colorWithRed:0.24f green:0.78f blue:0.99f alpha:1.00f] andAlpha:1];
     [self.navigationController.navigationBar setBackgroundImage:_navChangeBackImage forBarMetrics:UIBarMetricsDefault];
     
-    self.commitPageView = [[ZDICommitPageView alloc] initWithFrame:CGRectMake(0, 0, kExamplePictureWidth, kExamplePictureWidth)andLongCommits:_longCommits andShortCommits:_shortCommits];
+    self.commitPageView = [[ZDICommitPageView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight)andLongCommits:_longCommits andShortCommits:_shortCommits];
     [self.view addSubview:_commitPageView];
     
     self.commitPageView.commitPageViewDelegate = self;
     self.commitPageView.tableView.delegate = self;
-    
 }
 
 - (void)updateLongCommit {
@@ -106,26 +106,48 @@
     return 50;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     _commitPageSectionView = [[ZDICommitPageSectionView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, 50)];
-    if (section + _flag != 1) {
+    if (section + _flag == 1) {
+        NSString *longCommitSectionTitle = [NSString stringWithFormat:@"%d条长评", _longCommits];
+        _commitPageSectionView.commitNumberLabel.text = longCommitSectionTitle;
+    } else {
         _tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction)];
         _tap.numberOfTapsRequired = 1;
         [_commitPageSectionView addGestureRecognizer:_tap];
+        
+        NSString *shortCommitSectionTitle = [NSString stringWithFormat:@"%d条短评", _shortCommits];
+        _commitPageSectionView.commitNumberLabel.text = shortCommitSectionTitle;
+        
+        if (_tapFlag == 0) {
+            _commitPageSectionView.arrowImageView.image = [UIImage imageNamed:@"doubleDown"];
+        } else {
+            _commitPageSectionView.arrowImageView.image = [UIImage imageNamed:@"doubleUp"];
+        }
     }
-    _commitPageSectionView.commitNumberLabel.text = @"QSTSD";
     return _commitPageSectionView;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    return nil;
 }
 
 - (void)tapAction {
     if (_tapFlag == 1) {
         _tapFlag = 0;
         self.commitPageView.tapFlag = 1;
-        [self.commitPageView.tableView reloadData];
     } else {
         _tapFlag = 1;
         self.commitPageView.tapFlag = 0;
-        [self.commitPageView.tableView reloadData];
+    }
+    [self.commitPageView.tableView reloadData];
+    if (self.commitPageView.tapFlag == 0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:_flag];
+        [self.commitPageView.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
     }
 }
 
@@ -229,7 +251,7 @@
     [self.commitPageView.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
-- (void)unfoldShortWithButtonInCell:(UIButton *)button{
+- (void)unfoldShortWithButtonInCell:(UIButton *)button {
     ZDICommitPageTableViewCell *shortCommitCell = (ZDICommitPageTableViewCell *)[[button superview] superview];
     NSIndexPath *indexPath = [_commitPageView.tableView indexPathForCell:shortCommitCell];
     if ([_shortCommitsCellFoldStateArray[indexPath.row] isEqual:@NO]) {
@@ -244,7 +266,6 @@
     self.commitPageView.shortCommitsCellFoldStateArray = _shortCommitsCellFoldStateArray;
     [self.commitPageView.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
-
 
 + (UIImage *)createImageWithColor:(UIColor *)color andAlpha:(CGFloat)alpha {
     CGRect rect=CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
@@ -277,6 +298,8 @@
 {
     return [NSNumber numberWithFloat:[one floatValue] - [anotherNumber floatValue]];
 }
+
+
 
 /*
 #pragma mark - Navigation
