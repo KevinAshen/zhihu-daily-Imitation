@@ -26,6 +26,10 @@
 		0413438E21819EBB00486DF9 /* 4.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 0413438921819EBA00486DF9 /* 4.JPG */; };
 		0413438F21819EBB00486DF9 /* 0.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 0413438A21819EBA00486DF9 /* 0.JPG */; };
 		0413439021819EBB00486DF9 /* 2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 0413438B21819EBB00486DF9 /* 2.JPG */; };
+		0423B57E21C01574005C05C4 /* ZDIWebPageBounceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423B57D21C01574005C05C4 /* ZDIWebPageBounceView.m */; };
+		0423B58121C12D23005C05C4 /* ZDIWebPageBounceCollectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423B58021C12D23005C05C4 /* ZDIWebPageBounceCollectView.m */; };
+		0423B58421C138E0005C05C4 /* starGrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 0423B58221C138E0005C05C4 /* starGrey.png */; };
+		0423B58521C138E0005C05C4 /* starGolden.png in Resources */ = {isa = PBXBuildFile; fileRef = 0423B58321C138E0005C05C4 /* starGolden.png */; };
 		0485A84821A577F100B62907 /* ZDICommitPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A84721A577F100B62907 /* ZDICommitPageViewController.m */; };
 		0485A84B21A5780400B62907 /* ZDICommitPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A84A21A5780400B62907 /* ZDICommitPageView.m */; };
 		0485A84E21A57AA900B62907 /* ZDICommitPageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A84D21A57AA900B62907 /* ZDICommitPageManager.m */; };
@@ -95,6 +99,12 @@
 		0413438921819EBA00486DF9 /* 4.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.JPG; sourceTree = "<group>"; };
 		0413438A21819EBA00486DF9 /* 0.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.JPG; sourceTree = "<group>"; };
 		0413438B21819EBB00486DF9 /* 2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.JPG; sourceTree = "<group>"; };
+		0423B57C21C01574005C05C4 /* ZDIWebPageBounceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDIWebPageBounceView.h; sourceTree = "<group>"; };
+		0423B57D21C01574005C05C4 /* ZDIWebPageBounceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDIWebPageBounceView.m; sourceTree = "<group>"; };
+		0423B57F21C12D22005C05C4 /* ZDIWebPageBounceCollectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDIWebPageBounceCollectView.h; sourceTree = "<group>"; };
+		0423B58021C12D23005C05C4 /* ZDIWebPageBounceCollectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDIWebPageBounceCollectView.m; sourceTree = "<group>"; };
+		0423B58221C138E0005C05C4 /* starGrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starGrey.png; sourceTree = "<group>"; };
+		0423B58321C138E0005C05C4 /* starGolden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starGolden.png; sourceTree = "<group>"; };
 		0485A84621A577F100B62907 /* ZDICommitPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDICommitPageViewController.h; sourceTree = "<group>"; };
 		0485A84721A577F100B62907 /* ZDICommitPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDICommitPageViewController.m; sourceTree = "<group>"; };
 		0485A84921A5780400B62907 /* ZDICommitPageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDICommitPageView.h; sourceTree = "<group>"; };
@@ -300,6 +310,8 @@
 				04EBAC51218F2A0600708FDE /* set.png */,
 				04EBAC53218F2C0600708FDE /* downLoad.png */,
 				04EBAC55218F2E4700708FDE /* night-pattern.png */,
+				0423B58221C138E0005C05C4 /* starGrey.png */,
+				0423B58321C138E0005C05C4 /* starGolden.png */,
 			);
 			path = TestPicture;
 			sourceTree = "<group>";
@@ -453,6 +465,10 @@
 				04EBFF8821A17F31003F470B /* ZDIWebPageView.m */,
 				04EBFF8A21A2BA8D003F470B /* ZDIWebPageBottomView.h */,
 				04EBFFA321A2DAD9003F470B /* ZDIWebPageBottomView.m */,
+				0423B57C21C01574005C05C4 /* ZDIWebPageBounceView.h */,
+				0423B57D21C01574005C05C4 /* ZDIWebPageBounceView.m */,
+				0423B57F21C12D22005C05C4 /* ZDIWebPageBounceCollectView.h */,
+				0423B58021C12D23005C05C4 /* ZDIWebPageBounceCollectView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -548,12 +564,14 @@
 				0413439021819EBB00486DF9 /* 2.JPG in Resources */,
 				0413438F21819EBB00486DF9 /* 0.JPG in Resources */,
 				0485A86921A6B0C400B62907 /* placeholderSofa.png in Resources */,
+				0423B58521C138E0005C05C4 /* starGolden.png in Resources */,
 				0413438D21819EBB00486DF9 /* 1.JPG in Resources */,
 				04EBAC56218F2E4800708FDE /* night-pattern.png in Resources */,
 				041342CA21797D5E00486DF9 /* LaunchScreen.storyboard in Resources */,
 				04EBFF9E21A2DA17003F470B /* share.png in Resources */,
 				04EBAC46218EE21000708FDE /* homePage.png in Resources */,
 				04EBAC4E218F120800708FDE /* five-pointed star.png in Resources */,
+				0423B58421C138E0005C05C4 /* starGrey.png in Resources */,
 				041342C721797D5E00486DF9 /* Assets.xcassets in Resources */,
 				04EBAC44218EE0AD00708FDE /* sun-knight.jpeg in Resources */,
 				04EBFFA621A2E33C003F470B /* upVote.png in Resources */,
@@ -603,6 +621,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04134380217F4CA200486DF9 /* ZDIHomePageNormalTableViewCell.m in Sources */,
+				0423B57E21C01574005C05C4 /* ZDIWebPageBounceView.m in Sources */,
 				04EBAC37218BD3AE00708FDE /* ZDIMenuTableViewCell.m in Sources */,
 				04EBAC2F218BD16400708FDE /* ZDIContainerViewController.m in Sources */,
 				04EBAC602191C30C00708FDE /* ZDIDailyDataModel.m in Sources */,
@@ -624,6 +643,7 @@
 				0485A87421AA415800B62907 /* ZDICommitPageSectionView.m in Sources */,
 				0485A86121A64C0200B62907 /* ZDIWebPageExtraInformationModel.m in Sources */,
 				04EBFF8621A17E83003F470B /* ZDIWebPageViewController.m in Sources */,
+				0423B58121C12D23005C05C4 /* ZDIWebPageBounceCollectView.m in Sources */,
 				0413437A217F3F8E00486DF9 /* ZDIHomePageTableViewGroupView.m in Sources */,
 				041342BF21797D5D00486DF9 /* AppDelegate.m in Sources */,
 				04EBAC3D218C4E8200708FDE /* ZDIHomePageTableViewSectionHeadView.m in Sources */,

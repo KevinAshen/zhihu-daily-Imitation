@@ -10,7 +10,7 @@
 #import "ZDIWebPageView.h"
 #import "ZDIWebPageBottomView.h"
 #import "ZDIWebPageExtraInformationModel.h"
-
+@class ZDIWebPageBounceView;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,11 +20,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong)ZDIWebPageBottomView *webPageBottomView;
 
+@property (nonatomic, strong)ZDIWebPageBounceView *webPageBounceView;
+
 @property (nonatomic, strong)ZDIWebPageExtraInformationModel *webPageExtraInformationModel;
 
 @property (nonatomic, assign)BOOL skipFlag;
 
+@property (nonatomic, assign)BOOL collectFlag;
+
 @property (nonatomic, copy)NSString *IDStr;
+
+//所有的数据数组
+@property (nonatomic, strong) NSMutableArray *everyDailyDateModelMut;
+
+//天数，用来进行网络请求
+@property (nonatomic, assign) int days;
+
+//当前是数组中的第几个
+@property (nonatomic, assign)NSInteger nowArrIndex;
+
+//当前是该天中的第几个
+@property (nonatomic, assign)NSInteger nowDayIndex;
+
+//当天一共有几篇文章
+@property (nonatomic, assign)NSInteger textNumber;
 
 @end
 

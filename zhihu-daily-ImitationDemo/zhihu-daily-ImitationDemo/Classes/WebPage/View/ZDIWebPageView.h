@@ -17,5 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithFrame:(CGRect)frame AndIDStr:(NSString *)IDStr;
 
+- (void)reloadWKWebViewWithID:(NSString *)ID;
+
 @end
 NS_ASSUME_NONNULL_END

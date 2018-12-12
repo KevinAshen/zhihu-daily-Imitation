@@ -25,10 +25,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self updateLatestDaily];
-    [self updateSomeDailyWithDate:[ZDIHomePageViewController getSomeDayFromTodayWithNextDay:self.days]];
-    NSString *tempStr = [ZDIHomePageViewController getWeekDayFromTodayWithNextDay:self.days + 1];
-    [self.headViewDayStrMut addObject:tempStr];
     self.navigationController.navigationBar.hidden = YES;
 }
 
@@ -41,6 +37,15 @@
     _headViewDayStrMut = [[NSMutableArray alloc] init];
     
     _everyDailyDateModelMut = [[NSMutableArray alloc] init];
+    
+    _transmitEveryDailyDateModelMut = [NSMutableArray array];
+    
+    _tempArr = [NSArray array];
+    
+    [self updateLatestDaily];
+    [self updateSomeDailyWithDate:[ZDIHomePageViewController getSomeDayFromTodayWithNextDay:self.days]];
+    NSString *tempStr = [ZDIHomePageViewController getWeekDayFromTodayWithNextDay:self.days + 1];
+    [self.headViewDayStrMut addObject:tempStr];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
@@ -66,9 +71,6 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     self.navigationController.navigationBar.shadowImage= [UIImage new];
-    
-
-    
 }
 
 - (void)updateLatestDaily {
@@ -282,11 +284,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ZDIWebPageViewController *webPageViewController = [[ZDIWebPageViewController alloc] init];
+    webPageViewController.everyDailyDateModelMut = [[NSMutableArray alloc] initWithArray:_everyDailyDateModelMut copyItems:YES];
+    [webPageViewController.everyDailyDateModelMut insertObject:_latestDailyDataModel atIndex:0];
+    webPageViewController.days = _days;
+    webPageViewController.nowArrIndex = indexPath.section;
+    webPageViewController.nowDayIndex = indexPath.row;
     if (indexPath.section == 0) {
         webPageViewController.IDStr = [_latestDailyDataModel.stories[indexPath.row] id];
+        webPageViewController.textNumber = _latestDailyDataModel.stories.count;
     } else {
         ZDIDailyDataModel *tempDailyDataModel = _everyDailyDateModelMut[indexPath.section - 1];
         webPageViewController.IDStr = [tempDailyDataModel.stories[indexPath.row] id];
+        webPageViewController.textNumber = tempDailyDataModel.stories.count;
     }
     
     [self.navigationController pushViewController:webPageViewController animated:YES];

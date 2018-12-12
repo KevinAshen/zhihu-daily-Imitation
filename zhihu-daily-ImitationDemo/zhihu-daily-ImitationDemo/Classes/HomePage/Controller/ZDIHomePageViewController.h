@@ -36,6 +36,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *everyDailyDateModelMut;
 
+//要传给WKWebView的数组
+@property (nonatomic, strong) NSMutableArray *transmitEveryDailyDateModelMut;
+
+@property (nonatomic, copy) NSArray *tempArr;
 
 @end
 

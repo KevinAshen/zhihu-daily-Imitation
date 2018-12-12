@@ -28,6 +28,12 @@
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:webViewURLStr]]];
 }
 
+- (void)reloadWKWebViewWithID:(NSString *)ID {
+    NSString *webViewURLStr = [NSString stringWithFormat:@"https://daily.zhihu.com/story/%@", ID];
+    
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:webViewURLStr]]];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
