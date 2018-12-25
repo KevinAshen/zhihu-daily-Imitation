@@ -32,13 +32,13 @@
 
 @property (nonatomic, assign) BOOL collectFlag;
 
+
+
 @end
 
 @implementation ZDIWebPageBounceView
 
 - (void)setupContent {
-    
-    //self.frame = CGRectMake(0, 0, kDeviceWidth, kZDIWebPageBounceViewHeight);
     
     //alpha 0.0  白色   alpha 1 ：黑色   alpha 0～1 ：遮罩颜色，逐渐
     self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
@@ -57,11 +57,14 @@
     }
 }
 
-- (void)showInView:(UIView *)view {
+- (void)showInView:(UIView *)view WithFlag:(BOOL)flag {
     if (!view) {
         return;
     }
-    [self setupCollectView];
+    
+    _collectFlag = flag;
+    
+   
     [self setupContent];
     
     [view addSubview:self];
@@ -76,6 +79,7 @@
         [self.contentView setFrame:CGRectMake(0, kDeviceHeight - kZDIWebPageBounceViewHeight, kDeviceWidth, kZDIWebPageBounceViewHeight)];
         
     } completion:nil];
+    
 }
 
 - (void)disMissView {
@@ -92,9 +96,47 @@
                          
                          [self removeFromSuperview];
                          [self.contentView removeFromSuperview];
-                         
                      }];
     
+    if ([self.webPageBounceViewDelegate respondsToSelector:@selector(changeCollectFlagWithFlag:)]) {
+        [_webPageBounceViewDelegate changeCollectFlagWithFlag:_collectFlag];
+    } else {
+        NSLog(@"WRONG--");
+        return;
+    }
+    
+}
+
+- (void)touchCollect {
+    [self setupCollectView];
+    
+    [_contentView setFrame:CGRectMake(0, kDeviceHeight - kZDIWebPageBounceViewHeight, kDeviceWidth, kZDIWebPageBounceViewHeight)];
+    [UIView animateWithDuration:0.15
+                     animations:^{
+                         
+                         //self.alpha = 0.0;
+                         
+                         [self.contentView setFrame:CGRectMake(0, kDeviceHeight, kDeviceWidth, kZDIWebPageBounceViewHeight)];
+                     }
+                     completion:^(BOOL finished){
+                         
+                         //[self removeFromSuperview];
+                         [self.contentView removeFromSuperview];
+                     }];
+    
+    if ([self.webPageBounceViewDelegate respondsToSelector:@selector(changeCollectFlagWithFlag:)]) {
+        [_webPageBounceViewDelegate changeCollectFlagWithFlag:_collectFlag];
+    } else {
+        NSLog(@"WRONG--");
+        return;
+    }
+    
+    [UIView animateWithDuration:1 animations:^{
+        self.webPageBounceCollectView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [self.webPageBounceCollectView removeFromSuperview];
+        [self removeFromSuperview];
+    }];
 }
 
 - (void)setupContentSubview {
@@ -125,6 +167,7 @@
     _collectButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [_collectButton setTitleColor:[UIColor colorWithRed:0.62f green:0.62f blue:0.62f alpha:1.00f] forState:UIControlStateNormal];
     [_collectButton setBackgroundColor:[UIColor whiteColor]];
+    [_collectButton addTarget:self action:@selector(touchCollect) forControlEvents:UIControlEventTouchUpInside];
     
     _cancelButton = [[UIButton alloc] init];
     [self.contentView addSubview:_cancelButton];

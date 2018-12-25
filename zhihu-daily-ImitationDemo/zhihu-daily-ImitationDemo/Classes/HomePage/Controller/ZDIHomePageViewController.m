@@ -10,6 +10,7 @@
 #import "ZDIHomePageTableViewSectionHeadView.h"
 #import "ZDIHomePageManager.h"
 #import "ZDIWebPageViewController.h"
+#import "ZDIHomePageDBManager.h"
 #import <Masonry.h>
 #define kDeviceWidth [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
@@ -31,6 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     
     self.days = 0;
     
@@ -216,11 +218,12 @@
     }
 }
 
+//这个借口改成从数据库里拿NSDate
 - (NSArray *)getCarouselImagesWithModel:(ZDIDailyDataModel *)dailyDataModel {
     NSMutableArray *tempCarouselImageMut = [[NSMutableArray alloc] init];
-    for (int i = 0; i < dailyDataModel.top_stories.count; i++) {
-        NSString *tempCarouselStr = [self.homePageTableViewGroupView.latestDailyDataModel.top_stories[i] imageStr];
-        UIImage *tempCarouselImage = [self.homePageTableViewGroupView getImageFromURL:tempCarouselStr];
+    for (NSInteger i = 0; i < dailyDataModel.top_stories.count; i++) {
+        NSData *tempData = [[ZDIHomePageDBManager sharedManager] getLatestDailyImageFromDBWithID:i];
+        UIImage *tempCarouselImage = [UIImage imageWithData:tempData];
         [tempCarouselImageMut addObject:tempCarouselImage];
     }
     NSArray *tempCarouselImageArr = [NSArray arrayWithArray:tempCarouselImageMut];
@@ -300,8 +303,6 @@
     
     [self.navigationController pushViewController:webPageViewController animated:YES];
 }
-    
-    
 
 
 

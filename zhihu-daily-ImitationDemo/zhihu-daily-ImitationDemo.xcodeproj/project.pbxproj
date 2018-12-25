@@ -30,6 +30,7 @@
 		0423B58121C12D23005C05C4 /* ZDIWebPageBounceCollectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423B58021C12D23005C05C4 /* ZDIWebPageBounceCollectView.m */; };
 		0423B58421C138E0005C05C4 /* starGrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 0423B58221C138E0005C05C4 /* starGrey.png */; };
 		0423B58521C138E0005C05C4 /* starGolden.png in Resources */ = {isa = PBXBuildFile; fileRef = 0423B58321C138E0005C05C4 /* starGolden.png */; };
+		0423B65821CA8531005C05C4 /* ZDIHomePageDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423B65721CA8531005C05C4 /* ZDIHomePageDBManager.m */; };
 		0485A84821A577F100B62907 /* ZDICommitPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A84721A577F100B62907 /* ZDICommitPageViewController.m */; };
 		0485A84B21A5780400B62907 /* ZDICommitPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A84A21A5780400B62907 /* ZDICommitPageView.m */; };
 		0485A84E21A57AA900B62907 /* ZDICommitPageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A84D21A57AA900B62907 /* ZDICommitPageManager.m */; };
@@ -105,6 +106,8 @@
 		0423B58021C12D23005C05C4 /* ZDIWebPageBounceCollectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDIWebPageBounceCollectView.m; sourceTree = "<group>"; };
 		0423B58221C138E0005C05C4 /* starGrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starGrey.png; sourceTree = "<group>"; };
 		0423B58321C138E0005C05C4 /* starGolden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starGolden.png; sourceTree = "<group>"; };
+		0423B65621CA8531005C05C4 /* ZDIHomePageDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDIHomePageDBManager.h; sourceTree = "<group>"; };
+		0423B65721CA8531005C05C4 /* ZDIHomePageDBManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDIHomePageDBManager.m; sourceTree = "<group>"; };
 		0485A84621A577F100B62907 /* ZDICommitPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDICommitPageViewController.h; sourceTree = "<group>"; };
 		0485A84721A577F100B62907 /* ZDICommitPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDICommitPageViewController.m; sourceTree = "<group>"; };
 		0485A84921A5780400B62907 /* ZDICommitPageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDICommitPageView.h; sourceTree = "<group>"; };
@@ -214,6 +217,7 @@
 		041342D321797FED00486DF9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0423B62B21C9DE54005C05C4 /* DB */,
 				0485A84221A5777400B62907 /* CommitPage */,
 				04EBFF8021A17CC7003F470B /* WebPage */,
 				04EBAC5A21905FF900708FDE /* Manager */,
@@ -314,6 +318,15 @@
 				0423B58321C138E0005C05C4 /* starGolden.png */,
 			);
 			path = TestPicture;
+			sourceTree = "<group>";
+		};
+		0423B62B21C9DE54005C05C4 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				0423B65621CA8531005C05C4 /* ZDIHomePageDBManager.h */,
+				0423B65721CA8531005C05C4 /* ZDIHomePageDBManager.m */,
+			);
+			path = DB;
 			sourceTree = "<group>";
 		};
 		0485A84221A5777400B62907 /* CommitPage */ = {
@@ -624,6 +637,7 @@
 				0423B57E21C01574005C05C4 /* ZDIWebPageBounceView.m in Sources */,
 				04EBAC37218BD3AE00708FDE /* ZDIMenuTableViewCell.m in Sources */,
 				04EBAC2F218BD16400708FDE /* ZDIContainerViewController.m in Sources */,
+				0423B65821CA8531005C05C4 /* ZDIHomePageDBManager.m in Sources */,
 				04EBAC602191C30C00708FDE /* ZDIDailyDataModel.m in Sources */,
 				0485A86421A64DCA00B62907 /* ZDIWebPageManager.m in Sources */,
 				04EBAC25218B2A4D00708FDE /* ZDIMenuViewController.m in Sources */,

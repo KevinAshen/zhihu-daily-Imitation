@@ -19,7 +19,7 @@
 #define kExamplePictureWidth 440.0
 #define kExamplePictureHeight 784.0
 
-@interface ZDIWebPageViewController ()<UIScrollViewDelegate>
+@interface ZDIWebPageViewController ()<UIScrollViewDelegate, ZDIWebPageBounceViewDelegate>
 
 @end
 
@@ -34,6 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.hidden = YES;
+    
     
     [self setupWKWebViewWithID:_IDStr];
 }
@@ -74,7 +75,8 @@
 
 - (void)touchShare {
     _webPageBounceView = [[ZDIWebPageBounceView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight)];
-    [_webPageBounceView showInView:self.view];
+    self.webPageBounceView.webPageBounceViewDelegate = self;
+    [_webPageBounceView showInView:self.view WithFlag:_collectFlag];
     
 }
 
@@ -177,6 +179,10 @@
     } error:^(NSError *error) {
         NSLog(@"添加失败");
     }];
+}
+
+- (void)changeCollectFlagWithFlag:(BOOL)flag {
+    _collectFlag = !flag;
 }
 
 

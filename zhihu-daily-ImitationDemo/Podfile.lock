@@ -1,4 +1,7 @@
 PODS:
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - JSONModel (1.8.0)
   - Masonry (1.1.0)
   - SDWebImage (4.4.2):
@@ -6,21 +9,24 @@ PODS:
   - SDWebImage/Core (4.4.2)
 
 DEPENDENCIES:
+  - FMDB
   - JSONModel
   - Masonry
   - SDWebImage
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - FMDB
     - JSONModel
     - Masonry
     - SDWebImage
 
 SPEC CHECKSUMS:
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
 
-PODFILE CHECKSUM: 9cc1639bb1a2b18175218b214f5d3ac731e6856c
+PODFILE CHECKSUM: 70cd311b7ecb6de429620f56b212f41a5d0e6a0b
 
 COCOAPODS: 1.5.3

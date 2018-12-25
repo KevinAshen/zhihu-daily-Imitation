@@ -44,6 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSArray<ZDITop_storiesJSONModel>*top_stories;
 @property (nonatomic, copy) NSArray<ZDIStoriesJSONModel>*stories;
 
+
 @end
 
 NS_ASSUME_NONNULL_END

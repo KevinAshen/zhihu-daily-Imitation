@@ -11,10 +11,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ZDIWebPageBounceViewDelegate <NSObject>
+
+- (void)changeCollectFlagWithFlag:(BOOL)flag;
+
+@end
+
+
 @interface ZDIWebPageBounceView : UIView
 
 //展示从底部向上弹出的UIView（包含遮罩）
-- (void)showInView:(UIView *)view;
+- (void)showInView:(UIView *)view WithFlag:(BOOL)flag;
+
+@property (nonatomic, weak) id<ZDIWebPageBounceViewDelegate> webPageBounceViewDelegate;
 
 @end
 

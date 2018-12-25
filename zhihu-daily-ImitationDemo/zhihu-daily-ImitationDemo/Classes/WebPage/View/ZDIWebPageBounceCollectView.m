@@ -56,8 +56,8 @@
     [_collectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
         make.top.equalTo(self.starImageView.mas_bottom).offset(kLittleInterval);
-        make.width.mas_equalTo(37);
-        make.height.mas_equalTo(15);
+        make.width.lessThanOrEqualTo(@(50));
+        make.height.lessThanOrEqualTo(@(15));
     }];
     
     _collectLabel.textColor = [UIColor whiteColor];

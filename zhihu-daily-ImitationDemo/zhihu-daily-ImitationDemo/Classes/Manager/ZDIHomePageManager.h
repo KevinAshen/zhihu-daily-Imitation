@@ -15,6 +15,8 @@ typedef void(^ZDILatestDailyDataHandle)(ZDIDailyDataModel *latestDataModel);
 // 请求失败统一回调block
 typedef void(^ErrorHandle)(NSError *error);
 
+
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZDIHomePageManager : NSObject

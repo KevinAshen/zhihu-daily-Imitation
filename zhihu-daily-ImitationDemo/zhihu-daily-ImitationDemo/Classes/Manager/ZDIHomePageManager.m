@@ -7,7 +7,7 @@
 //
 
 #import "ZDIHomePageManager.h"
-
+#import "ZDIHomePageDBManager.h"
 
 @implementation ZDIHomePageManager
 
@@ -28,11 +28,25 @@ static ZDIHomePageManager *manger = nil;
     NSURLSession *latestDailyDataSession = [NSURLSession sharedSession];
     NSURLSessionDataTask *latestDailyDataTask = [latestDailyDataSession dataTaskWithRequest:latestDailyDataRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error == nil) {
+//            NSString *resultStr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             ZDIDailyDataModel *LatestDailyDataModel = [[ZDIDailyDataModel alloc] initWithDictionary:resultDic error:&error];
+            BOOL result = [[ZDIHomePageDBManager sharedManager] dropHomePageLatestDBTable];
+            NSLog(@"QSTSD----result   %d", result);
+            BOOL test = [[ZDIHomePageDBManager sharedManager] createHomePageLatestDB];
+            NSLog(@"QSTSD----test   %d", test);
+            BOOL imageResult = [[ZDIHomePageDBManager sharedManager] dropHomePageLatestDBTableForImage];
+            NSLog(@"QSTSD----imageResult   %d", imageResult);
+            BOOL imageTest = [[ZDIHomePageDBManager sharedManager] createHomePageLatestDBForImage];
+            NSLog(@"QSTSD----imageTest   %d", imageTest);
+            [[ZDIHomePageDBManager sharedManager] updateHomePageLatestDBWithDic:resultDic];
+            [[ZDIHomePageDBManager sharedManager] updateHomePageLatestDBWithDailyDataModel:LatestDailyDataModel];
             succeedBlock(LatestDailyDataModel);
         } else {
-            errorBlock(error);
+            ZDIDailyDataModel *tempDailyDataModel = [[ZDIHomePageDBManager sharedManager] getLatestDailyFromDB];
+            NSLog(@"--tempDailyDataModel--    %@", tempDailyDataModel);
+            succeedBlock(tempDailyDataModel);
+            //errorBlock(error);
         }
     }];
     [latestDailyDataTask resume];
