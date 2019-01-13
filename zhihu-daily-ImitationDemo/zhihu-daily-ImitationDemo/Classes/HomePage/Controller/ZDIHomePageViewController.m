@@ -110,8 +110,7 @@
 }
 
 /**侧边栏的展开和关闭*/
-- (void)openCloseMenu: (UIBarButtonItem *)sender
-{
+- (void)openCloseMenu: (UIBarButtonItem *)sender {
     [self.navigationController.parentViewController performSelector:@selector(openCloseMenu)];
 }
 
@@ -195,8 +194,8 @@
         
         [self setStatusBarBackgroundColor:[UIColor clearColor]];
         
-        
     } else {
+        
         self.homePageTableViewGroupView.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
         [self setStatusBarBackgroundColor:[UIColor colorWithRed:0.24f green:0.78f blue:0.99f alpha:1.00f]];
         self.navigationController.navigationBar.hidden = YES;

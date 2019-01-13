@@ -15,6 +15,7 @@
 @implementation ZDIHomePageTableViewSectionHeadView
 
 - (instancetype) initWithFrame:(CGRect)frame andDateStr:(NSString *)dateStr{
+    
     self = [super initWithFrame:frame];
     if (self) {
         [self createUIWithFrame:frame andDateStr:dateStr];
@@ -28,7 +29,7 @@
     [self addSubview:baseView];
     
     self.backgroundColor = [UIColor whiteColor];
-    //        self.backgroundColor = [UIColor colorWithRed:0.24f green:0.78f blue:0.99f alpha:1.00f];
+
     _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width / 2.0 - 50, 0, frame.size.width / 3.0, frame.size.height)];
     _dateLabel.textColor = [UIColor whiteColor];
     _dateLabel.text = dateStr;

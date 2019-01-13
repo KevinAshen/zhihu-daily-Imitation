@@ -13,6 +13,7 @@
 
 static ZDIHomePageManager *manger = nil;
 
+//dsadasdsa
 + (instancetype)sharedManager {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
