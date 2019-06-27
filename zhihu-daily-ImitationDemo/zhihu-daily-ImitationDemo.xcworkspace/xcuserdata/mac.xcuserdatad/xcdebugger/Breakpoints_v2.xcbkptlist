@@ -20,28 +20,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "zhihu-daily-ImitationDemo/Classes/DB/ZDIHomePageDBManager.m"
-            timestampString = "568264755.297089"
+            timestampString = "569316573.327204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "-getLatestDailyFromDB"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "-dropHomePageLatestDBTable"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "zhihu-daily-ImitationDemo/Classes/DB/ZDIHomePageDBManager.m"
-            timestampString = "568264755.2989841"
+            filePath = "zhihu-daily-ImitationDemo/Classes/HomePage/Controller/ZDIHomePageViewController.m"
+            timestampString = "581953631.849647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "-dropHomePageLatestDBTable"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "-updateLatestDaily"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

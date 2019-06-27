@@ -22,6 +22,8 @@ static NSString *longCommitCellIdentifier = @"longCommitCell";
 
 @implementation ZDICommitPageView
 
+
+
 - (instancetype)initWithFrame:(CGRect)frame andLongCommits:(int)longCommits andShortCommits:(int)shortCommits
 {
     self = [super initWithFrame:frame];

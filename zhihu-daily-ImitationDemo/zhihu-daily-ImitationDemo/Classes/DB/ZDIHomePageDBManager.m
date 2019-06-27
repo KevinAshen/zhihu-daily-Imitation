@@ -10,8 +10,11 @@
 #import "ZDIDailyDataModel.h"
 #import <FMDB.h>
 
-@interface ZDIHomePageDBManager()
+@interface ZDIHomePageDBManager() {
+    NSString *a;    //大括号形式
+}
 
+//全是属性
 @property (nonatomic, strong) FMDatabase *db;
 
 @property (nonatomic, copy) NSString *fileName;
@@ -110,6 +113,8 @@ static ZDIHomePageDBManager *manager = nil;
     }
     [_db close];
 }
+
+
 
 - (NSInteger)returnCount {
     return _count;

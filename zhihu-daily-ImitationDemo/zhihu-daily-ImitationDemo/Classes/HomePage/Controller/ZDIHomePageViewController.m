@@ -79,6 +79,7 @@
     [[ZDIHomePageManager sharedManager] fetchLatestDailyDataWithSucceed:^(ZDIDailyDataModel *latestDataModel) {
         self.homePageTableViewGroupView.latestDailyDataModel = [[ZDIDailyDataModel alloc] init];
         self.homePageTableViewGroupView.latestDailyDataModel = latestDataModel;
+        NSLog(@"self.homePageTableViewGroupView.latestDailyDataModel:%@", self.homePageTableViewGroupView.latestDailyDataModel);
         self.latestDailyDataModel = [[ZDIDailyDataModel alloc] init];
         self.latestDailyDataModel = latestDataModel;
         dispatch_async(dispatch_get_main_queue(), ^{
